@@ -13,6 +13,10 @@ public class Libro {
     private String genero;
     private int cantidad;
 
+    public String getResumen() {return resumen;}
+
+    public void setResumen(String resumen) {this.resumen = resumen;}
+
     public int getAniopublicacion() {
         return aniopublicacion;
     }
@@ -30,8 +34,6 @@ public class Libro {
     public void setRutaimagen(String rutaimagen) {
         this.rutaimagen = rutaimagen;
     }
-
-
 
     public String getGenero() {
         return genero;
@@ -86,9 +88,9 @@ public class Libro {
                 ", Resumen: " + this.resumen;
     }
 
-    public void mostrarInfo() {
+   /* public void mostrarInfo() {
         out.println(this);
-    }
+    }*/
 
 
     public static Libro buscarlibronumero(int opcion, ArrayList<Libro> listaLibros) {

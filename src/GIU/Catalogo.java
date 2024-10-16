@@ -124,13 +124,10 @@ public class Catalogo extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                JPanel detallesLibroPanel = DetallesLibro.crearDetallesLibroPanel(libro, ventanacontenedor);
-
-                // Añadir el panel de detalles al contenedor y cambiar de panel
-                //ventanacontenedor.add(detallesLibroPanel, "detalle");
+                DetallesLibro detallesLibroPanel = new DetallesLibro  (ventanacontenedor, libro);
                 ventanacontenedor.getPanelContenedor().add(detallesLibroPanel, "paneldetalle");
                 ventanacontenedor.cambiarPanel("paneldetalle");
-                //ventanacontenedor.remove();
+
             }
         });
 

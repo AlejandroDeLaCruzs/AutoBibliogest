@@ -71,10 +71,7 @@ public class Usuario {
                 if ((email.equals(campos[0])) && contraosenia.equals(campos[1])) {
                     return true;
                 }
-
-
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
