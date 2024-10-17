@@ -56,7 +56,7 @@ public class PanelInicio extends JPanel {
         butoninicsesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (Usuario.esvaldio(usuario.getText(), contrasenia.getText())) {
+                if (Usuario.esvaldio(usuario.getText(), contrasenia.getText(), ventanacontenedor)) {
                     ventanacontenedor.cambiarPanel("pantallacarga");
                 } else {
                     JOptionPane.showMessageDialog(null, "Usuario incorrecto");

@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static GIU.Prestamos.haydisponibilidad;
+
 public class PanelReservar extends JPanel {
      public PanelReservar(Libro libro) {
 
@@ -18,7 +20,13 @@ public class PanelReservar extends JPanel {
          butonconfirmreserva.addActionListener(new ActionListener() {
              @Override
              public void actionPerformed(ActionEvent e) {
-                 Prestamos prestamo = new Prestamos();
+                 if(haydisponibilidad(libro)){
+
+                 }
+                 else{
+                     JOptionPane.showMessageDialog(null, "No hay libros disponibles.");
+                 }
+
              }
          });
 

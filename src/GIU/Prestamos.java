@@ -2,22 +2,20 @@ package GIU;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.util.Scanner;
-import static java.lang.System.*;
 
 public class Prestamos {
     private Usuario nombre;
-    private Libro libroprestado;
+    private String titulo;
     private LocalDate fechainicioprestamo;
     private LocalDate fechafinprestamo;
 
-    public Prestamos(Usuario nombre, Libro libroprestado, LocalDate fechainicioprestamo, LocalDate fechafinprestamo) {
+    public Prestamos(Usuario nombre, String titulo, LocalDate fechainicioprestamo, LocalDate fechafinprestamo) {
         this.nombre = nombre;
-        this.libroprestado = libroprestado;
+        this.titulo = titulo;
         this.fechainicioprestamo = fechainicioprestamo;
         this.fechafinprestamo = fechafinprestamo;
     }
-
+/*
     public void reservar(Prestamos prestamo) {
        // LocalDate fechaincio = LocalDate.now();
         //LocalDate fechafin = fechaincio.plusWeeks(2);
@@ -31,13 +29,12 @@ public class Prestamos {
 
         }
     }
-
+*/
     @Override
     public String toString() {
        // String usuario = this.nombre.toString();
         //this.libroprestado.mostrarInfo();
-
-        return this.nombre + "," +libroprestado.toString()+ "," + this.fechainicioprestamo + ","+
+        return this.nombre + "," + this.titulo + "," + this.fechainicioprestamo + ","+
                 "," + this.fechafinprestamo;
     }
 
@@ -51,26 +48,52 @@ public class Prestamos {
 
     }
 */
-    public boolean haydisponibilidad(Libro aux) {
-        boolean disponibildad = true;
-        int cantidadlibro = aux.getCantidad();
-        int contador = 0;
+
+    public void reservarlibro(Libro libro, Ventana ventanacontenedor) {
+
+        LocalDate fechaincioprestamo = LocalDate.now();
+        LocalDate fechafinprestamo = fechaincioprestamo.plusWeeks(2);
+
+       Prestamos nuevoprestamo = new Prestamos(  ventanacontenedor.getUsuarioActivo(), libro.getTitulo(), fechainicioprestamo, fechafinprestamo);
+
+       try(BufferedWriter writer = new BufferedWriter(new FileWriter("prestamos.txt", true))){
+            writer.newLine();
+            writer.write(nuevoprestamo.toString());
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    /*
+    @param Libro
+    @return bool true si hay disponiblidad
+    En este metodo controlamos si hay disponibilidad del libro del que se quiere reservar. Para ello
+    consultamos el fichero prestamos.txt buscando algun prestamo de ese libro.Al final del metedo comparamos
+    el numero de prestamos de ese libro con la cantidad de copias que hay de ese libro para ver si hay alguna de sobra.
+     */
+    public static boolean haydisponibilidad(Libro aux) {
+        boolean disponibildad = false;
+        int copiaslibro = aux.getCantidad(); //Cantidad de copias que tiene el libro
+        int contadorprestamos = 0; //Numero de copias prestadas
+
+        //Arbrimos el archivo que contiene los prestamos
         try(BufferedReader reader = new BufferedReader(new FileReader("prestamos.txt"))) {
             String linea;
             while ((linea = reader.readLine()) != null){
                 String[] campos = linea.split(",");
+                if(campos[1].equals(aux.getTitulo())){ //Comparamos el titulo
+                    contadorprestamos++;
+                }
 
             }
         }
         catch (IOException e){
             e.printStackTrace();
         }
-        for (Prestamos acutales : app.getTotalprestamos()) {
-            if (acutales.libroprestado.getTitulo().equals(aux.getTitulo())) {
-                contador++;
-            }
-        }
-        if (contador == aux.getCantidad()) {
+
+        //Comparas el numero de libros prestados con el numero de copias que tiene la biblioteca
+        if (contadorprestamos < copiaslibro) {
             disponibildad = false;
         }
         return disponibildad;

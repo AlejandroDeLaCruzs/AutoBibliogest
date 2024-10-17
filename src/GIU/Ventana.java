@@ -7,6 +7,17 @@ import java.awt.event.ActionListener;
 
 public class Ventana extends JFrame {
 
+    public Usuario getUsuarioActivo() {
+        return UsuarioActivo;
+    }
+
+    public void setUsuarioActivo(Usuario usuarioActivo) {
+        UsuarioActivo = usuarioActivo;
+    }
+
+    private Usuario UsuarioActivo;
+
+
     private CardLayout cardLayout;
     private JPanel panelContenedor;
 
@@ -17,6 +28,9 @@ public class Ventana extends JFrame {
 
     public Ventana() {
         // Configuración del JFrame
+
+        UsuarioActivo= new Usuario();
+
         setTitle("Madrid");
         setSize(400, 400);
 
