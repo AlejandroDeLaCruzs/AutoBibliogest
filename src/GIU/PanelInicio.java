@@ -58,6 +58,8 @@ public class PanelInicio extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (Usuario.esvaldio(usuario.getText(), contrasenia.getText(), ventanacontenedor)) {
                     ventanacontenedor.cambiarPanel("pantallacarga");
+                    PanelMisReservas panelMisReservas = new PanelMisReservas(ventanacontenedor);
+                    ventanacontenedor.getPanelContenedor().add(panelMisReservas, "panelMisreservas");
                 } else {
                     JOptionPane.showMessageDialog(null, "Usuario incorrecto");
                 }

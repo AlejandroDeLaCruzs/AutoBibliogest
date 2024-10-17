@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static GIU.Prestamos.haydisponibilidad;
+
 /*
   La clase DatellesLibro derivada de la clase JPanel creara un panel para cada libro con sus detalles.
   Además tendra un buton para poder realizar la reserva.
@@ -28,7 +30,7 @@ public class DetallesLibro extends JPanel {
         //Creacion del titulo del libro
         JLabel titulo = new JLabel(libro.getTitulo());
         titulo.setFont(new Font("Arial", Font.BOLD, 30));
-        titulo.setBounds(500, 110, 500, 21);
+        titulo.setBounds(500, 110, 500, 40);
         add(titulo);
 
 
@@ -36,7 +38,7 @@ public class DetallesLibro extends JPanel {
         JLabel autor = new JLabel(libro.getAutor());
         autor.setFont(new Font("Arial", Font.TYPE1_FONT, 25));
         autor.setForeground(Color.lightGray);
-        autor.setBounds(500, 150, 500, 21);
+        autor.setBounds(500, 150, 500, 30);
         add(autor);
 
         //--------
@@ -60,9 +62,17 @@ public class DetallesLibro extends JPanel {
         butonreservar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PanelReservar panelreserva = new PanelReservar(libro);
+                if(haydisponibilidad(libro)){
+                    PanelConfirmreserva panelConfirmreserva = new PanelConfirmreserva(libro, ventanacontendor);
+                    ventanacontendor.getPanelContenedor().add(panelConfirmreserva, "panelConfirmreserva");
+                    ventanacontendor.cambiarPanel("panelConfirmreserva");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "No hay libros disponibles.");
+                }
+               /* PanelReservar panelreserva = new PanelReservar(libro, ventanacontendor);
                 ventanacontendor.getPanelContenedor().add(panelreserva, "panelreserva");
-                ventanacontendor.cambiarPanel("panelreserva");
+                ventanacontendor.cambiarPanel("panelreserva");*/
             }
         });
 

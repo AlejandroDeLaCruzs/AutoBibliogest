@@ -4,57 +4,47 @@ import java.io.*;
 import java.time.LocalDate;
 
 public class Prestamos {
-    private Usuario nombre;
+    private String correo;
     private String titulo;
     private LocalDate fechainicioprestamo;
     private LocalDate fechafinprestamo;
 
-    public Prestamos(Usuario nombre, String titulo, LocalDate fechainicioprestamo, LocalDate fechafinprestamo) {
-        this.nombre = nombre;
+    public Prestamos(String correo, String titulo, LocalDate fechainicioprestamo, LocalDate fechafinprestamo) {
+        this.correo = correo;
         this.titulo = titulo;
         this.fechainicioprestamo = fechainicioprestamo;
         this.fechafinprestamo = fechafinprestamo;
     }
-/*
-    public void reservar(Prestamos prestamo) {
-       // LocalDate fechaincio = LocalDate.now();
-        //LocalDate fechafin = fechaincio.plusWeeks(2);
-        //Prestamos aux = new Prestamos(activo, libro, fechaincio, fechafin);
-        try(BufferedWriter writer= new BufferedWriter(new FileWriter("prestamos.txt", true))){
-            writer.newLine();
-            writer.write(prestamo.toString());
-        }
-        catch(IOException e){
-            e.printStackTrace();
 
-        }
-    }
-*/
     @Override
     public String toString() {
-       // String usuario = this.nombre.toString();
+       // String usuario = this.correo.toString();
         //this.libroprestado.mostrarInfo();
-        return this.nombre + "," + this.titulo + "," + this.fechainicioprestamo + ","+
-                "," + this.fechafinprestamo;
+        return this.correo + "," + this.titulo + "," + this.fechainicioprestamo + "," + this.fechafinprestamo;
     }
 
    /* public static void vistareserva(Prestamos prestamo) {
 
         prestamo.libroprestado.mostrarInfo();
         //mostrarInfolibro(util.libroprestado);
-        out.println(prestamo.nombre);
+        out.println(prestamo.correo);
         out.println("Inicio de prestamo: " + prestamo.fechainicioprestamo);
         out.println("Fecha fin de prestamo: " + prestamo.fechafinprestamo);
 
     }
 */
 
-    public void reservarlibro(Libro libro, Ventana ventanacontenedor) {
 
+    /*
+    @param Libro del cual se quiere realizar la reserva
+    @param Ventana
+    En este metedo escribimos los datos de la reserva en el fichero: prestamos.txt
+     */
+    public static void reservarlibro(Libro libro, Ventana ventanacontenedor) {
         LocalDate fechaincioprestamo = LocalDate.now();
         LocalDate fechafinprestamo = fechaincioprestamo.plusWeeks(2);
 
-       Prestamos nuevoprestamo = new Prestamos(  ventanacontenedor.getUsuarioActivo(), libro.getTitulo(), fechainicioprestamo, fechafinprestamo);
+       Prestamos nuevoprestamo = new Prestamos(ventanacontenedor.getUsuarioActivo().getCorreo(), libro.getTitulo(), fechaincioprestamo, fechafinprestamo);
 
        try(BufferedWriter writer = new BufferedWriter(new FileWriter("prestamos.txt", true))){
             writer.newLine();
@@ -82,8 +72,10 @@ public class Prestamos {
             String linea;
             while ((linea = reader.readLine()) != null){
                 String[] campos = linea.split(",");
-                if(campos[1].equals(aux.getTitulo())){ //Comparamos el titulo
-                    contadorprestamos++;
+                if (campos.length == 4) {
+                    if (aux.getTitulo().equals(campos[1])) { //Comparamos el titulo
+                        contadorprestamos++;
+                    }
                 }
 
             }
@@ -94,7 +86,7 @@ public class Prestamos {
 
         //Comparas el numero de libros prestados con el numero de copias que tiene la biblioteca
         if (contadorprestamos < copiaslibro) {
-            disponibildad = false;
+            disponibildad = true;
         }
         return disponibildad;
     }

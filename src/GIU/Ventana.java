@@ -52,18 +52,19 @@ public class Ventana extends JFrame {
 
 
 
+
         // Añadir los paneles al panel contenedor con un nombre para cada uno
         panelContenedor.add(panelInicio, "panelInicio");
         panelContenedor.add(panelCrearUsuario, "panelCrearUsuario");
         panelContenedor.add(catalogo, "catalogo");
         panelContenedor.add(busquedalibros, "busquedalibros");
         panelContenedor.add(pantallaCarga, "pantallacarga");
-        //panelContenedor.add(detallesLibro, "detalleslibro");
 
 
 
 
-        //Menu
+
+        //Menu con las diferentes opciones
         JMenuItem menuSalir = new JMenuItem("SALIR");
 
         JMenuItem menuItemcatalogo = new JMenuItem("CATALOGO");
@@ -73,14 +74,16 @@ public class Ventana extends JFrame {
         JMenuItem menuItemmisreservas = new JMenuItem("MIS RESERVAS");
 
         JMenuBar barraMenu = new JMenuBar();
-        barraMenu.add(menuSalir);
+
+        //Añadimos al menu todas las diferentes items(opciones)
         barraMenu.add(menuItemcatalogo);
         barraMenu.add(menuItembusqueda);
         barraMenu.add(menuItembusqueda);
         barraMenu.add(menuItemmisreservas);
+        barraMenu.add(menuSalir);
 
+        //Añadimos el menu a la ventana
         setJMenuBar(barraMenu);
-
 
 
         // Mostrar el primer panel al iniciar
@@ -117,13 +120,14 @@ public class Ventana extends JFrame {
         menuItemmisreservas.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                cambiarPanel("panelMisreservas");
 
             }
         });
 
     }
 
-    // Método público para cambiar de panel
+    //Métedo público para cambiar de panel
     public void cambiarPanel(String nombrePanel) {
         cardLayout.show(panelContenedor, nombrePanel);
     }
