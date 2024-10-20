@@ -4,3 +4,6 @@ null,La mujer en la ventana,2024-10-17,2024-10-31
 t,La mujer en la ventana,2024-10-17,2024-10-31
 t,Cien años de soledad,2024-10-17,2024-10-31
 t,La mujer en la ventana,2024-10-17,2024-10-31
+a,Cien años de soledad,2024-10-19,2024-11-02
+a,Cien años de soledad,2024-10-19,2024-1-02
+null,El corredor del laberinto,2024-10-20,2024-11-03

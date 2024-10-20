@@ -52,7 +52,7 @@ public class Catalogo extends JPanel {
         try (BufferedReader reader = new BufferedReader(new FileReader("libros.txt"))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
-                String[] partes = linea.split(", ");
+                String[] partes = linea.split(",");
                 if (partes.length == 8) {
                     int copias = Integer.parseInt(partes[6]);
                     int aniopublicacion = Integer.parseInt(partes[4]);
@@ -75,7 +75,7 @@ public class Catalogo extends JPanel {
     Metodo que crea un panel del respectivo libro. Añade el titulo del libro y su respectiva portada.
     Ademas se crea un JButton para poder acceeder a una informacion mas detallada del libro.
      */
-    private static JPanel crearpanelinfolibro(final Libro libro, Ventana ventanacontenedor) {
+    public static JPanel crearpanelinfolibro(final Libro libro, Ventana ventanacontenedor) {
         JPanel panelinfolibro = new JPanel();
 
         panelinfolibro.setSize(400, 400);
