@@ -9,11 +9,11 @@ import java.time.LocalDate;
 import static GIU.Prestamos.reservarlibro;
 
 public class PanelConfirmreserva extends JPanel {
-    public PanelConfirmreserva(Libro libro, Ventana ventanacontenador){
+    public PanelConfirmreserva(Libro libro, Ventana ventanacontenador) {
 
         setLayout(null);
 
-       //Creacion de la imagen de la portada del libro------------
+        //Creacion de la imagen de la portada del libro------------
         JLabel imagenLabel = new JLabel();
         ImageIcon imagenIcon = new ImageIcon(libro.getRutaimagen());
         Image imagen = imagenIcon.getImage();  // Obtener la imagen
@@ -39,7 +39,7 @@ public class PanelConfirmreserva extends JPanel {
         LocalDate fechafinprestamo = fechaincioprestamo.plusWeeks(2);
 
         //Creacion de fecha incio reserva
-        JLabel fechainicoreserva = new JLabel("Fecha incio prestamo:"+fechaincioprestamo);
+        JLabel fechainicoreserva = new JLabel("Fecha incio prestamo:" + fechaincioprestamo);
         fechainicoreserva.setBounds(500, 200, 500, 20);
         add(fechainicoreserva);
 

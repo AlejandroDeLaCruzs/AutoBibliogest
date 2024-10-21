@@ -13,9 +13,13 @@ public class Libro {
     private String genero;
     private int cantidad;
 
-    public String getResumen() {return resumen;}
+    public String getResumen() {
+        return resumen;
+    }
 
-    public void setResumen(String resumen) {this.resumen = resumen;}
+    public void setResumen(String resumen) {
+        this.resumen = resumen;
+    }
 
     public int getAniopublicacion() {
         return aniopublicacion;
@@ -52,7 +56,6 @@ public class Libro {
     }
 
 
-
     public String getTitulo() {
         return titulo;
     }
@@ -69,7 +72,7 @@ public class Libro {
         this.cantidad = cantidad;
     }
 
-    public Libro(String ISBN, String titulo, String resumen, String autor,int aniopublicacion, String genero, int cantidad, String rutaimagen) {
+    public Libro(String ISBN, String titulo, String resumen, String autor, int aniopublicacion, String genero, int cantidad, String rutaimagen) {
         this.ISBN = ISBN;
         this.titulo = titulo;
         this.resumen = resumen;

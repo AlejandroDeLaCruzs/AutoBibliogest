@@ -26,7 +26,7 @@ public class Ventana extends JFrame {
         // Inicializar CardLayout y panel contenedor
         cardLayout = new CardLayout();
         panelContenedor = new JPanel(cardLayout);
-        UsuarioActivo= new Usuario();
+        UsuarioActivo = new Usuario();
 
 
         // Crear los paneles
@@ -35,8 +35,7 @@ public class Ventana extends JFrame {
         Catalogo catalogo = new Catalogo(this); //EL tercer panel
         Busquedalibros busquedalibros = new Busquedalibros(this);
         PantallaCarga pantallaCarga = new PantallaCarga(this);
-
-
+        PanelMisReservas misReservas = new PanelMisReservas(this);
 
 
         // Añadir los paneles al panel contenedor con un nombre para cada uno
@@ -45,7 +44,7 @@ public class Ventana extends JFrame {
         panelContenedor.add(catalogo, "catalogo");
         panelContenedor.add(busquedalibros, "busquedalibros");
         panelContenedor.add(pantallaCarga, "pantallacarga");
-
+        panelContenedor.add(misReservas, "panelMisreservas");
 
 
         //Menu con las diferentes opciones
@@ -75,6 +74,8 @@ public class Ventana extends JFrame {
 
         // Hacer visible el JFrame
         setVisible(true);
+
+
 
         menuSalir.addActionListener(new ActionListener() {
             @Override

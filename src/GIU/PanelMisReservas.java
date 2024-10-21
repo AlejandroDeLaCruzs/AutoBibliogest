@@ -7,28 +7,32 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class PanelMisReservas extends JPanel {
-    public PanelMisReservas(Ventana ventanacontenedor){
-            setLayout(new GridLayout(3, 1));
+    public PanelMisReservas(Ventana ventanacontenedor) {
+        setLayout(new GridLayout(0, 1));
 
-            try(BufferedReader reader = new BufferedReader(new FileReader("prestamos.txt"))){
-                String linea;
-                while ((linea = reader.readLine()) != null){
-                    String[] campos = linea.split(",");
-                    if(campos.length == 3){
-                        if(campos[0].equals(ventanacontenedor.getUsuarioActivo().getCorreo())){
-                            add(panellibroreservado(campos));
-                        }
+        // Crear un JScrollPane que contenga el panelContenido
+        JScrollPane scrollPane = new JScrollPane(this);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+
+        try (BufferedReader reader = new BufferedReader(new FileReader("prestamos.txt"))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] campos = linea.split(",");
+                if (campos.length == 4) {
+                    if (campos[0].equals(ventanacontenedor.getUsuarioActivo().getCorreo())) {
+                        System.out.println("aaaa");
+                        add(panellibroreservado(campos));
                     }
-
                 }
+
             }
-            catch (IOException e){
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static JPanel panellibroreservado(String[] datosreserva){
-        JPanel panelreserva= new JPanel();
+    public static JPanel panellibroreservado(String[] datosreserva) {
+        JPanel panelreserva = new JPanel();
 
         JLabel titulo = new JLabel(datosreserva[1]);
         panelreserva.add(titulo);
@@ -43,12 +47,6 @@ public class PanelMisReservas extends JPanel {
         panelinfolibro.add(imagenLabel);*/
 
         //JLabel
-
-
-
-
-
-
 
 
         return panelreserva;

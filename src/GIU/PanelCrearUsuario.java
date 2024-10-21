@@ -10,46 +10,8 @@ public class PanelCrearUsuario extends JPanel {
     PanelCrearUsuario(Ventana ventanacontenedor) {
         SpringLayout layout = new SpringLayout();
         setLayout(layout);
-        /*setBackground(Color.BLUE);
-        JLabel titulousuario = new JLabel("BIBLIOGEST", SwingConstants.CENTER);
-        titulousuario.setOpaque(true);
-        titulousuario.setBackground(Color.ORANGE);
-        titulousuario.setForeground(Color.CYAN);
-        titulousuario.setFont(new Font("Arial", Font.BOLD, 20));
-        titulousuario.setBounds(110, 15, 170, 60);
-        this.add(titulousuario);
 
-
-        //Fiel para introducir el nombre
-        JTextField nombre = new JTextField();
-        nombre.setBounds(105, 120, 200, 35);  // Ahora el setBounds se aplica al JTextField
-        nombre.setBackground(Color.BLACK);  // Fondo del JTextField en negro
-        nombre.setForeground(Color.WHITE);  // Texto en blanco para mayor contraste
-        this.add(nombre);
-
-
-        JTextField correo = new JTextField();
-        correo.setBounds(105, 160, 200, 35);  // Ahora el setBounds se aplica al JTextField
-        correo.setBackground(Color.BLACK);  // Fondo del JTextField en negro
-        correo.setForeground(Color.WHITE);  // Texto en blanco para mayor contraste
-        this.add(correo);
-
-        JTextField iduser = new JTextField();
-        iduser.setBounds(105, 200, 200, 35);  // Ahora el setBounds se aplica al JTextField
-        iduser.setBackground(Color.BLACK);  // Fondo del JTextField en negro
-        iduser.setForeground(Color.WHITE);  // Texto en blanco para mayor contraste
-        this.add(iduser);
-
-
-        JTextField contrasenia = new JTextField();
-        contrasenia.setBounds(105, 240, 200, 35);  // Ahora el setBounds se aplica al JTextField
-        contrasenia.setBackground(Color.BLACK);  // Fondo del JTextField en negro
-        contrasenia.setForeground(Color.WHITE);  // Texto en blanco para mayor contraste
-        this.add(contrasenia);*/
-
-
-
-        String[] labels = {"Name: ", "Fax: ", "Email: ", "Address: "};
+        String[] labels = {"Nombre: ", "Iduser: ", "Email: ", "Contraseña: "};
         int numPairs = labels.length;
         JTextField[] textFields = new JTextField[labels.length];
 
@@ -72,9 +34,6 @@ public class PanelCrearUsuario extends JPanel {
         }
 
 
-
-
-
         JButton botonCrearCuenta = new JButton("Crear cuenta");
         botonCrearCuenta.setEnabled(true);
         layout.putConstraint(SpringLayout.EAST, botonCrearCuenta, -10, SpringLayout.EAST, this);
@@ -83,9 +42,7 @@ public class PanelCrearUsuario extends JPanel {
         this.add(botonCrearCuenta);
 
 
-
-
-       botonCrearCuenta.addActionListener(new ActionListener() {
+        botonCrearCuenta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 for (JTextField textField : textFields) {
@@ -99,7 +56,6 @@ public class PanelCrearUsuario extends JPanel {
                 ventanacontenedor.cambiarPanel("panelInicio");
             }
         });
-
 
     }
 }

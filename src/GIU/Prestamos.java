@@ -18,7 +18,7 @@ public class Prestamos {
 
     @Override
     public String toString() {
-       // String usuario = this.correo.toString();
+        // String usuario = this.correo.toString();
         //this.libroprestado.mostrarInfo();
         return this.correo + "," + this.titulo + "," + this.fechainicioprestamo + "," + this.fechafinprestamo;
     }
@@ -44,13 +44,12 @@ public class Prestamos {
         LocalDate fechaincioprestamo = LocalDate.now();
         LocalDate fechafinprestamo = fechaincioprestamo.plusWeeks(2);
 
-       Prestamos nuevoprestamo = new Prestamos(ventanacontenedor.getUsuarioActivo().getCorreo(), libro.getTitulo(), fechaincioprestamo, fechafinprestamo);
+        Prestamos nuevoprestamo = new Prestamos(ventanacontenedor.getUsuarioActivo().getCorreo(), libro.getTitulo(), fechaincioprestamo, fechafinprestamo);
 
-       try(BufferedWriter writer = new BufferedWriter(new FileWriter("prestamos.txt", true))){
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("prestamos.txt", true))) {
             writer.newLine();
             writer.write(nuevoprestamo.toString());
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -68,9 +67,9 @@ public class Prestamos {
         int contadorprestamos = 0; //Numero de copias prestadas
 
         //Arbrimos el archivo que contiene los prestamos
-        try(BufferedReader reader = new BufferedReader(new FileReader("prestamos.txt"))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("prestamos.txt"))) {
             String linea;
-            while ((linea = reader.readLine()) != null){
+            while ((linea = reader.readLine()) != null) {
                 String[] campos = linea.split(",");
                 if (campos.length == 4) {
                     if (aux.getTitulo().equals(campos[1])) { //Comparamos el titulo
@@ -79,8 +78,7 @@ public class Prestamos {
                 }
 
             }
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
