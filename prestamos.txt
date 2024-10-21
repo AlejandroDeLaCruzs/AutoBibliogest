@@ -14,3 +14,14 @@ t,Cien años de soledad,2024-10-20,2024-11-03
 t,El corredor del laberinto,2024-10-20,2024-11-03
 a,La mujer en la ventana,2024-10-20,2024-11-03
 e,El silencio de la ciudad blanca,2024-10-21,2024-11-04
+null,El silencio de la ciudad blanca,2024-10-21,2024-11-04
+L,Ready Player One,2024-10-21,2024-11-04
+L,El corredor del laberinto,2024-10-21,2024-11-04
+null,Los testamentos,2024-10-21,2024-11-04
+null,Los testamentos,2024-10-21,2024-11-04
+null,Los testamentos,2024-10-21,2024-11-04
+null,Los renglones torcidos de Dios,2024-10-21,2024-11-04
+aaaa,Los testamentos,2024-10-21,2024-11-04
+aaaa,Los testamentos,2024-10-21,2024-11-04
+aaaa,Los testamentos,2024-10-21,2024-11-04
+aaaa,El odio que das,2024-10-21,2024-11-04
