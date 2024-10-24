@@ -67,7 +67,7 @@ public class Ventana extends JFrame {
 
 
         // Mostrar el primer panel al iniciar
-        cardLayout.show(panelContenedor, "panel1");
+        cardLayout.show(panelContenedor, "panelInicio");
 
         // Añadir el panel contenedor al JFrame
         this.add(panelContenedor);

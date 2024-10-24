@@ -66,13 +66,13 @@ public class Catalogo extends JPanel {
     }
 
     /**
-     * Metodo que crea un panel del respectivo libro. Añade el titulo del libro y su respectiva portada.
-     * Ademas se crea un JButton para poder acceeder a una informacion mas detallada del libro.
+     * Método que crea un panel del respectivo libro. Añade el titulo del libro y su respectiva portada.
+     * Además se crea un JButton para poder acceder a una información mas detallada del libro.
      *
      * @param libro             del que se quiere crear el panel
-     * @param ventanacontenedor para poder cambiar de panel si pulsa el boton de mas informacion
-     *                          Metodo que crea un panel del respectivo libro. Añade el titulo del libro y su respectiva portada.
-     *                          Ademas se crea un JButton para poder acceeder a una informacion mas detallada del libro.
+     * @param ventanacontenedor para poder cambiar de panel si pulsa el botón de más información
+     *                          Método que crea un panel del respectivo libro. Añade el título del libro y su respectiva portada.
+     *                          Además se crea un JButton para poder acceder a una información más detallada del libro.
      * @return panelinfolibro
      */
     public static JPanel crearpanelinfolibro(final Libro libro, Ventana ventanacontenedor) {
@@ -103,14 +103,14 @@ public class Catalogo extends JPanel {
         imagenLabel.setIcon(new ImageIcon(imagenEscalada));
         panelinfolibro.add(imagenLabel);
 
-        //Buton para obtner mas infotmacion dek libro
+        //Botón para obtener más información del libro
         JButton buttoninfodetallelibro = new JButton("Info");
         buttoninfodetallelibro.setEnabled(true);
         buttoninfodetallelibro.setBounds(350, 7, 50, 40);
         panelinfolibro.add(buttoninfodetallelibro);
 
         /**
-         Al haceer clic se crea un nuevo panel con los detallews libro utilizando el metedo estatico
+         Al hacer clic se crea un nuevo panel con los detalles libro utilizando el metedo estatico
          creardetallesLibroPanel.
          Se añade el panel a la pila del paneles.
          */

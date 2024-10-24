@@ -14,9 +14,9 @@ import static GUI.Catalogo.crearpanelinfolibro;
 public class Busquedapanel extends JPanel {
 
     /**
-     * El panel BusquedaPanel  contendrá a un JscrollPane que a su vez contendrá unos
+     * El panel BusquedaPanel contendrá a un JscrollPane que a su vez contendrá unos
      * paneles que se iran ubicando de manera horizontal y vertical. Además en esto paneles
-     * se podrá ver el titulo, la portada del libro y un boton para obtener mas informacion.
+     * se podrá ver el título, la portada del libro y un botón para obtener mas información.
      *
      * @param autor            El autor del libro a buscar.
      * @param titulo           El título del libro a buscar.
@@ -42,7 +42,7 @@ public class Busquedapanel extends JPanel {
     }
 
     /**
-     * Este métatdo busca en el fichero libros.txt los libros que tienen
+     * Este método busca en el fichero libros.txt los libros que tienen
      * las características introducidas por el usuario. Si el usuario no ha
      * proporcionado todos los datos, se consideran como coincidencias.
      * Luego, se comparan los campos con los datos introducidos por el usuario.
@@ -91,13 +91,13 @@ public class Busquedapanel extends JPanel {
                     }
                 }
 
-                //Si se cumplen las tres condicidones hemos encontrado un libro que cuadra con las caracteriticas de la busqueda
+                //Si se cumplen las tres condiciones hemos encontrado un libro que cuadra con las características de la busqueda
                 if (coincideTitulo && coincideAutor && coincideGenero && campos.length == 8) {
 
                     int copias = Integer.parseInt(campos[6]);
                     int aniopublicacion = Integer.parseInt(campos[4]);
                     Libro libro = new Libro(campos[0], campos[1], campos[2], campos[3], aniopublicacion, campos[5], copias, campos[7]); //Creamos el libro
-                    panelcontindo.add(crearpanelinfolibro(libro, ventanacontendor)); //LLamamos a un meteod de la Clase Catalogo para crear el panel
+                    panelcontindo.add(crearpanelinfolibro(libro, ventanacontendor)); //LLamamos a un método de la Clase Catalogo para crear el panel
                     contador++;
                 }
             }

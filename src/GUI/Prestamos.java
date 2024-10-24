@@ -45,15 +45,15 @@ public class Prestamos {
     @param libro
     @return bool true si hay disponiblidad
     En este metodo controlamos si hay disponibilidad del libro del que se quiere reservar. Para ello
-    consultamos el fichero prestamos.txt buscando algun prestamo de ese libro.Al final del metedo comparamos
-    el numero de prestamos de ese libro con la cantidad de copias que hay de ese libro para ver si hay alguna de sobra.
+    consultamos el fichero prestamos.txt buscando algún préstamo de ese libro. Al final del metedo comparamos
+    el número de préstamos de ese libro con la cantidad de copias que hay de ese libro para ver si hay alguna de sobra.
      */
     public static boolean haydisponibilidad(Libro libro) {
         boolean disponibildad = false;
         int copiaslibro = libro.getCantidad(); //Cantidad de copias que tiene el libro
         int contadorprestamos = 0; //Numero de copias prestadas
 
-        //Arbrimos el archivo que contiene los prestamos
+        //Arbrimos el archivo que contiene los préstamos
         try (BufferedReader reader = new BufferedReader(new FileReader("prestamos.txt"))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
@@ -69,7 +69,7 @@ public class Prestamos {
             e.printStackTrace();
         }
 
-        //Comparas el numero de libros prestados con el numero de copias que tiene la biblioteca
+        //Comparas el número de libros prestados con el número de copias que tiene la biblioteca
         if (contadorprestamos < copiaslibro) {
             disponibildad = true;
         }

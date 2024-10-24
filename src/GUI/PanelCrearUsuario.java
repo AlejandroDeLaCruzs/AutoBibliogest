@@ -18,7 +18,7 @@ public class PanelCrearUsuario extends JPanel {
         for (int i = 0; i < numPairs; i++) {
             JLabel label = new JLabel(labels[i], JLabel.TRAILING);
             add(label);
-            textFields[i] = new JTextField(18); // Store each text field
+            textFields[i] = new JTextField(18);
             label.setLabelFor(textFields[i]);
             add(textFields[i]);
 
@@ -31,7 +31,7 @@ public class PanelCrearUsuario extends JPanel {
 
         }
 
-        //Creacion del buton crearcuenta
+        //Creacion del botón crearcuenta
         JButton botonCrearCuenta = new JButton("Crear cuenta");
         botonCrearCuenta.setEnabled(true);
         layout.putConstraint(SpringLayout.EAST, botonCrearCuenta, -10, SpringLayout.EAST, this);
