@@ -1,12 +1,14 @@
 package GUI;
 
+import Core.Usuario;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelCrearUsuario extends JPanel {
 
-    PanelCrearUsuario(Ventana ventanacontenedor) {
+    PanelCrearUsuario(VentanaPrincipal ventanacontenedor) {
         SpringLayout layout = new SpringLayout();
         setLayout(layout);
 
@@ -49,6 +51,7 @@ public class PanelCrearUsuario extends JPanel {
                         return;
                     }
                 }
+
                 Usuario crearusuaio = new Usuario(textFields[0].getText(), textFields[1].getText(), textFields[2].getText(), textFields[3].getText());
                 crearusuaio.aniadiruseralarchivo();
                 ventanacontenedor.cambiarPanel("panelInicio");

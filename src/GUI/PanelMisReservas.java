@@ -7,7 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class PanelMisReservas extends JPanel {
-    public PanelMisReservas(Ventana ventanacontenedor) {
+    public PanelMisReservas(VentanaPrincipal ventanacontenedor) {
         setLayout(new GridLayout(0, 1));
 
         // Crear un JScrollPane que contenga el panelContenido
@@ -51,7 +51,7 @@ public class PanelMisReservas extends JPanel {
 
         return panelreserva;
     }
-    public static void actualizarpanelreservas(Ventana ventanacontenedor){
+    public static void actualizarpanelreservas(VentanaPrincipal ventanacontenedor){
 
     }
 }

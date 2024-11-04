@@ -1,5 +1,7 @@
 package GUI;
 
+import Core.Libro;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,7 +23,7 @@ public class Catalogo extends JPanel {
      * paneles que se iran ubicando de manera horizontal y vertical. Además en esto paneles
      * se podrá ver el titulo, la portada del libro y un boton para obtener mas informacion.
      */
-    Catalogo(Ventana ventanacontenedor) {
+    Catalogo(VentanaPrincipal ventanacontenedor) {
 
         // Establecer color de fondo y layout
         setBackground(Color.LIGHT_GRAY);
@@ -46,7 +48,7 @@ public class Catalogo extends JPanel {
      * Metodo que lee el fichero y llama al metedo para crear un panel con los datos del libro
      * y los añade al PanelContendenor.
      */
-    public void infolibros(JPanel panel, Ventana ventanacontenedor) {
+    public void infolibros(JPanel panel, VentanaPrincipal ventanacontenedor) {
         try (BufferedReader reader = new BufferedReader(new FileReader("libros.txt"))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
@@ -75,7 +77,7 @@ public class Catalogo extends JPanel {
      *                          Además se crea un JButton para poder acceder a una información más detallada del libro.
      * @return panelinfolibro
      */
-    public static JPanel crearpanelinfolibro(final Libro libro, Ventana ventanacontenedor) {
+    public static JPanel crearpanelinfolibro(final Libro libro, VentanaPrincipal ventanacontenedor) {
 
         JPanel panelinfolibro = new JPanel();
 

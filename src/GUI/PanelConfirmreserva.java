@@ -1,5 +1,7 @@
 package GUI;
 
+import Core.Libro;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,10 +9,10 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
 import static GUI.PanelMisReservas.actualizarpanelreservas;
-import static GUI.Prestamos.reservarlibro;
+import static Core.Prestamos.reservarlibro;
 
 public class PanelConfirmreserva extends JPanel {
-    public PanelConfirmreserva(Libro libro, Ventana ventanacontenador) {
+    public PanelConfirmreserva(Libro libro, VentanaPrincipal ventanacontenador) {
 
         setLayout(null);
 

@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Busquedalibros extends JPanel {
+public class BusquedalibrosPanel extends JPanel {
 
-    public Busquedalibros(Ventana ventanacontendor) {
+    public BusquedalibrosPanel(VentanaPrincipal ventanacontendor) {
 
         JLabel tituloLabel = new JLabel("Título:");
         JTextField tituloField = new JTextField(100);
@@ -96,6 +96,4 @@ public class Busquedalibros extends JPanel {
         });
 
     }
-
-
 }

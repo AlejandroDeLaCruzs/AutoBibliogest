@@ -1,11 +1,13 @@
 package GUI;
 
+import Core.Libro;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static GUI.Prestamos.haydisponibilidad;
+import static Core.Prestamos.haydisponibilidad;
 
 /**
  * La clase DatellesLibro derivada de la clase JPanel creara un panel para cada libro con sus detalles.
@@ -13,7 +15,7 @@ import static GUI.Prestamos.haydisponibilidad;
  */
 public class DetallesLibro extends JPanel {
 
-    public DetallesLibro(Ventana ventanacontendor, Libro libro) {
+    public DetallesLibro(VentanaPrincipal ventanacontendor, Libro libro) {
 
         setLayout(null);
 

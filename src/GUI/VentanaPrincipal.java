@@ -1,18 +1,20 @@
 package GUI;
 
+import Core.Usuario;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Ventana extends JFrame {
+public class VentanaPrincipal extends JFrame {
 
     private Usuario UsuarioActivo;
     private CardLayout cardLayout;
     private JPanel panelContenedor;
 
 
-    public Ventana() {
+    public VentanaPrincipal() {
         // Configuración del JFrame
         setTitle("AutoBibliogest");
         setSize(400, 400);
@@ -33,7 +35,7 @@ public class Ventana extends JFrame {
         PanelInicio panelInicio = new PanelInicio(this);  // El primer panel
         PanelCrearUsuario panelCrearUsuario = new PanelCrearUsuario(this);  // El segundo panel
         Catalogo catalogo = new Catalogo(this); //EL tercer panel
-        Busquedalibros busquedalibros = new Busquedalibros(this);
+        BusquedalibrosPanel busquedalibros = new BusquedalibrosPanel(this);
         PantallaCarga pantallaCarga = new PantallaCarga(this);
         PanelMisReservas misReservas = new PanelMisReservas(this);
 

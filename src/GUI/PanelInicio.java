@@ -1,12 +1,14 @@
 package GUI;
 
+import Core.Usuario;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class PanelInicio extends JPanel {
-    public PanelInicio(Ventana ventanacontenedor) {
+    public PanelInicio(VentanaPrincipal ventanacontenedor) {
 
         this.setLayout(null);
         this.setBackground(Color.BLUE);

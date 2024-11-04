@@ -1,5 +1,8 @@
-package GUI;
+package Core;
 
+import GUI.VentanaPrincipal;
+
+import javax.swing.*;
 import java.io.*;
 
 public class Usuario {
@@ -58,7 +61,7 @@ public class Usuario {
 
 
     //VALIDACION DE DATOS DE INCIO DE SESION---------
-    public static boolean esvaldio(String email, String contraosenia, Ventana ventanacontador) {
+    public static boolean esvaldio(String email, String contraosenia, VentanaPrincipal ventanacontador) {
         boolean usuariovalido = false;
         try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
             String linea;
@@ -77,20 +80,46 @@ public class Usuario {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return false;
     }
 
 
     //Metodo para añadir un usuario nuevo al archivo usuario.txt------------
     public void aniadiruseralarchivo() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter("usuarios.txt", true))) {
-            writer.newLine();
-            writer.write(this.toString());
-            System.out.println("Datos de préstamos guardados en " + "usarios.txt");
+        if(usuarioyacreado(this)){
+            JOptionPane.showMessageDialog(null, "EL usuario esta usado");
+
+        }
+        else {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("usuarios.txt", true))) {
+                writer.newLine();
+                writer.write(this.toString());
+                JOptionPane.showMessageDialog(null, "Usuario creado con éxito.");
+                System.out.println("Datos de préstamos guardados en " + "usarios.txt");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    //Metedo para detectar si el usuario ya tiene cuanta y esta intentado volver a crearse una cuenta con el mismo correo
+    public static boolean usuarioyacreado(Usuario usuario){
+        try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
+            String linea;
+            // Leer línea por línea
+            while ((linea = br.readLine()) != null) {
+                // Separar los campos por comas usando split
+                String[] campos = linea.split(",");
+
+                // Procesar cada campo (en este caso solo imprimirlo)
+               if(usuario.correo.equals(campos[1])){
+                   return true;
+               }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return false;
     }
 
 

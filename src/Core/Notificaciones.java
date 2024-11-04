@@ -1,4 +1,4 @@
-package GUI;
+package Core;
 
 public class Notificaciones {
 }

@@ -1,4 +1,11 @@
-package GUI;
+package Core;
+
+import GUI.VentanaPrincipal;
+
+import javax.swing.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class Libro {
     private String ISBN;
@@ -89,5 +96,28 @@ public class Libro {
    /* public void mostrarInfo() {
         out.println(this);
     }*/
+
+    /**
+     * Metodo que lee el fichero y llama al metedo para crear un panel con los datos del libro
+     * y los añade al PanelContendenor.
+     */
+    public void infolibros(JPanel panel, VentanaPrincipal ventanacontenedor) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("libros.txt"))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] partes = linea.split(",");
+                if (partes.length == 8) {
+                    int copias = Integer.parseInt(partes[6]);
+                    int aniopublicacion = Integer.parseInt(partes[4]);
+                    Libro libro = new Libro(partes[0], partes[1], partes[2], partes[3], aniopublicacion, partes[5], copias, partes[7]);
+                    panel.add(crearpanelinfolibro(libro, ventanacontenedor));
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }

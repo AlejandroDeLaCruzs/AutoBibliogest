@@ -1,4 +1,6 @@
-package GUI;
+package Core;
+
+import GUI.VentanaPrincipal;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -27,7 +29,7 @@ public class Prestamos {
     @param ventanacontenedor
     En este metedo escribimos los datos de la reserva en el fichero: prestamos.txt
      */
-    public static void reservarlibro(Libro libro, Ventana ventanacontenedor) {
+    public static void reservarlibro(Libro libro, VentanaPrincipal ventanacontenedor) {
         LocalDate fechaincioprestamo = LocalDate.now();
         LocalDate fechafinprestamo = fechaincioprestamo.plusWeeks(2);
 
@@ -68,6 +70,7 @@ public class Prestamos {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 
         //Comparas el número de libros prestados con el número de copias que tiene la biblioteca
         if (contadorprestamos < copiaslibro) {
