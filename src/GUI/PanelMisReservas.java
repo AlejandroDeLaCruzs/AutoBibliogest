@@ -23,10 +23,10 @@ public class PanelMisReservas extends JPanel {
 
         misreservas(ventanacontenedor, panelContenedor);
 
-        // Crear un JScrollPane que contenga el panelContenido
+
         scrollPane = new JScrollPane(panelContenedor);
 
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED); // Solo mostrar la barra vertical si es necesario
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
         add(scrollPane);  // Directamente agregar el scrollPane
@@ -35,11 +35,11 @@ public class PanelMisReservas extends JPanel {
     }
 
     public static JPanel panellibroreservado(String[] datosreserva) {
-        //System.out.println(datosreserva[1]);
-        JPanel panelReserva = new JPanel();
-        panelReserva.setLayout(new BoxLayout(panelReserva, BoxLayout.X_AXIS)); // Organizar horizontalmente
 
-        // panelReserva.setPreferredSize(new Dimension(400, 250));
+        JPanel panelReserva = new JPanel();
+        panelReserva.setLayout(new BoxLayout(panelReserva, BoxLayout.X_AXIS));
+
+
         panelReserva.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Panel para la imagen del libro y el título
@@ -88,10 +88,6 @@ public class PanelMisReservas extends JPanel {
         panelReserva.add(boxFechas);
 
         return panelReserva;
-    }
-
-    public JScrollPane getScrollPane() {
-        return scrollPane;
     }
 
     private static String rutaimagen(String tituloLibro) {
