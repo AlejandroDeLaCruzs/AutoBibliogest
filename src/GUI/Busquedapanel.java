@@ -27,7 +27,7 @@ public class Busquedapanel extends JPanel {
      * @param ventanacontendor La ventana que contiene este panel.
      */
     public Busquedapanel(String autor, String titulo, String genero, VentanaPrincipal ventanacontendor) {
-        ArrayList<Libro> librosencontrados = new ArrayList<>();
+        ArrayList<Libro> librosencontrados;
 
         setLayout(new BorderLayout()); //Para que ocupe toda la pantalla
 
@@ -45,9 +45,10 @@ public class Busquedapanel extends JPanel {
         add(scrollPane);
 
     }
-    public void librosbuscadospanel(final ArrayList<Libro> librosencontrados, JPanel panelcontido, VentanaPrincipal ventanaPrincipal){
-        for(Libro libro : librosencontrados){
-            panelcontido.add(crearpanelinfolibro(libro,ventanaPrincipal));
+
+    public void librosbuscadospanel(final ArrayList<Libro> librosencontrados, JPanel panelcontido, VentanaPrincipal ventanaPrincipal) {
+        for (Libro libro : librosencontrados) {
+            panelcontido.add(crearpanelinfolibro(libro, ventanaPrincipal));
         }
     }
 }

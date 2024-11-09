@@ -37,7 +37,7 @@ public class VentanaPrincipal extends JFrame {
         Catalogo catalogo = new Catalogo(this); //EL tercer panel
         BusquedalibrosPanel busquedalibros = new BusquedalibrosPanel(this);
         PantallaCarga pantallaCarga = new PantallaCarga(this);
-        PanelMisReservas misReservas = new PanelMisReservas(this);
+        //PanelMisReservas misReservas = new PanelMisReservas(this);
 
 
         // Añadir los paneles al panel contenedor con un nombre para cada uno
@@ -46,7 +46,7 @@ public class VentanaPrincipal extends JFrame {
         panelContenedor.add(catalogo, "catalogo");
         panelContenedor.add(busquedalibros, "busquedalibros");
         panelContenedor.add(pantallaCarga, "pantallacarga");
-        panelContenedor.add(misReservas, "panelMisreservas");
+       // panelContenedor.add(misReservas, "panelMisreservas");
 
 
         //Menu con las diferentes opciones
@@ -132,6 +132,15 @@ public class VentanaPrincipal extends JFrame {
     public void setPanelContenedor(JPanel panelContenedor) {
         this.panelContenedor = panelContenedor;
     }
+    public PanelMisReservas getPanelMisReservas() {
+        for (Component comp : panelContenedor.getComponents()) {
+            if (comp instanceof PanelMisReservas) {
+                return (PanelMisReservas) comp;
+            }
+        }
+        return null; // Si no encuentra el panel
+    }
+
 
 }
 

@@ -20,7 +20,6 @@ public class Busquedalibros {
      * Si se cumplen las tres características, se crea un panel para mostrar
      * la información del libro.
      *
-    // * @param panelcontindo    El panel donde se añadirán los resultados de la búsqueda.
      * @param autor            El autor del libro a buscar.
      * @param titulo           El título del libro a buscar.
      * @param genero           El género del libro a buscar.

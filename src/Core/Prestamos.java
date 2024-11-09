@@ -25,9 +25,8 @@ public class Prestamos {
 
 
     /**
-    @param libro del cual se quiere realizar la reserva
-    @param ventanacontenedor
-    En este metedo escribimos los datos de la reserva en el fichero: prestamos.txt
+     * @param libro             del cual se quiere realizar la reserva
+     * @param ventanacontenedor En este metedo escribimos los datos de la reserva en el fichero: prestamos.txt
      */
     public static void reservarlibro(Libro libro, VentanaPrincipal ventanacontenedor) {
         LocalDate fechaincioprestamo = LocalDate.now();
@@ -44,11 +43,11 @@ public class Prestamos {
     }
 
     /**
-    @param libro
-    @return bool true si hay disponiblidad
-    En este metodo controlamos si hay disponibilidad del libro del que se quiere reservar. Para ello
-    consultamos el fichero prestamos.txt buscando algún préstamo de ese libro. Al final del metedo comparamos
-    el número de préstamos de ese libro con la cantidad de copias que hay de ese libro para ver si hay alguna de sobra.
+     * @param libro
+     * @return bool true si hay disponiblidad
+     * En este metodo controlamos si hay disponibilidad del libro del que se quiere reservar. Para ello
+     * consultamos el fichero prestamos.txt buscando algún préstamo de ese libro. Al final del metedo comparamos
+     * el número de préstamos de ese libro con la cantidad de copias que hay de ese libro para ver si hay alguna de sobra.
      */
     public static boolean haydisponibilidad(Libro libro) {
         boolean disponibildad = false;
@@ -70,13 +69,29 @@ public class Prestamos {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         //Comparas el número de libros prestados con el número de copias que tiene la biblioteca
         if (contadorprestamos < copiaslibro) {
             disponibildad = true;
         }
         return disponibildad;
+    }
+
+    public static boolean reservado(Libro libro, Usuario usuarioactivo) {
+        boolean estareservado = false;
+        try(BufferedReader reader = new BufferedReader(new FileReader("prestamos.txt"))){
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] campos = linea.split(",");
+                if (campos.length == 4) {
+                    if(campos[1].equals(libro.getTitulo()) && campos[0].equals(usuarioactivo.getCorreo())){
+                        return true;
+                    }
+                }
+            }
+        } catch (IOException e) {
+           e.printStackTrace();
+        }
+        return estareservado;
     }
 
     /*

@@ -7,6 +7,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import static GUI.Catalogo.crearpanelinfolibro;
+
 public class Libro {
     private String ISBN;
     private String titulo;
@@ -101,7 +103,7 @@ public class Libro {
      * Metodo que lee el fichero y llama al metedo para crear un panel con los datos del libro
      * y los añade al PanelContendenor.
      */
-    public void infolibros(JPanel panel, VentanaPrincipal ventanacontenedor) {
+    public static void infolibros(JPanel panel, VentanaPrincipal ventanacontenedor) {
         try (BufferedReader reader = new BufferedReader(new FileReader("libros.txt"))) {
             String linea;
             while ((linea = reader.readLine()) != null) {

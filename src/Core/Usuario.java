@@ -86,11 +86,10 @@ public class Usuario {
 
     //Metodo para añadir un usuario nuevo al archivo usuario.txt------------
     public void aniadiruseralarchivo() {
-        if(usuarioyacreado(this)){
+        if (usuarioyacreado(this)) {
             JOptionPane.showMessageDialog(null, "EL usuario esta usado");
 
-        }
-        else {
+        } else {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter("usuarios.txt", true))) {
                 writer.newLine();
                 writer.write(this.toString());
@@ -103,7 +102,7 @@ public class Usuario {
     }
 
     //Metedo para detectar si el usuario ya tiene cuanta y esta intentado volver a crearse una cuenta con el mismo correo
-    public static boolean usuarioyacreado(Usuario usuario){
+    public static boolean usuarioyacreado(Usuario usuario) {
         try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
             String linea;
             // Leer línea por línea
@@ -112,9 +111,9 @@ public class Usuario {
                 String[] campos = linea.split(",");
 
                 // Procesar cada campo (en este caso solo imprimirlo)
-               if(usuario.correo.equals(campos[1])){
-                   return true;
-               }
+                if (usuario.correo.equals(campos[1])) {
+                    return true;
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

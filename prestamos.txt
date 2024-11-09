@@ -1,27 +1,6 @@
 
-f,La mujer en la ventana,2024-10-17,2024-10-31
-null,La mujer en la ventana,2024-10-17,2024-10-31
-t,La mujer en la ventana,2024-10-17,2024-10-31
-t,Cien años de soledad,2024-10-17,2024-10-31
-t,La mujer en la ventana,2024-10-17,2024-10-31
-a,Cien años de soledad,2024-10-19,2024-11-02
-a,Cien años de soledad,2024-10-19,2024-1-02
-null,El corredor del laberinto,2024-10-20,2024-11-03
-null,Six of Crows,2024-10-20,2024-11-03
-t,La mujer en la ventana,2024-10-20,2024-11-03
-t,El silencio de la ciudad blanca,2024-10-20,2024-11-03
-t,Cien años de soledad,2024-10-20,2024-11-03
-t,El corredor del laberinto,2024-10-20,2024-11-03
-a,La mujer en la ventana,2024-10-20,2024-11-03
-e,El silencio de la ciudad blanca,2024-10-21,2024-11-04
-null,El silencio de la ciudad blanca,2024-10-21,2024-11-04
-L,Ready Player One,2024-10-21,2024-11-04
-L,El corredor del laberinto,2024-10-21,2024-11-04
-null,Los testamentos,2024-10-21,2024-11-04
-null,Los testamentos,2024-10-21,2024-11-04
-null,Los testamentos,2024-10-21,2024-11-04
-null,Los renglones torcidos de Dios,2024-10-21,2024-11-04
-aaaa,Los testamentos,2024-10-21,2024-11-04
-aaaa,Los testamentos,2024-10-21,2024-11-04
-aaaa,Los testamentos,2024-10-21,2024-11-04
-aaaa,El odio que das,2024-10-21,2024-11-04
+a,La mujer en la ventana,2024-11-09,2024-11-23
+a,El silencio de la ciudad blanca,2024-11-09,2024-11-23
+a,El corredor del laberinto,2024-11-09,2024-11-23
+a,Cien años de soledad,2024-11-09,2024-11-23
+a,Los testamentos,2024-11-09,2024-11-23

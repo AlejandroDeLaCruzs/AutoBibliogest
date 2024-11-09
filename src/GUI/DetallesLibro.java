@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import static Core.Prestamos.haydisponibilidad;
+import static Core.Prestamos.reservado;
 
 /**
  * La clase DatellesLibro derivada de la clase JPanel creara un panel para cada libro con sus detalles.
@@ -64,12 +65,14 @@ public class DetallesLibro extends JPanel {
         butonreservar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (haydisponibilidad(libro)) {
+                if (!haydisponibilidad(libro)) {
+                    JOptionPane.showMessageDialog(null, "No hay libros disponibles para reservar.");
+                } else if (reservado(libro, ventanacontendor.getUsuarioActivo())) {
+                    JOptionPane.showMessageDialog(null, "Ya tienes este libro reservado.");
+                } else {
                     PanelConfirmreserva panelConfirmreserva = new PanelConfirmreserva(libro, ventanacontendor);
                     ventanacontendor.getPanelContenedor().add(panelConfirmreserva, "panelConfirmreserva");
                     ventanacontendor.cambiarPanel("panelConfirmreserva");
-                } else {
-                    JOptionPane.showMessageDialog(null, "No hay libros disponibles.");
                 }
             }
         });
