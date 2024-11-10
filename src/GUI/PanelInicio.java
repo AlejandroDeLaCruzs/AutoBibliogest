@@ -59,6 +59,7 @@ public class PanelInicio extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (Usuario.esvaldio(usuario.getText(), contrasenia.getText(), ventanacontenedor)) {
+                    ventanacontenedor.hacervisblemenu();
                     ventanacontenedor.cambiarPanel("pantallacarga");
                     PanelMisReservas panelMisReservas = new PanelMisReservas(ventanacontenedor);
                     ventanacontenedor.getPanelContenedor().add(panelMisReservas, "panelMisreservas");
@@ -77,6 +78,6 @@ public class PanelInicio extends JPanel {
         });
 
 
-        this.setVisible(true);
+
     }
 }

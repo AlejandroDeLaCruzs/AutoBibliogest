@@ -1,6 +1,2 @@
 
 a,La mujer en la ventana,2024-11-09,2024-11-23
-a,El silencio de la ciudad blanca,2024-11-09,2024-11-23
-a,El corredor del laberinto,2024-11-09,2024-11-23
-a,Cien años de soledad,2024-11-09,2024-11-23
-a,Los testamentos,2024-11-09,2024-11-23

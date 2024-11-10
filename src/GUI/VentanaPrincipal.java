@@ -12,6 +12,8 @@ public class VentanaPrincipal extends JFrame {
     private Usuario UsuarioActivo;
     private CardLayout cardLayout;
     private JPanel panelContenedor;
+    private JMenuBar barraMenu;
+
 
 
     public VentanaPrincipal() {
@@ -35,7 +37,7 @@ public class VentanaPrincipal extends JFrame {
         PanelInicio panelInicio = new PanelInicio(this);  // El primer panel
         PanelCrearUsuario panelCrearUsuario = new PanelCrearUsuario(this);  // El segundo panel
         Catalogo catalogo = new Catalogo(this); //EL tercer panel
-        BusquedalibrosPanel busquedalibros = new BusquedalibrosPanel(this);
+        PanelBusquedalibros busquedalibros = new PanelBusquedalibros(this);
         PantallaCarga pantallaCarga = new PantallaCarga(this);
         //PanelMisReservas misReservas = new PanelMisReservas(this);
 
@@ -55,7 +57,7 @@ public class VentanaPrincipal extends JFrame {
         JMenuItem menuItembusqueda = new JMenuItem("BUSQUEDA");
         JMenuItem menuItemmisreservas = new JMenuItem("MIS RESERVAS");
 
-        JMenuBar barraMenu = new JMenuBar();
+        barraMenu = new JMenuBar();
 
         //Añadimos al menu todas las diferentes items(opciones)
         barraMenu.add(menuItemcatalogo);
@@ -65,7 +67,7 @@ public class VentanaPrincipal extends JFrame {
         barraMenu.add(menuSalir);
 
         //Añadimos el menu a la ventana
-        setJMenuBar(barraMenu);
+       // setJMenuBar(barraMenu);
 
 
         // Mostrar el primer panel al iniciar
@@ -109,6 +111,9 @@ public class VentanaPrincipal extends JFrame {
         });
 
     }
+    public void hacervisblemenu() {
+        setJMenuBar(barraMenu);
+    }
 
     //Métedo público para cambiar de panel
     public void cambiarPanel(String nombrePanel) {
@@ -132,6 +137,7 @@ public class VentanaPrincipal extends JFrame {
     public void setPanelContenedor(JPanel panelContenedor) {
         this.panelContenedor = panelContenedor;
     }
+
     public PanelMisReservas getPanelMisReservas() {
         for (Component comp : panelContenedor.getComponents()) {
             if (comp instanceof PanelMisReservas) {

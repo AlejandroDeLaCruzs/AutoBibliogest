@@ -23,7 +23,6 @@ public class PanelMisReservas extends JPanel {
 
         misreservas(ventanacontenedor, panelContenedor);
 
-
         scrollPane = new JScrollPane(panelContenedor);
 
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -100,7 +99,7 @@ public class PanelMisReservas extends JPanel {
             System.err.println("No se pudo leer datos válidos de la última reserva.");
             return; // No continuar si los datos no son válidos
         }
-        System.out.println(datosreserva[0]);
+
         JPanel panelReserva = panellibroreservado(datosreserva);
         panelContenedor.add(panelReserva);
 

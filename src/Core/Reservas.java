@@ -10,8 +10,8 @@ import java.io.IOException;
 import static GUI.PanelMisReservas.panellibroreservado;
 
 public class Reservas {
+
     public static void misreservas(VentanaPrincipal ventanacontenedor, JPanel panel) {
-        //panel.removeAll();
         try (BufferedReader reader = new BufferedReader(new FileReader("prestamos.txt"))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
@@ -26,10 +26,10 @@ public class Reservas {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("22");
     }
+
     public static String[] leerUltimaLinea() {
-        String[] a = null;
+        String[] camposultimalinea   = null;
 
         try (BufferedReader br = new BufferedReader(new FileReader("prestamos.txt"))) {
             String linea;
@@ -40,16 +40,13 @@ public class Reservas {
 
             // Si hay una última línea, la dividimos en campos
             if (ultimaLinea != null) {
-                a = ultimaLinea.split(","); // Divide la última línea en campos
+                camposultimalinea = ultimaLinea.split(","); // Divide la última línea en campos
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return a; // Retorna el arreglo de campos de la última línea
+        return camposultimalinea; // Retorna el arreglo de campos de la última línea
     }
-    public static void misreservasact(VentanaPrincipal ventanaPrincipal, JPanel panel)
-    {
 
-    }
 }

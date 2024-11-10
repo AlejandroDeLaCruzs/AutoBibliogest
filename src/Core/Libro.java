@@ -108,6 +108,7 @@ public class Libro {
             String linea;
             while ((linea = reader.readLine()) != null) {
                 String[] partes = linea.split(",");
+
                 if (partes.length == 8) {
                     int copias = Integer.parseInt(partes[6]);
                     int aniopublicacion = Integer.parseInt(partes[4]);

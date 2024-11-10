@@ -4,9 +4,14 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BusquedalibrosPanel extends JPanel {
+public class PanelBusquedalibros extends JPanel {
 
-    public BusquedalibrosPanel(VentanaPrincipal ventanacontendor) {
+    private JRadioButton generoLiteraturajuvenil;
+    private JRadioButton generoLiteraturacontemporanea;
+    private JRadioButton generoFantasia;
+    private JRadioButton generoThriller;
+
+    public PanelBusquedalibros(VentanaPrincipal ventanacontendor) {
 
         JLabel tituloLabel = new JLabel("Título:");
         JTextField tituloField = new JTextField(100);
@@ -16,10 +21,10 @@ public class BusquedalibrosPanel extends JPanel {
 
         JLabel generoLabel = new JLabel("Género:");
 
-        JRadioButton generoLiteraturajuvenil = new JRadioButton("Literatura juvenil");
-        JRadioButton generoLiteraturacontemporanea = new JRadioButton("Literatura contemporánea");
-        JRadioButton generoFantasia = new JRadioButton("Fantasía");
-        JRadioButton generoThriller = new JRadioButton("Thriller");
+        generoLiteraturajuvenil = new JRadioButton("Literatura juvenil");
+         generoLiteraturacontemporanea = new JRadioButton("Literatura contemporánea");
+         generoFantasia = new JRadioButton("Fantasía");
+         generoThriller = new JRadioButton("Thriller");
 
         ButtonGroup grupoGeneros = new ButtonGroup();
         grupoGeneros.add(generoLiteraturajuvenil);
@@ -73,27 +78,28 @@ public class BusquedalibrosPanel extends JPanel {
         botonBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String generoSeleccionado = "";
+                String generoSeleccionado = generoseleccionado();
                 String titulo = tituloField.getText();
                 String autor = autorField.getText();
-
-                if (generoLiteraturajuvenil.isSelected()) {
-                    generoSeleccionado = "Literatura juvenil";
-                } else if (generoLiteraturacontemporanea.isSelected()) {
-                    generoSeleccionado = "Literatura contemporánea";
-                } else if (generoFantasia.isSelected()) {
-                    generoSeleccionado = "Fantasía";
-                } else if (generoThriller.isSelected()) {
-                    generoSeleccionado = "Thriller";
-                }
 
                 Busquedapanel panel = new Busquedapanel(autor, titulo, generoSeleccionado, ventanacontendor);
                 ventanacontendor.getPanelContenedor().add(panel, "busqueda");
                 ventanacontendor.cambiarPanel("busqueda");
-
-
             }
         });
 
+    }
+    public String generoseleccionado () {
+        String generoSeleccionado = "";
+        if (generoLiteraturajuvenil.isSelected()) {
+            generoSeleccionado = "Literatura juvenil";
+        } else if (generoLiteraturacontemporanea.isSelected()) {
+            generoSeleccionado = "Literatura contemporánea";
+        } else if (generoFantasia.isSelected()) {
+            generoSeleccionado = "Fantasía";
+        } else if (generoThriller.isSelected()) {
+            generoSeleccionado = "Thriller";
+        }
+        return generoSeleccionado ;
     }
 }

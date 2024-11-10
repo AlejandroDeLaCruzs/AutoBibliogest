@@ -13,11 +13,10 @@ public class PanelCrearUsuario extends JPanel {
         setLayout(layout);
 
         String[] labels = {"Nombre: ", "Iduser: ", "Email: ", "Contraseña: "};
-        int numPairs = labels.length;
         JTextField[] textFields = new JTextField[labels.length];
 
 
-        for (int i = 0; i < numPairs; i++) {
+        for (int i = 0; i < labels.length; i++) {
             JLabel label = new JLabel(labels[i], JLabel.TRAILING);
             add(label);
             textFields[i] = new JTextField(18);

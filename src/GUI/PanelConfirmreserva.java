@@ -8,9 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
 
-//import static GUI.PanelMisReservas.actualizarpanelreservas;
+
 import static Core.Prestamos.reservarlibro;
-//import static GUI.PanelMisReservas.actualizarpanelreservas;
+
 
 public class PanelConfirmreserva extends JPanel {
     public PanelConfirmreserva(Libro libro, VentanaPrincipal ventanacontenador) {

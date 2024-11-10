@@ -98,7 +98,6 @@ public class Catalogo extends JPanel {
         buttoninfodetallelibro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontenedor, libro);
                 ventanacontenedor.getPanelContenedor().add(detallesLibroPanel, "paneldetalle");
                 ventanacontenedor.cambiarPanel("paneldetalle");
