@@ -3,58 +3,128 @@ package GUI;
 import Core.Usuario;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class PanelInicio extends JPanel {
     public PanelInicio(VentanaPrincipal ventanacontenedor) {
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Configuramos BoxLayout en el eje Y
+        this.setBackground(Color.WHITE);
+        Font fuente = new Font("Arial", Font.BOLD, 12);
 
-        this.setLayout(null);
-        this.setBackground(Color.BLUE);
 
+        // Espacio para centrar verticalmente los elementos
+        this.add(Box.createVerticalGlue());
 
-        //Nombre de la aplicacion
-        JLabel titulousuario = new JLabel("BIBLIOGEST", SwingConstants.CENTER);
-        titulousuario.setOpaque(true);
-        titulousuario.setBackground(Color.ORANGE);
-        titulousuario.setForeground(Color.CYAN);
-        titulousuario.setFont(new Font("Arial", Font.BOLD, 20));
-        titulousuario.setBounds(110, 15, 170, 60);
+        // Nombre de la aplicación
+        JLabel titulousuario = new JLabel("AUTOBIBLIOGEST", SwingConstants.CENTER);
+       // titulousuario.setOpaque(true);
+        titulousuario.setForeground(Color.orange);
+        titulousuario.setFont(new Font("Arial", Font.TYPE1_FONT, 50));
+        titulousuario.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineado al centro
         this.add(titulousuario);
 
-        //Boton para iniciar sesion
-        JButton butoninicsesion = new JButton("Inicio sesion");
-        butoninicsesion.setBounds(105, 260, 200, 30);
-        butoninicsesion.setEnabled(true);
-        this.add(butoninicsesion);
+        // Espacio entre componentes
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
 
+        JLabel etiquetaUsuario = new JLabel("Dirección de e-mail");
+        etiquetaUsuario.setFont(fuente);
+        etiquetaUsuario.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        //Field para introducir el usuario
+        this.add(etiquetaUsuario);
+
+        // Field para introducir el usuario
         JTextField usuario = new JTextField();
-        usuario.setBounds(105, 200, 200, 30);  // Ahora el setBounds se aplica al JTextField
-        usuario.setBackground(Color.BLACK);  // Fondo del JTextField en negro
-        usuario.setForeground(Color.WHITE);  // Texto en blanco para mayor contraste
-        System.out.println(usuario.getText());
+        usuario.setMaximumSize(new Dimension(270, 200)); // Ancho máximo
+        usuario.setBackground(Color.WHITE);
+        usuario.setForeground(Color.BLACK);
+        usuario.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineado al centro
+
+
+        Border borderNegro = new LineBorder(Color.BLACK, 1);
+        usuario.setBorder(borderNegro);
+
+        // Borde iluminado (cuando se está escribiendo)
+        Border borderIluminado = new LineBorder(Color.BLUE, 2);
+
+        // Agregar FocusListener para cambiar el borde al ganar o perder el foco
+        usuario.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                // Cambiar borde a azul cuando se escribe
+                usuario.setBorder(borderIluminado);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                // Cambiar borde a negro cuando no se está escribiendo
+                usuario.setBorder(borderNegro);
+            }
+        });
         this.add(usuario);
 
+        // Espaciador entre componentes
+        this.add(Box.createRigidArea(new Dimension(0, 30)));
 
-        //Area para introducir la contreña
+        JLabel etiquetaContrasenia = new JLabel("Contraseña");
+        etiquetaContrasenia.setFont(fuente);
+        etiquetaContrasenia.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(etiquetaContrasenia);
+
+
+
+        // Field para introducir la contraseña
         JTextField contrasenia = new JTextField();
-        contrasenia.setBounds(105, 220, 200, 30);  // Ahora el setBounds se aplica al JTextField
-        contrasenia.setBackground(Color.BLACK);  // Fondo del JTextField en negro
-        contrasenia.setForeground(Color.WHITE);  // Texto en blanco para mayor contraste
+        contrasenia.setMaximumSize(new Dimension(270, 200)); // Ancho máximo
+        contrasenia.setBackground(Color.WHITE);
+        contrasenia.setForeground(Color.BLACK);
+        contrasenia.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineado al centro
+        // Agregar FocusListener para cambiar el borde al ganar o perder el foco
+        contrasenia.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                // Cambiar borde a azul cuando se escribe
+                contrasenia.setBorder(borderIluminado);
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                // Cambiar borde a negro cuando no se está escribiendo
+                contrasenia.setBorder(borderNegro);
+            }
+        });
+
         this.add(contrasenia);
 
+        // Espaciador entre componentes
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
 
-        //Boton para crear usuario
+        // Botón para iniciar sesión
+        JButton butoninicsesion = new JButton("Inicio sesión");
+        butoninicsesion.setMaximumSize(new Dimension(270, 40));
+        butoninicsesion.setOpaque(true);
+        butoninicsesion.setBorderPainted(false);
+        butoninicsesion.setBackground(Color.ORANGE);
+        butoninicsesion.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineado al centro
+        this.add(butoninicsesion);
+
+        // Espaciador entre componentes
+        this.add(Box.createRigidArea(new Dimension(0, 10)));
+
+        // Botón para crear usuario
         JButton buttoncrearusuario = new JButton("Crear usuario");
-        buttoncrearusuario.setBounds(105, 300, 200, 30);
-        buttoncrearusuario.setEnabled(true);
+        buttoncrearusuario.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineado al centro
         this.add(buttoncrearusuario);
 
+        // Espaciador para centrar verticalmente los elementos
+        this.add(Box.createVerticalGlue());
 
-        // CREACION DEL ACTION LISTENER DEL BOTON INICO SESION
+        // ActionListener para el botón "Inicio sesión"
         butoninicsesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -69,15 +139,12 @@ public class PanelInicio extends JPanel {
             }
         });
 
-
+        // ActionListener para el botón "Crear usuario"
         buttoncrearusuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 ventanacontenedor.cambiarPanel("panelCrearUsuario");
             }
         });
-
-
-
     }
 }

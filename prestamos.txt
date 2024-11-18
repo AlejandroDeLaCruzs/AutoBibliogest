@@ -1,2 +1,10 @@
-
 a,La mujer en la ventana,2024-11-09,2024-11-23
+a,Los testamentos,2024-11-11,2024-11-25
+a,Fangirl,2024-11-11,2024-11-25
+a,El corredor del laberinto,2024-11-11,2024-11-25
+t,La mujer en la ventana,2024-11-12,2024-11-26
+e,La mujer en la ventana,2024-11-15,2024-11-29
+e,El odio que das,2024-11-15,2024-11-29
+e,El teorema Katherine,2024-11-15,2024-11-29
+e,Los testamentos,2024-11-15,2024-11-29
+d,El silencio de la ciudad blanca,2024-11-18,2024-12-02

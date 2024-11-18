@@ -76,7 +76,7 @@ public class Usuario {
                     ventanacontador.setUsuarioActivo(usuarioactivo);
                     return true;
                 }
-            }
+            } 
         } catch (IOException e) {
             e.printStackTrace();
         }

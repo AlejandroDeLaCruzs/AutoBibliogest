@@ -81,7 +81,7 @@ public class PanelBusquedalibros extends JPanel {
                 String generoSeleccionado = generoseleccionado();
                 String titulo = tituloField.getText();
                 String autor = autorField.getText();
-
+                
                 Busquedapanel panel = new Busquedapanel(autor, titulo, generoSeleccionado, ventanacontendor);
                 ventanacontendor.getPanelContenedor().add(panel, "busqueda");
                 ventanacontendor.cambiarPanel("busqueda");

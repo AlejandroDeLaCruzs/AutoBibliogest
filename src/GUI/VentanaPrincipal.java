@@ -15,7 +15,6 @@ public class VentanaPrincipal extends JFrame {
     private JMenuBar barraMenu;
 
 
-
     public VentanaPrincipal() {
         // Configuración del JFrame
         setTitle("AutoBibliogest");
@@ -146,7 +145,6 @@ public class VentanaPrincipal extends JFrame {
         }
         return null; // Si no encuentra el panel
     }
-
 
 }
 

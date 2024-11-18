@@ -63,13 +63,11 @@ public class Prestamos {
                         contadorprestamos++;
                     }
                 }
-
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
         return contadorprestamos;
-
     }
 
     public static boolean haydisponibilidad(Libro libro) {
@@ -123,8 +121,7 @@ public class Prestamos {
     }
 
     public static String proximadisponibilidad(Libro libro) {
-        // Lógica para determinar cuándo estará disponible el libro
-        // Puede ser una fecha fija o calculada
+
         LocalDate fechaDisponibilidad = calcularProximaDisponibilidad(libro);
         return "El libro estará disponible el " + fechaDisponibilidad.toString();
     }
