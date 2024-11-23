@@ -61,7 +61,7 @@ public class Usuario {
 
 
     //VALIDACION DE DATOS DE INCIO DE SESION---------
-    public static boolean esvaldio(String email, String contraosenia, VentanaPrincipal ventanacontador) {
+    public static boolean esvaldio(String email, char[] contrasenia, VentanaPrincipal ventanacontador) {
         boolean usuariovalido = false;
         try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
             String linea;
@@ -71,12 +71,17 @@ public class Usuario {
                 String[] campos = linea.split(",");
 
                 // Procesar cada campo (en este caso solo imprimirlo)
-                if ((email.equals(campos[0])) && contraosenia.equals(campos[1])) {
-                    Usuario usuarioactivo = new Usuario(campos[0], campos[1], campos[2], campos[3]);
-                    ventanacontador.setUsuarioActivo(usuarioactivo);
-                    return true;
+                if ((email.equals(campos[0]))) {
+
+                    String contraseniaIngresada = new String(contrasenia);
+
+                    if (contraseniaIngresada.equals(campos[1])) {
+                        Usuario usuarioactivo = new Usuario(campos[0], campos[1], campos[2], campos[3]);
+                        ventanacontador.setUsuarioActivo(usuarioactivo);
+                        return true;
+                    }
                 }
-            } 
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -89,6 +89,7 @@ public class PanelBusquedalibros extends JPanel {
         });
 
     }
+
     public String generoseleccionado () {
         String generoSeleccionado = "";
         if (generoLiteraturajuvenil.isSelected()) {

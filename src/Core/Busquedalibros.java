@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static Core.Libro.crearLibro;
 import static GUI.Catalogo.crearpanelinfolibro;
 
 public class Busquedalibros {
@@ -59,9 +60,7 @@ public class Busquedalibros {
 
         if (coincideTitulo && coincideAutor && coincideGenero) {
             try {
-                int copias = Integer.parseInt(campos[6]);
-                int anioPublicacion = Integer.parseInt(campos[4]);
-                return new Libro(campos[0], campos[1], campos[2], campos[3], anioPublicacion, campos[5], copias, campos[7]);
+                return crearLibro(campos);
             } catch (NumberFormatException e) {
                 System.out.println("Error en el formato de números para el libro: " + String.join(",", campos));
             }

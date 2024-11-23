@@ -23,7 +23,6 @@ public class PanelInicio extends JPanel {
 
         // Nombre de la aplicación
         JLabel titulousuario = new JLabel("AUTOBIBLIOGEST", SwingConstants.CENTER);
-       // titulousuario.setOpaque(true);
         titulousuario.setForeground(Color.orange);
         titulousuario.setFont(new Font("Arial", Font.TYPE1_FONT, 50));
         titulousuario.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineado al centro
@@ -79,11 +78,14 @@ public class PanelInicio extends JPanel {
 
 
         // Field para introducir la contraseña
-        JTextField contrasenia = new JTextField();
+        JPasswordField contrasenia = new JPasswordField();
+        contrasenia.setEchoChar('●');
         contrasenia.setMaximumSize(new Dimension(270, 200)); // Ancho máximo
         contrasenia.setBackground(Color.WHITE);
         contrasenia.setForeground(Color.BLACK);
         contrasenia.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineado al centro
+
+
         // Agregar FocusListener para cambiar el borde al ganar o perder el foco
         contrasenia.addFocusListener(new FocusAdapter() {
             @Override
@@ -107,17 +109,24 @@ public class PanelInicio extends JPanel {
         // Botón para iniciar sesión
         JButton butoninicsesion = new JButton("Inicio sesión");
         butoninicsesion.setMaximumSize(new Dimension(270, 40));
+        butoninicsesion.setBackground(Color.ORANGE);
         butoninicsesion.setOpaque(true);
         butoninicsesion.setBorderPainted(false);
-        butoninicsesion.setBackground(Color.ORANGE);
         butoninicsesion.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineado al centro
         this.add(butoninicsesion);
 
         // Espaciador entre componentes
-        this.add(Box.createRigidArea(new Dimension(0, 10)));
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
+
+        JLabel etiquetacrearusario = new JLabel("¿Eres nuevo en AutoBibliogest?");
+        etiquetacrearusario.setFont(fuente);
+        etiquetacrearusario.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(etiquetacrearusario);
+
+        this.add(Box.createRigidArea(new Dimension(0, 20)));
 
         // Botón para crear usuario
-        JButton buttoncrearusuario = new JButton("Crear usuario");
+        JButton buttoncrearusuario = new JButton("Crear tu cuenta de AutoBibliogest");
         buttoncrearusuario.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineado al centro
         this.add(buttoncrearusuario);
 
@@ -128,7 +137,7 @@ public class PanelInicio extends JPanel {
         butoninicsesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (Usuario.esvaldio(usuario.getText(), contrasenia.getText(), ventanacontenedor)) {
+                if (Usuario.esvaldio(usuario.getText(), contrasenia.getPassword(), ventanacontenedor)) {
                     ventanacontenedor.hacervisblemenu();
                     ventanacontenedor.cambiarPanel("pantallacarga");
                     PanelMisReservas panelMisReservas = new PanelMisReservas(ventanacontenedor);
@@ -146,5 +155,8 @@ public class PanelInicio extends JPanel {
                 ventanacontenedor.cambiarPanel("panelCrearUsuario");
             }
         });
+
+
     }
 }
+

@@ -1,4 +1,5 @@
 package Core;
 
-public class Notificaciones {
+abstract public class Notificaciones {
+
 }

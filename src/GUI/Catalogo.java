@@ -6,9 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 import static Core.Libro.infolibros;
 
@@ -69,7 +66,7 @@ public class Catalogo extends JPanel {
         panelinfolibro.add(titulo);
 
         // Establecer el fondo del panel
-        panelinfolibro.setBackground(Color.LIGHT_GRAY);
+        panelinfolibro.setBackground(Color.WHITE);
 
         // Establecer el tamaño preferido del panel
         panelinfolibro.setPreferredSize(new Dimension(250, 250));

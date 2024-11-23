@@ -17,6 +17,16 @@ public class Libro {
     private String autor;
     private String genero;
     private Integer cantidad;
+    private String aniopublicacion;
+    private Integer cantidadpaginas;
+
+    public Integer getCantidadpaginas() {
+        return cantidadpaginas;
+    }
+
+    public void setCantidadpaginas(Integer cantidadpaginas) {
+        this.cantidadpaginas = cantidadpaginas;
+    }
 
     public String getResumen() {
         return resumen;
@@ -26,15 +36,13 @@ public class Libro {
         this.resumen = resumen;
     }
 
-    public int getAniopublicacion() {
+    public String getAniopublicacion() {
         return aniopublicacion;
     }
 
-    public void setAniopublicacion(int aniopublicacion) {
+    public void setAniopublicacion(String aniopublicacion) {
         this.aniopublicacion = aniopublicacion;
     }
-
-    private int aniopublicacion;
 
     public String getRutaimagen() {
         return rutaimagen;
@@ -76,7 +84,7 @@ public class Libro {
         this.cantidad = cantidad;
     }
 
-    public Libro(String ISBN, String titulo, String resumen, String autor, Integer aniopublicacion, String genero, Integer cantidad, String rutaimagen) {
+    public Libro(String ISBN, String titulo, String resumen, String autor, String aniopublicacion, String genero,Integer cantidadpaginas, Integer cantidad,  String rutaimagen) {
         this.ISBN = ISBN;
         this.titulo = titulo;
         this.resumen = resumen;
@@ -85,6 +93,8 @@ public class Libro {
         this.genero = genero;
         this.cantidad = cantidad;
         this.rutaimagen = rutaimagen;
+        this.cantidadpaginas = cantidadpaginas;
+
     }
 
     @Override
@@ -95,9 +105,6 @@ public class Libro {
                 ", Resumen: " + this.resumen;
     }
 
-   /* public void mostrarInfo() {
-        out.println(this);
-    }*/
 
     /**
      * Metodo que lee el fichero y llama al metedo para crear un panel con los datos del libro
@@ -109,11 +116,8 @@ public class Libro {
             while ((linea = reader.readLine()) != null) {
                 String[] partes = linea.split(",");
 
-                if (partes.length == 8) {
-                    int copias = Integer.parseInt(partes[6]);
-                    int aniopublicacion = Integer.parseInt(partes[4]);
-                    Libro libro = new Libro(partes[0], partes[1], partes[2], partes[3], aniopublicacion, partes[5], copias, partes[7]);
-                    panel.add(crearpanelinfolibro(libro, ventanacontenedor));
+                if (partes.length == 9) {
+                    panel.add(crearpanelinfolibro(crearLibro(partes), ventanacontenedor));
                 }
             }
 
@@ -122,5 +126,58 @@ public class Libro {
         }
 
     }
+
+    public static Libro buscarLibro(Libro libroActual, boolean buscarSiguiente) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("libros.txt"))) {
+            String linea;
+            String[] partesAnterior = null; // Guardar datos del libro previo
+
+            while ((linea = reader.readLine()) != null) {
+                String[] partes = linea.split(",");
+
+                if (partes.length == 9) {
+                    // Si encontramos el libro actual
+                    if (partes[1].equals(libroActual.titulo)) {
+                        if (buscarSiguiente) {
+                            return obtenerSiguienteLibro(reader);
+                        } else {
+                            return obtenerLibroAnterior(partesAnterior);
+                        }
+
+                    }
+
+                    // Actualizar el libro previo antes de avanzar a la siguiente línea
+                    partesAnterior = partes;
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static Libro obtenerSiguienteLibro(BufferedReader reader) throws IOException {
+        String linea = reader.readLine();  // Leer la siguiente línea
+        if (linea != null) {
+            String[] partesSiguiente = linea.split(",");
+            return crearLibro(partesSiguiente);
+        }
+        return null;  // No hay siguiente libro
+    }
+
+    private static Libro obtenerLibroAnterior(String[] partesAnterior) {
+        if (partesAnterior != null) {
+            return crearLibro(partesAnterior);
+        }
+        return null;  // No hay libro anterior
+    }
+
+    public static Libro crearLibro(String[] partes) {
+        int copias = Integer.parseInt(partes[7]);
+        int cantidadpaginas = Integer.parseInt(partes[6]);
+        return new Libro(partes[0], partes[1], partes[2], partes[3], partes[4], partes[5], cantidadpaginas, copias, partes[8]);
+    }
+
 
 }
