@@ -52,7 +52,7 @@ public class PanelCrearUsuario extends JPanel {
                 }
 
                 Usuario crearusuaio = new Usuario(textFields[0].getText(), textFields[1].getText(), textFields[2].getText(), textFields[3].getText());
-                crearusuaio.aniadiruseralarchivo();
+                crearusuaio.aniadirUseralArchivo();
                 ventanacontenedor.cambiarPanel("panelInicio");
             }
         });

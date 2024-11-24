@@ -11,22 +11,22 @@ import static Core.Libro.infolibros;
 
 
 /**
- * CLASE CATALAGO-------
- * La clase catalgo es panel que contiene toodos los libros de la biblioteca pudiendo selecionar
- * mediante un boton cualquier libro para obtener informacion mas en detalle del libro.
+ * La clase {@code Catalogo} es un panel que contiene todos los libros de la biblioteca.
+ * Los usuarios pueden seleccionar un libro mediante un botón para obtener información más detallada del libro.
  */
 public class Catalogo extends JPanel {
 
     /**
-     * El panel Catálogo contendrá a un JscrollPane que a su vez contendrá unos
-     * paneles que se iran ubicando de manera horizontal y vertical. Además en esto paneles
-     * se podrá ver el titulo, la portada del libro y un boton para obtener mas informacion.
+     * Constructor de la clase {@code Catalogo}.
+     * Este constructor crea un panel con una cuadrícula que contiene tarjetas con los libros disponibles.
+     * Cada tarjeta tiene el título, la portada y un botón para obtener más detalles sobre el libro.
+     *
+     * @param ventanacontenedor La ventana principal que contiene este panel.
      */
     Catalogo(VentanaPrincipal ventanacontenedor) {
 
-        // Establecer color de fondo y layout
         setBackground(Color.LIGHT_GRAY);
-        setLayout(new BorderLayout()); //Para que ocupe toda la pantalla
+        setLayout(new BorderLayout());
 
         JPanel panelContenido = new JPanel();
         panelContenido.setLayout(new GridLayout(7, 9));
@@ -35,7 +35,7 @@ public class Catalogo extends JPanel {
         JScrollPane scrollPane = new JScrollPane(panelContenido);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        // Llamar a la función para cargar la información de los libros
+        // Cargar los libros en el panel
         infolibros(panelContenido, ventanacontenedor);
 
         // Añadir el JScrollPane al panel principal
@@ -44,14 +44,11 @@ public class Catalogo extends JPanel {
     }
 
     /**
-     * Método que crea un panel del respectivo libro. Añade el titulo del libro y su respectiva portada.
-     * Además se crea un JButton para poder acceder a una información mas detallada del libro.
+     * Crea un panel con la información de un libro, que incluye su título, portada y un botón para más detalles.
      *
-     * @param libro             del que se quiere crear el panel
-     * @param ventanacontenedor para poder cambiar de panel si pulsa el botón de más información
-     *                          Método que crea un panel del respectivo libro. Añade el título del libro y su respectiva portada.
-     *                          Además se crea un JButton para poder acceder a una información más detallada del libro.
-     * @return panelinfolibro
+     * @param libro El objeto {@code Libro} que contiene la información del libro.
+     * @param ventanacontenedor La ventana principal que contiene este panel.
+     * @return Un panel con la información del libro, incluyendo un botón para más detalles.
      */
     public static JPanel crearpanelinfolibro(final Libro libro, VentanaPrincipal ventanacontenedor) {
 
@@ -65,13 +62,11 @@ public class Catalogo extends JPanel {
         titulo.setBounds(100, 10, 300, 20);
         panelinfolibro.add(titulo);
 
-        // Establecer el fondo del panel
+        // Establecer el fondo del panel y su tamaño preferido
         panelinfolibro.setBackground(Color.WHITE);
-
-        // Establecer el tamaño preferido del panel
         panelinfolibro.setPreferredSize(new Dimension(250, 250));
 
-
+        // Imagen del libro
         JLabel imagenLabel = new JLabel();
         ImageIcon imagenIcon = new ImageIcon(libro.getRutaimagen());
         Image imagen = imagenIcon.getImage();
@@ -87,14 +82,11 @@ public class Catalogo extends JPanel {
         buttoninfodetallelibro.setBounds(350, 7, 50, 40);
         panelinfolibro.add(buttoninfodetallelibro);
 
-        /**
-         Al hacer clic se crea un nuevo panel con los detalles libro utilizando el metedo estatico
-         creardetallesLibroPanel.
-         Se añade el panel a la pila del paneles.
-         */
+        // Acción para mostrar los detalles del libro al hacer clic en el botón
         buttoninfodetallelibro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                // Crear un panel con los detalles del libro y cambiar el panel visible
                 DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontenedor, libro);
                 ventanacontenedor.getPanelContenedor().add(detallesLibroPanel, "paneldetalle");
                 ventanacontenedor.cambiarPanel("paneldetalle");

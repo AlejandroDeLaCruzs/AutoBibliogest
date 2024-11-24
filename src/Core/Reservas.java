@@ -9,7 +9,11 @@ import java.io.IOException;
 
 import static GUI.PanelMisReservas.panellibroreservado;
 
-public class Reservas {
+/**
+ * Clase que gestiona las reservas de libros realizadas por los usuarios.
+ * Proporciona métodos para mostrar las reservas de un usuario y leer la última línea del archivo de préstamos.
+ */
+abstract public class Reservas {
 
     public static void misreservas(VentanaPrincipal ventanacontenedor, JPanel panel) {
         try (BufferedReader reader = new BufferedReader(new FileReader("prestamos.txt"))) {
@@ -28,25 +32,30 @@ public class Reservas {
         }
     }
 
+    /**
+     * Lee y retorna la última línea del archivo `prestamos.txt` como un arreglo de campos.
+     *
+     * @return Un arreglo de cadenas con los campos de la última línea, o {@code null} si no hay líneas.
+     */
     public static String[] leerUltimaLinea() {
         String[] camposultimalinea   = null;
 
         try (BufferedReader br = new BufferedReader(new FileReader("prestamos.txt"))) {
             String linea;
-            String ultimaLinea = null; // Variable para almacenar la última línea válida
+            String ultimaLinea = null;
             while ((linea = br.readLine()) != null) {
-                ultimaLinea = linea; // Actualiza la última línea leída
+                ultimaLinea = linea;
             }
 
-            // Si hay una última línea, la dividimos en campos
+            // Divide la última línea en campos si existe
             if (ultimaLinea != null) {
-                camposultimalinea = ultimaLinea.split(","); // Divide la última línea en campos
+                camposultimalinea = ultimaLinea.split(",");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return camposultimalinea; // Retorna el arreglo de campos de la última línea
+        return camposultimalinea;
     }
 
 }

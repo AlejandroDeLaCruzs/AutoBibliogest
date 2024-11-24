@@ -4,27 +4,23 @@ import Core.Libro;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import static Core.Busquedalibros.busquedalibrofichero;
 import static GUI.Catalogo.crearpanelinfolibro;
 
 /**
- * La clase BusquedaPanel genera un panel con los libros que tengan las características que indicamos en la busqueda.
+ * La clase {@code Busquedapanel} genera un panel que muestra los libros que cumplen con los criterios de búsqueda.
+ * El panel contiene una lista de libros presentados en forma de tarjetas con su título, portada y un botón
+ * para obtener más información.
  */
 public class Busquedapanel extends JPanel {
+
     /**
-     * El panel BusquedaPanel contendrá a un JscrollPane que a su vez contendrá unos
-     * paneles que se iran ubicando de manera horizontal y vertical. Además en esto paneles
-     * se podrá ver el título, la portada del libro y un botón para obtener mas información.
+     * Constructor de la clase {@code Busquedapanel}.
+     * Este constructor crea un panel con una cuadrícula que contiene los libros encontrados según los criterios de búsqueda.
      *
-     * @param autor            El autor del libro a buscar.
-     * @param titulo           El título del libro a buscar.
-     * @param genero           El género del libro a buscar.
-     * @param ventanacontendor La ventana que contiene este panel.
+     * @param librosencontrados Lista de libros encontrados que cumplen con los criterios de búsqueda.
+     * @param ventanacontendor Ventana principal que contiene este panel y proporciona contexto para las interacciones.
      */
     public Busquedapanel( ArrayList<Libro> librosencontrados, VentanaPrincipal ventanacontendor) {
 
@@ -38,17 +34,26 @@ public class Busquedapanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(panelContenido);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        librosbuscadospanel(librosencontrados, panelContenido, ventanacontendor);
+        agregarLibrosALaVista(librosencontrados, panelContenido, ventanacontendor);
 
         // Añadir el JScrollPane al panel principal
         add(scrollPane);
 
     }
 
-    public void librosbuscadospanel(final ArrayList<Libro> librosencontrados, JPanel panelcontido, VentanaPrincipal ventanaPrincipal) {
+    /**
+     * Este método agrega los paneles de información de cada libro al panel de contenido.
+     *
+     * @param librosencontrados Lista de libros encontrados que se mostrarán en el panel.
+     * @param panelContenido El panel donde se agregan los libros.
+     * @param ventanaPrincipal La ventana principal que contiene este panel y proporciona contexto para la interacción.
+     */
+    public void agregarLibrosALaVista(final ArrayList<Libro> librosencontrados, JPanel panelContenido, VentanaPrincipal ventanaPrincipal) {
         for (Libro libro : librosencontrados) {
-            panelcontido.add(crearpanelinfolibro(libro, ventanaPrincipal));
+            // Para cada libro, se crea un panel con la información y se agrega al panelContenido
+            panelContenido.add(crearpanelinfolibro(libro, ventanaPrincipal));
         }
     }
+
 }
 
