@@ -10,3 +10,5 @@ e,Los testamentos,2024-11-15,2024-11-29
 d,El silencio de la ciudad blanca,2024-11-18,2024-12-02
 da,Anatomía de un instante,2024-11-18,2024-12-02
 a,El silencio de la ciudad blanca,2024-11-20,2024-12-04
+a,El odio que das,2024-11-24,2024-12-08
+a,Cien años de soledad,2024-11-24,2024-12-08

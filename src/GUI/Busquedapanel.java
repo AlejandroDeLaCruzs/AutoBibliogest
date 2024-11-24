@@ -26,8 +26,8 @@ public class Busquedapanel extends JPanel {
      * @param genero           El género del libro a buscar.
      * @param ventanacontendor La ventana que contiene este panel.
      */
-    public Busquedapanel(String autor, String titulo, String genero, VentanaPrincipal ventanacontendor) {
-        ArrayList<Libro> librosencontrados;
+    public Busquedapanel( ArrayList<Libro> librosencontrados, VentanaPrincipal ventanacontendor) {
+
 
         setLayout(new BorderLayout()); //Para que ocupe toda la pantalla
 
@@ -38,7 +38,6 @@ public class Busquedapanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(panelContenido);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        librosencontrados = busquedalibrofichero(autor, titulo, genero, ventanacontendor);
         librosbuscadospanel(librosencontrados, panelContenido, ventanacontendor);
 
         // Añadir el JScrollPane al panel principal

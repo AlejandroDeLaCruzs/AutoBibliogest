@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static Core.Libro.buscarLibro;
+import static Core.Libro.librosrecomendados;
 import static Core.Prestamos.*;
 
 /**
@@ -68,6 +69,7 @@ public class DetallesLibro extends JPanel {
         add(crearPanelAnioPublicacion(libro));
         add(crearPanelIdioma());
         add(crearPanelCantidadPaginas(libro));
+        add(crearPanelLibrosreomendados(libro, ventanacontendor));
 
         JButton botonReservar = crearBoton("Reservar", 670, 170, 270, 40);
         add(botonReservar);
@@ -181,7 +183,7 @@ public class DetallesLibro extends JPanel {
         return boton;
     }
 
-    private JButton crearBotonConImagen(String rutaImagen, int x, int y, int width, int height, String tooltip) {
+    private static JButton crearBotonConImagen(String rutaImagen, int x, int y, int width, int height, String tooltip) {
         ImageIcon icono = new ImageIcon(rutaImagen);
         Image imgEscalada = icono.getImage().getScaledInstance(width, height, Image.SCALE_SMOOTH);
         JButton boton = new JButton(new ImageIcon(imgEscalada));
@@ -311,7 +313,48 @@ public class DetallesLibro extends JPanel {
         return panelcantidadpags;
     }
 
+    private JScrollPane crearPanelLibrosreomendados(Libro libro, VentanaPrincipal ventanacontendor) {
+        JPanel panellibrosrecomendados = new JPanel();
+        //panellibrosrecomendados.setBounds(100, 500, 700, 500);
+        panellibrosrecomendados.setLayout(new GridLayout(1, 0, 10, 10));
+        librosrecomendados(libro, panellibrosrecomendados, ventanacontendor);
+        JScrollPane jScrollPane = new JScrollPane(panellibrosrecomendados);
+        jScrollPane.setBounds(300, 460, 1000, 250);
+        jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
+        return jScrollPane;
+    }
+
+    public static JPanel crearPanelLibroRecomendado(Libro libro, VentanaPrincipal ventanacontenedor) {
+        JPanel panellibrorecoemdado = new JPanel();
+        panellibrorecoemdado.setLayout(new BoxLayout(panellibrorecoemdado, BoxLayout.Y_AXIS));
+        panellibrorecoemdado.setBackground(Color.white);
+        panellibrorecoemdado.setBounds(290, 400, 400, 500);
+
+        JLabel titulo = new JLabel(libro.getTitulo());
+        titulo.setForeground(Color.LIGHT_GRAY);
+        titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panellibrorecoemdado.add(titulo);
+
+        panellibrorecoemdado.add(Box.createVerticalStrut(10));
+
+        JButton botonlibro = crearBotonConImagen(libro.getRutaimagen(), 250, 250, 170, 170, null);
+        botonlibro.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panellibrorecoemdado.add(botonlibro);
+
+        botonlibro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontenedor, libro);
+                ventanacontenedor.getPanelContenedor().add(detallesLibroPanel, "paneldetalle");
+                ventanacontenedor.cambiarPanel("paneldetalle");
+
+            }
+        });
+
+        return panellibrorecoemdado;
+
+    }
 }
 
 

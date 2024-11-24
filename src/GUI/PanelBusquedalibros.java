@@ -1,15 +1,19 @@
 package GUI;
 
+import Core.Libro;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import static Core.Busquedalibros.busquedalibrofichero;
 
 public class PanelBusquedalibros extends JPanel {
 
-    private JRadioButton generoLiteraturajuvenil;
-    private JRadioButton generoLiteraturacontemporanea;
-    private JRadioButton generoFantasia;
-    private JRadioButton generoThriller;
+    private Map<String, JRadioButton> generoBotones;
 
     public PanelBusquedalibros(VentanaPrincipal ventanacontendor) {
 
@@ -21,16 +25,13 @@ public class PanelBusquedalibros extends JPanel {
 
         JLabel generoLabel = new JLabel("Género:");
 
-        generoLiteraturajuvenil = new JRadioButton("Literatura juvenil");
-         generoLiteraturacontemporanea = new JRadioButton("Literatura contemporánea");
-         generoFantasia = new JRadioButton("Fantasía");
-         generoThriller = new JRadioButton("Thriller");
+        // Inicializamos los botones y los asociamos a géneros
+        generoBotones = new HashMap<>();
+        generoBotones.put("Literatura juvenil", new JRadioButton("Literatura juvenil"));
+        generoBotones.put("Literatura contemporánea", new JRadioButton("Literatura contemporánea"));
+        generoBotones.put("Fantasía", new JRadioButton("Fantasía"));
+        generoBotones.put("Thriller", new JRadioButton("Thriller"));
 
-        ButtonGroup grupoGeneros = new ButtonGroup();
-        grupoGeneros.add(generoLiteraturajuvenil);
-        grupoGeneros.add(generoLiteraturacontemporanea);
-        grupoGeneros.add(generoFantasia);
-        grupoGeneros.add(generoThriller);
 
         JButton botonBuscar = new JButton("Buscar");
 
@@ -38,6 +39,18 @@ public class PanelBusquedalibros extends JPanel {
         this.setLayout(layout);
         layout.setAutoCreateGaps(true);
         layout.setAutoCreateContainerGaps(true);
+
+        // Configuración de diseño dinámico para los géneros
+        GroupLayout.SequentialGroup generoGroupHorizontal = layout.createSequentialGroup();
+        for (JRadioButton boton : generoBotones.values()) {
+            generoGroupHorizontal.addComponent(boton);
+        }
+
+        GroupLayout.ParallelGroup generoGroupVertical = layout.createParallelGroup(GroupLayout.Alignment.BASELINE);
+        for (JRadioButton boton : generoBotones.values()) {
+            generoGroupVertical.addComponent(boton);
+        }
+
 
         // Configurar el diseño horizontal
         layout.setHorizontalGroup(layout.createSequentialGroup()
@@ -48,15 +61,11 @@ public class PanelBusquedalibros extends JPanel {
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(tituloField)
                         .addComponent(autorField)
-                        .addGroup(layout.createSequentialGroup()
-                                .addComponent(generoLiteraturajuvenil)
-                                .addComponent(generoLiteraturacontemporanea)
-                                .addComponent(generoFantasia)
-                                .addComponent(generoThriller))
+                        .addGroup(generoGroupHorizontal)
                         .addComponent(botonBuscar))
         );
 
-
+        // Configurar el diseño vertical
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(tituloLabel)
@@ -66,11 +75,7 @@ public class PanelBusquedalibros extends JPanel {
                         .addComponent(autorField))
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(generoLabel))
-                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(generoLiteraturajuvenil)
-                        .addComponent(generoLiteraturacontemporanea)
-                        .addComponent(generoFantasia)
-                        .addComponent(generoThriller))
+                .addGroup(generoGroupVertical)
                 .addComponent(botonBuscar)
         );
 
@@ -78,29 +83,33 @@ public class PanelBusquedalibros extends JPanel {
         botonBuscar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String generoSeleccionado = generoseleccionado();
+                String[] generoSeleccionado = generosSeleccionados();
                 String titulo = tituloField.getText();
                 String autor = autorField.getText();
-                
-                Busquedapanel panel = new Busquedapanel(autor, titulo, generoSeleccionado, ventanacontendor);
-                ventanacontendor.getPanelContenedor().add(panel, "busqueda");
-                ventanacontendor.cambiarPanel("busqueda");
+
+                ArrayList<Libro> librosencontrados = busquedalibrofichero(autor, titulo, generoSeleccionado);
+                if(librosencontrados != null){
+                    Busquedapanel panel = new Busquedapanel(librosencontrados, ventanacontendor);
+                    ventanacontendor.getPanelContenedor().add(panel, "busqueda");
+                    ventanacontendor.cambiarPanel("busqueda");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "No se ha encontrado ningun libro");
+                }
+
             }
         });
 
     }
 
-    public String generoseleccionado () {
-        String generoSeleccionado = "";
-        if (generoLiteraturajuvenil.isSelected()) {
-            generoSeleccionado = "Literatura juvenil";
-        } else if (generoLiteraturacontemporanea.isSelected()) {
-            generoSeleccionado = "Literatura contemporánea";
-        } else if (generoFantasia.isSelected()) {
-            generoSeleccionado = "Fantasía";
-        } else if (generoThriller.isSelected()) {
-            generoSeleccionado = "Thriller";
+
+    public String[] generosSeleccionados() {
+        ArrayList<String> seleccionados = new ArrayList<>();
+        for (Map.Entry<String, JRadioButton> entry : generoBotones.entrySet()) {
+            if (entry.getValue().isSelected()) {
+                seleccionados.add(entry.getKey());
+            }
         }
-        return generoSeleccionado ;
+        return seleccionados.toArray(new String[0]);
     }
 }
