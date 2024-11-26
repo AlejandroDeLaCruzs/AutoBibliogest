@@ -20,9 +20,9 @@ public class Busquedapanel extends JPanel {
      * Este constructor crea un panel con una cuadrícula que contiene los libros encontrados según los criterios de búsqueda.
      *
      * @param librosencontrados Lista de libros encontrados que cumplen con los criterios de búsqueda.
-     * @param ventanacontendor Ventana principal que contiene este panel y proporciona contexto para las interacciones.
+     * @param ventanacontendor  Ventana principal que contiene este panel y proporciona contexto para las interacciones.
      */
-    public Busquedapanel( ArrayList<Libro> librosencontrados, VentanaPrincipal ventanacontendor) {
+    public Busquedapanel(ArrayList<Libro> librosencontrados, VentanaPrincipal ventanacontendor) {
 
 
         setLayout(new BorderLayout()); //Para que ocupe toda la pantalla
@@ -45,8 +45,8 @@ public class Busquedapanel extends JPanel {
      * Este método agrega los paneles de información de cada libro al panel de contenido.
      *
      * @param librosencontrados Lista de libros encontrados que se mostrarán en el panel.
-     * @param panelContenido El panel donde se agregan los libros.
-     * @param ventanaPrincipal La ventana principal que contiene este panel y proporciona contexto para la interacción.
+     * @param panelContenido    El panel donde se agregan los libros.
+     * @param ventanaPrincipal  La ventana principal que contiene este panel.
      */
     public void agregarLibrosALaVista(final ArrayList<Libro> librosencontrados, JPanel panelContenido, VentanaPrincipal ventanaPrincipal) {
         for (Libro libro : librosencontrados) {

@@ -15,7 +15,7 @@ import static GUI.PanelMisReservas.panellibroreservado;
  */
 abstract public class Reservas {
 
-    public static void misreservas(VentanaPrincipal ventanacontenedor, JPanel panel) {
+    public static void misReservas(VentanaPrincipal ventanacontenedor, JPanel panel) {
         try (BufferedReader reader = new BufferedReader(new FileReader("prestamos.txt"))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
@@ -38,7 +38,7 @@ abstract public class Reservas {
      * @return Un arreglo de cadenas con los campos de la última línea, o {@code null} si no hay líneas.
      */
     public static String[] leerUltimaLinea() {
-        String[] camposultimalinea   = null;
+        String[] camposultimalinea = null;
 
         try (BufferedReader br = new BufferedReader(new FileReader("prestamos.txt"))) {
             String linea;

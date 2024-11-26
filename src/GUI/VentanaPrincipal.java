@@ -47,7 +47,7 @@ public class VentanaPrincipal extends JFrame {
         panelContenedor.add(catalogo, "catalogo");
         panelContenedor.add(busquedalibros, "busquedalibros");
         panelContenedor.add(pantallaCarga, "pantallacarga");
-       // panelContenedor.add(misReservas, "panelMisreservas");
+        // panelContenedor.add(misReservas, "panelMisreservas");
 
 
         //Menu con las diferentes opciones
@@ -66,7 +66,7 @@ public class VentanaPrincipal extends JFrame {
         barraMenu.add(menuSalir);
 
         //Añadimos el menu a la ventana
-       // setJMenuBar(barraMenu);
+        // setJMenuBar(barraMenu);
 
 
         // Mostrar el primer panel al iniciar
@@ -110,16 +110,27 @@ public class VentanaPrincipal extends JFrame {
         });
 
     }
-    public void hacervisblemenu() {
+
+    public void hacervisiblemenu() {
         setJMenuBar(barraMenu);
     }
 
-    //Métedo público para cambiar de panel
+    // Método público para cambiar de panel
+
+    /**
+     * Cambia el panel activo (visible)
+     * @param nombrePanel Panel a mostrar
+     */
     public void cambiarPanel(String nombrePanel) {
         cardLayout.show(panelContenedor, nombrePanel);
     }
 
-    //Metedos get y set
+    public void mostrarPanel(JPanel panel, String nombreDelPanel) {
+        panelContenedor.add(panel, nombreDelPanel);
+        cambiarPanel(nombreDelPanel);
+    }
+
+    // Geter y set
     public Usuario getUsuarioActivo() {
         return UsuarioActivo;
     }
@@ -127,7 +138,6 @@ public class VentanaPrincipal extends JFrame {
     public void setUsuarioActivo(Usuario usuarioActivo) {
         UsuarioActivo = usuarioActivo;
     }
-
 
     public JPanel getPanelContenedor() {
         return panelContenedor;

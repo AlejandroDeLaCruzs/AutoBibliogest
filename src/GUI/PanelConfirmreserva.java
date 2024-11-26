@@ -27,7 +27,7 @@ public class PanelConfirmreserva extends JPanel {
         imagenLabel.setIcon(new ImageIcon(imagenEscalada));
         add(imagenLabel);
 
-        //Creacion del titulo del libro
+        //Creacion del título del libro
         JLabel titulo = new JLabel(libro.getTitulo());
         titulo.setFont(new Font("Arial", Font.BOLD, 30));
         titulo.setBounds(500, 110, 500, 40);

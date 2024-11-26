@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import static Core.Prestamos.haydisponibilidad;
 import static GUI.Catalogo.crearpanelinfolibro;
-import static GUI.DetallesLibro.crearPanelLibroRecomendado;
+import static GUI.DetallesLibro.panelLibroRecomendado;
 
 /**
  * Clase que representa un libro con atributos como ISBN, título, autor, etc.
@@ -176,15 +176,15 @@ public class Libro {
     /**
      * Constructor para inicializar un libro con los atributos proporcionados.
      *
-     * @param ISBN El ISBN del libro.
-     * @param titulo El título del libro.
-     * @param resumen El resumen del libro.
-     * @param autor El autor del libro.
+     * @param ISBN            El ISBN del libro.
+     * @param titulo          El título del libro.
+     * @param resumen         El resumen del libro.
+     * @param autor           El autor del libro.
      * @param aniopublicacion El año de publicación del libro.
-     * @param genero El género del libro.
+     * @param genero          El género del libro.
      * @param cantidadpaginas La cantidad de páginas del libro.
-     * @param cantidad La cantidad de copias disponibles del libro.
-     * @param rutaimagen La ruta de la imagen del libro.
+     * @param cantidad        La cantidad de copias disponibles del libro.
+     * @param rutaimagen      La ruta de la imagen del libro.
      */
     public Libro(String ISBN, String titulo, String resumen, String autor, String aniopublicacion, String genero, Integer cantidadpaginas, Integer cantidad, String rutaimagen) {
         this.ISBN = ISBN;
@@ -212,15 +212,14 @@ public class Libro {
                 ", Resumen: " + this.resumen;
     }
 
-
     /**
      * Lee un archivo de texto con los libros y añade un panel con los datos de cada libro
      * al panel proporcionado.
      *
-     * @param panel El panel donde se añadirán los libros.
+     * @param panel             El panel donde se añadirán los libros.
      * @param ventanacontenedor La ventana principal que contiene el panel.
      */
-    public static void infolibros(JPanel panel, VentanaPrincipal ventanacontenedor) {
+    public static void infoLibros(JPanel panel, VentanaPrincipal ventanacontenedor) {
         try (BufferedReader reader = new BufferedReader(new FileReader("libros.txt"))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
@@ -237,11 +236,10 @@ public class Libro {
 
     }
 
-
     /**
      * Busca un libro en el archivo, y devuelve el siguiente o anterior libro según el parámetro.
      *
-     * @param libroActual El libro actual para buscar.
+     * @param libroActual     El libro actual para buscar.
      * @param buscarSiguiente Si es true, devuelve el siguiente libro, de lo contrario el anterior.
      * @return El libro siguiente o anterior, o null si no se encuentra.
      */
@@ -276,6 +274,41 @@ public class Libro {
     }
 
     /**
+     * Crea un objeto Libro a partir de un array de partes extraído de una línea de archivo.
+     *
+     * @param partes Los datos del libro en forma de un array de cadenas.
+     * @return Un objeto Libro creado con los datos proporcionados.
+     */
+    public static Libro crearLibro(String[] partes) {
+        int copias = Integer.parseInt(partes[7]);
+        int cantidadpaginas = Integer.parseInt(partes[6]);
+        return new Libro(partes[0], partes[1], partes[2], partes[3], partes[4], partes[5], cantidadpaginas, copias, partes[8]);
+    }
+
+    /**
+     * Genera recomendaciones de libros basados en el género del libro actual.
+     *
+     * @param libro             El libro actual usado para encontrar recomendaciones.
+     * @param panelrecomendados El panel donde se añadirán los libros recomendados.
+     * @param ventanacontenedor La ventana principal que contiene el panel.
+     */
+    public static void librosRecomendados(Libro libro, JPanel panelrecomendados, VentanaPrincipal ventanacontenedor) {
+        try (BufferedReader reader = new BufferedReader(new FileReader("libros.txt"))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] partes = linea.split(",");
+                if (partes[5].equals(libro.genero) && !partes[1].equals(libro.titulo)) {
+                    if (haydisponibilidad(crearLibro(partes))) {
+                        panelrecomendados.add(panelLibroRecomendado(crearLibro(partes), ventanacontenedor));
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Lee la siguiente línea del archivo y crea un objeto Libro a partir de esos datos.
      *
      * @param reader El BufferedReader que lee el archivo.
@@ -302,42 +335,6 @@ public class Libro {
             return crearLibro(partesAnterior);
         }
         return null;  // No hay libro anterior
-    }
-
-    /**
-     * Crea un objeto Libro a partir de un array de partes extraído de una línea de archivo.
-     *
-     * @param partes Los datos del libro en forma de un array de cadenas.
-     * @return Un objeto Libro creado con los datos proporcionados.
-     */
-    public static Libro crearLibro(String[] partes) {
-        int copias = Integer.parseInt(partes[7]);
-        int cantidadpaginas = Integer.parseInt(partes[6]);
-        return new Libro(partes[0], partes[1], partes[2], partes[3], partes[4], partes[5], cantidadpaginas, copias, partes[8]);
-    }
-
-    /**
-     * Genera recomendaciones de libros basados en el género del libro actual.
-     *
-     * @param libro El libro actual usado para encontrar recomendaciones.
-     * @param panelrecomendados El panel donde se añadirán los libros recomendados.
-     * @param ventanacontenedor La ventana principal que contiene el panel.
-     */
-    public static void librosrecomendados(Libro libro, JPanel panelrecomendados, VentanaPrincipal ventanacontenedor) {
-        try(BufferedReader reader = new BufferedReader(new FileReader("libros.txt"))){
-            String linea;
-            while ((linea = reader.readLine()) != null) {
-                String[] partes = linea.split(",");
-                if (partes[5].equals(libro.genero) && !partes[1].equals(libro.titulo)){
-                    if(haydisponibilidad(crearLibro(partes))){
-                        panelrecomendados.add(crearPanelLibroRecomendado(crearLibro(partes), ventanacontenedor));
-                    }
-                }
-            }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
     }
 
 }

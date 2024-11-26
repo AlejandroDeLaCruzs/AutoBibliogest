@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static Core.Libro.infolibros;
+import static Core.Libro.infoLibros;
 
 
 /**
@@ -36,7 +36,7 @@ public class Catalogo extends JPanel {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
         // Cargar los libros en el panel
-        infolibros(panelContenido, ventanacontenedor);
+        infoLibros(panelContenido, ventanacontenedor);
 
         // Añadir el JScrollPane al panel principal
         add(scrollPane);
@@ -46,7 +46,7 @@ public class Catalogo extends JPanel {
     /**
      * Crea un panel con la información de un libro, que incluye su título, portada y un botón para más detalles.
      *
-     * @param libro El objeto {@code Libro} que contiene la información del libro.
+     * @param libro             El objeto {@code Libro} que contiene la información del libro.
      * @param ventanacontenedor La ventana principal que contiene este panel.
      * @return Un panel con la información del libro, incluyendo un botón para más detalles.
      */
@@ -88,8 +88,7 @@ public class Catalogo extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // Crear un panel con los detalles del libro y cambiar el panel visible
                 DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontenedor, libro);
-                ventanacontenedor.getPanelContenedor().add(detallesLibroPanel, "paneldetalle");
-                ventanacontenedor.cambiarPanel("paneldetalle");
+                ventanacontenedor.mostrarPanel(detallesLibroPanel, "paneldetalle");
 
             }
         });

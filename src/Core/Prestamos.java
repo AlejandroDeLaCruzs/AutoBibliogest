@@ -19,10 +19,10 @@ public class Prestamos {
     /**
      * Constructor de la clase Prestamos.
      *
-     * @param correo             Correo del usuario que realiza el préstamo.
-     * @param titulo             Título del libro prestado.
+     * @param correo              Correo del usuario que realiza el préstamo.
+     * @param titulo              Título del libro prestado.
      * @param fechainicioprestamo Fecha de inicio del préstamo.
-     * @param fechafinprestamo   Fecha de finalización del préstamo.
+     * @param fechafinprestamo    Fecha de finalización del préstamo.
      */
     public Prestamos(String correo, String titulo, LocalDate fechainicioprestamo, LocalDate fechafinprestamo) {
         this.correo = correo;
@@ -43,8 +43,10 @@ public class Prestamos {
 
 
     /**
+     * En este metedo escribimos los datos de la reserva en el fichero: prestamos.txt
+     *
      * @param libro             del cual se quiere realizar la reserva
-     * @param ventanacontenedor En este metedo escribimos los datos de la reserva en el fichero: prestamos.txt
+     * @param ventanacontenedor
      */
     public static void reservarlibro(Libro libro, VentanaPrincipal ventanacontenedor) {
         LocalDate fechaincioprestamo = LocalDate.now();
@@ -98,24 +100,24 @@ public class Prestamos {
     /**
      * Comprueba si un usuario tiene reservado un libro específico.
      *
-     * @param libro          Libro a verificar.
-     * @param usuarioactivo  Usuario activo del sistema.
+     * @param libro         Libro a verificar.
+     * @param usuarioactivo Usuario activo del sistema.
      * @return {@code true} si el usuario ya reservó el libro, {@code false} de lo contrario.
      */
     public static boolean reservado(Libro libro, Usuario usuarioactivo) {
         boolean estareservado = false;
-        try(BufferedReader reader = new BufferedReader(new FileReader("prestamos.txt"))){
+        try (BufferedReader reader = new BufferedReader(new FileReader("prestamos.txt"))) {
             String linea;
             while ((linea = reader.readLine()) != null) {
                 String[] campos = linea.split(",");
                 if (campos.length == 4) {
-                    if(campos[1].equals(libro.getTitulo()) && campos[0].equals(usuarioactivo.getCorreo())){
+                    if (campos[1].equals(libro.getTitulo()) && campos[0].equals(usuarioactivo.getCorreo())) {
                         return true;
                     }
                 }
             }
         } catch (IOException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
         return estareservado;
     }
@@ -150,7 +152,7 @@ public class Prestamos {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-        return  mejorOpcion;
+        return mejorOpcion;
     }
 
     /**

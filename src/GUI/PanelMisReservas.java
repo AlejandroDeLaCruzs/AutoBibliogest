@@ -1,17 +1,12 @@
 package GUI;
 
-import Core.Libro;
-
 import javax.swing.*;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 import static Core.Reservas.*;
 
 public class PanelMisReservas extends JPanel {
-    private JScrollPane scrollPane;
+    private  JScrollPane scrollPane;
     private JPanel panelContenedor;
 
     public PanelMisReservas(VentanaPrincipal ventanacontenedor) {
@@ -21,7 +16,7 @@ public class PanelMisReservas extends JPanel {
         panelContenedor = new JPanel();
         panelContenedor.setLayout(new BoxLayout(panelContenedor, BoxLayout.Y_AXIS));
 
-        misreservas(ventanacontenedor, panelContenedor);
+        misReservas(ventanacontenedor, panelContenedor);
 
         scrollPane = new JScrollPane(panelContenedor);
 
@@ -56,7 +51,7 @@ public class PanelMisReservas extends JPanel {
 
         // Imagen del libro
         JLabel imagenLabel = new JLabel();
-        ImageIcon imagenIcon = new ImageIcon(rutaimagen(datosreserva[1]));
+        ImageIcon imagenIcon = new ImageIcon(rutaImagen(datosreserva[1]));
         Image imagen = imagenIcon.getImage();
         Image imagenEscalada = imagen.getScaledInstance(200, 200, Image.SCALE_SMOOTH);  // Tamaño ajustado de imagen
         imagenLabel.setIcon(new ImageIcon(imagenEscalada));
@@ -89,10 +84,6 @@ public class PanelMisReservas extends JPanel {
         return panelReserva;
     }
 
-    private static String rutaimagen(String tituloLibro) {
-        return "./res/" + tituloLibro + ".jpg";
-    }
-
     public void agregarReserva(VentanaPrincipal ventanaPrincipal) {
         String[] datosreserva = leerUltimaLinea();
         if (datosreserva == null || datosreserva.length < 4) {
@@ -111,6 +102,10 @@ public class PanelMisReservas extends JPanel {
             verticalScrollBar.setValue(verticalScrollBar.getMaximum()); // Desplazar al final
         });
 
+    }
+
+    private static String rutaImagen(String tituloLibro) {
+        return "./res/" + tituloLibro + ".jpg";
     }
 }
 

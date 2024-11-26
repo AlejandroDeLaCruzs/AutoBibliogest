@@ -11,7 +11,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 
+/**
+ * Panel de inicio de sesión para la aplicación AutoBibliogest.
+ * <p>
+ * Este panel permite al usuario ingresar su dirección de correo electrónico y contraseña
+ * para iniciar sesión o redirigirlo a la creación de una nueva cuenta.
+ */
 public class PanelInicio extends JPanel {
+
+    /**
+     * Constructor del panel de inicio de sesión.
+     *
+     * @param ventanacontenedor referencia a la ventana principal que contiene este panel.
+     */
     public PanelInicio(VentanaPrincipal ventanacontenedor) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Configuramos BoxLayout en el eje Y
         this.setBackground(Color.WHITE);
@@ -76,7 +88,6 @@ public class PanelInicio extends JPanel {
         this.add(etiquetaContrasenia);
 
 
-
         // Field para introducir la contraseña
         JPasswordField contrasenia = new JPasswordField();
         contrasenia.setEchoChar('●');
@@ -138,7 +149,7 @@ public class PanelInicio extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (Usuario.esvaldio(usuario.getText(), contrasenia.getPassword(), ventanacontenedor)) {
-                    ventanacontenedor.hacervisblemenu();
+                    ventanacontenedor.hacervisiblemenu();
                     ventanacontenedor.cambiarPanel("pantallacarga");
                     PanelMisReservas panelMisReservas = new PanelMisReservas(ventanacontenedor);
                     ventanacontenedor.getPanelContenedor().add(panelMisReservas, "panelMisreservas");

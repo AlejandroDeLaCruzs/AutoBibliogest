@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static Core.Libro.buscarLibro;
-import static Core.Libro.librosrecomendados;
+import static Core.Libro.librosRecomendados;
 import static Core.Prestamos.*;
 
 /**
@@ -44,6 +44,46 @@ public class DetallesLibro extends JPanel {
 
     }
 
+    public static JPanel panelLibroRecomendado(Libro libro, VentanaPrincipal ventanacontenedor) {
+        JPanel panellibrorecoemdado = new JPanel();
+        panellibrorecoemdado.setLayout(new BoxLayout(panellibrorecoemdado, BoxLayout.Y_AXIS));
+        panellibrorecoemdado.setBackground(Color.white);
+        panellibrorecoemdado.setBounds(290, 400, 400, 500);
+
+        JLabel titulo = new JLabel(libro.getTitulo());
+        titulo.setForeground(Color.LIGHT_GRAY);
+        titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panellibrorecoemdado.add(titulo);
+
+        panellibrorecoemdado.add(Box.createVerticalStrut(10));
+
+        JButton botonlibro = crearBotonConImagen(libro.getRutaimagen(), 250, 250, 170, 170, null);
+        botonlibro.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panellibrorecoemdado.add(botonlibro);
+
+        botonlibro.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontenedor, libro);
+                ventanacontenedor.getPanelContenedor().add(detallesLibroPanel, "paneldetalle");
+                ventanacontenedor.cambiarPanel("paneldetalle");
+
+            }
+        });
+        return panellibrorecoemdado;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g); // Limpia el panel antes de dibujar
+        g.setColor(Color.lightGray);   // Establece el color de la línea
+        g.drawLine(290, 300, 1100, 300);
+        g.drawLine(590, 320, 590, 400);
+        g.drawLine(720, 320, 720, 400);
+        g.drawLine(900, 320, 900, 400);
+    }
+
+
     /**
      * Configura las propiedades iniciales del panel, como el diseño y el color de fondo.
      */
@@ -51,6 +91,8 @@ public class DetallesLibro extends JPanel {
         setLayout(null);
         setBackground(Color.white);
     }
+
+
 
     /**
      * Agrega los componentes principales relacionados con la información del libro.
@@ -65,11 +107,11 @@ public class DetallesLibro extends JPanel {
         agregarEtiqueta(new JLabel("Sinopsis de " + libro.getTitulo()), 420, 230, 500, 30, null);
         agregarEtiqueta(new JLabel(libro.getResumen()), 410, 250, 500, 21, null);
 
-        add(crearPanelGeneroro(libro));
-        add(crearPanelAnioPublicacion(libro));
-        add(crearPanelIdioma());
-        add(crearPanelCantidadPaginas(libro));
-        add(crearPanelLibrosreomendados(libro, ventanacontendor));
+        add(panelGenero(libro));
+        add(panelAnioPublicacion(libro));
+        add(panelIdioma());
+        add(panelCantidadPaginas(libro));
+        add(panelLibrosreomendados(libro, ventanacontendor));
 
         JButton botonReservar = crearBoton("Reservar", 670, 170, 270, 40);
         add(botonReservar);
@@ -82,8 +124,7 @@ public class DetallesLibro extends JPanel {
                     JOptionPane.showMessageDialog(null, "Ya tienes este libro reservado.");
                 } else {
                     PanelConfirmreserva panelConfirmreserva = new PanelConfirmreserva(libro, ventanacontendor);
-                    ventanacontendor.getPanelContenedor().add(panelConfirmreserva, "panelConfirmreserva");
-                    ventanacontendor.cambiarPanel("panelConfirmreserva");
+                    ventanacontendor.mostrarPanel(panelConfirmreserva, "panelConfirmreserva");
                 }
             }
         });
@@ -119,8 +160,7 @@ public class DetallesLibro extends JPanel {
                 Libro siguientelibroficehro = buscarLibro(libro, true);
                 if (siguientelibroficehro != null) {
                     DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontendor, siguientelibroficehro);
-                    ventanacontendor.getPanelContenedor().add(detallesLibroPanel, "paneldetalle");
-                    ventanacontendor.cambiarPanel("paneldetalle");
+                    ventanacontendor.mostrarPanel(detallesLibroPanel, "paneldetalle");
                 }
             }
         });
@@ -134,8 +174,7 @@ public class DetallesLibro extends JPanel {
                 Libro anteriorlibroficehro = buscarLibro(libro, false);
                 if (anteriorlibroficehro != null) {
                     DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontendor, anteriorlibroficehro);
-                    ventanacontendor.getPanelContenedor().add(detallesLibroPanel, "paneldetalle");
-                    ventanacontendor.cambiarPanel("paneldetalle");
+                    ventanacontendor.mostrarPanel(detallesLibroPanel, "paneldetalle");
                 }
             }
         });
@@ -176,7 +215,7 @@ public class DetallesLibro extends JPanel {
         add(etiqueta);
     }
 
-
+//Singelton
     private JButton crearBoton(String texto, int x, int y, int width, int height) {
         JButton boton = new JButton(texto);
         boton.setBounds(x, y, width, height);
@@ -194,18 +233,6 @@ public class DetallesLibro extends JPanel {
         return boton;
     }
 
-
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g); // Limpia el panel antes de dibujar
-        g.setColor(Color.lightGray);   // Establece el color de la línea
-        g.drawLine(290, 300, 1100, 300);
-        g.drawLine(590, 320, 590, 400);
-        g.drawLine(720, 320, 720, 400);
-        g.drawLine(900, 320, 900, 400);
-    }
-
-    // Imagen del género-------Cambiar de foto para cada genero
     private JLabel getGeneroImagen(Libro libro) {
         JLabel generoImagen = new JLabel();
         ImageIcon iconGenero = new ImageIcon(getImagePathGenero(libro.getGenero()));
@@ -219,7 +246,7 @@ public class DetallesLibro extends JPanel {
         return generoImagenes.getOrDefault(genero, generoImagenes.get("Default"));
     }
 
-    private JPanel crearPanelGeneroro(Libro libro) {
+    private JPanel panelGenero(Libro libro) {
         JPanel generoPanel = new JPanel();
         generoPanel.setLayout(new BoxLayout(generoPanel, BoxLayout.Y_AXIS)); // Configurar BoxLayout (vertical)
         generoPanel.setBounds(390, 310, 180, 100); // Posición y tamaño del subpanel
@@ -248,7 +275,7 @@ public class DetallesLibro extends JPanel {
         return generoPanel;
     }
 
-    private JPanel crearPanelAnioPublicacion(Libro libro) {
+    private JPanel panelAnioPublicacion(Libro libro) {
         JPanel publicadopanel = new JPanel();
         publicadopanel.setLayout(new BoxLayout(publicadopanel, BoxLayout.Y_AXIS));
         publicadopanel.setBackground(Color.white);
@@ -269,8 +296,7 @@ public class DetallesLibro extends JPanel {
         return publicadopanel;
     }
 
-
-    private JPanel crearPanelIdioma() {
+    private JPanel panelIdioma() {
         JPanel paneldioma = new JPanel();
         paneldioma.setLayout(new BoxLayout(paneldioma, BoxLayout.Y_AXIS));
         paneldioma.setBackground(Color.white);
@@ -292,7 +318,7 @@ public class DetallesLibro extends JPanel {
         return paneldioma;
     }
 
-    private JPanel crearPanelCantidadPaginas(Libro libro) {
+    private JPanel panelCantidadPaginas(Libro libro) {
         JPanel panelcantidadpags = new JPanel();
         panelcantidadpags.setLayout(new BoxLayout(panelcantidadpags, BoxLayout.Y_AXIS));
         panelcantidadpags.setBackground(Color.white);
@@ -313,11 +339,11 @@ public class DetallesLibro extends JPanel {
         return panelcantidadpags;
     }
 
-    private JScrollPane crearPanelLibrosreomendados(Libro libro, VentanaPrincipal ventanacontendor) {
+    private JScrollPane panelLibrosreomendados(Libro libro, VentanaPrincipal ventanacontenedor) {
         JPanel panellibrosrecomendados = new JPanel();
         //panellibrosrecomendados.setBounds(100, 500, 700, 500);
         panellibrosrecomendados.setLayout(new GridLayout(1, 0, 10, 10));
-        librosrecomendados(libro, panellibrosrecomendados, ventanacontendor);
+        librosRecomendados(libro, panellibrosrecomendados, ventanacontenedor);
         JScrollPane jScrollPane = new JScrollPane(panellibrosrecomendados);
         jScrollPane.setBounds(300, 460, 1000, 250);
         jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -325,46 +351,5 @@ public class DetallesLibro extends JPanel {
         return jScrollPane;
     }
 
-    public static JPanel crearPanelLibroRecomendado(Libro libro, VentanaPrincipal ventanacontenedor) {
-        JPanel panellibrorecoemdado = new JPanel();
-        panellibrorecoemdado.setLayout(new BoxLayout(panellibrorecoemdado, BoxLayout.Y_AXIS));
-        panellibrorecoemdado.setBackground(Color.white);
-        panellibrorecoemdado.setBounds(290, 400, 400, 500);
 
-        JLabel titulo = new JLabel(libro.getTitulo());
-        titulo.setForeground(Color.LIGHT_GRAY);
-        titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panellibrorecoemdado.add(titulo);
-
-        panellibrorecoemdado.add(Box.createVerticalStrut(10));
-
-        JButton botonlibro = crearBotonConImagen(libro.getRutaimagen(), 250, 250, 170, 170, null);
-        botonlibro.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panellibrorecoemdado.add(botonlibro);
-
-        botonlibro.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontenedor, libro);
-                ventanacontenedor.getPanelContenedor().add(detallesLibroPanel, "paneldetalle");
-                ventanacontenedor.cambiarPanel("paneldetalle");
-
-            }
-        });
-
-        return panellibrorecoemdado;
-
-    }
 }
-
-
-
-
-
-
-
-
-
-
-
-

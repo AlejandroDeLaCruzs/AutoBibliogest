@@ -95,7 +95,8 @@ public class Usuario {
         this.contrasena = contrasena;
     }
 
-    public Usuario() {}
+    public Usuario() {
+    }
 
     @Override
     public String toString() {
@@ -106,8 +107,8 @@ public class Usuario {
     /**
      * Valida las credenciales de inicio de sesión.
      *
-     * @param email            Correo electrónico ingresado por el usuario.
-     * @param contrasenia      Contraseña ingresada por el usuario.
+     * @param email             Correo electrónico ingresado por el usuario.
+     * @param contrasenia       Contraseña ingresada por el usuario.
      * @param ventanaContenedor Contenedor principal para actualizar el usuario activo.
      * @return {@code true} si las credenciales son válidas, de lo contrario {@code false}.
      */
