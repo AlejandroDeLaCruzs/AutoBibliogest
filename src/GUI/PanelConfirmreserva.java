@@ -1,6 +1,7 @@
 package GUI;
 
 import Core.Libro;
+import Core.Prestamos;
 
 import javax.swing.*;
 import java.awt.*;

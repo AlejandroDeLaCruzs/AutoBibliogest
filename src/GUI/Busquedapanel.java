@@ -1,5 +1,6 @@
 package GUI;
 
+import Core.Busquedalibros;
 import Core.Libro;
 
 import javax.swing.*;

@@ -19,19 +19,6 @@ import static Core.Prestamos.*;
  */
 public class DetallesLibro extends JPanel {
     /**
-     * Mapa que asocia géneros de libros con sus rutas de imágenes correspondientes.
-     */
-    private static final Map<String, String> generoImagenes = new HashMap<>();
-
-    static {
-        generoImagenes.put("Literatura juvenil", "./res/literaturajuvenil.png");
-        generoImagenes.put("Fantasía", "./res/Fantasia.jpg");
-        generoImagenes.put("Thriller", "./res/thriller.jpg");
-        generoImagenes.put("Literatura contemporánea", "./res/literaturacontemporanea.jpg");
-        generoImagenes.put("Default", "./res/literaturacontemporanea.jpg"); // Imagen por defecto
-    }
-
-    /**
      * Constructor de la clase DetallesLibro.
      *
      * @param ventanacontendor La ventana principal de la aplicación.
@@ -215,7 +202,7 @@ public class DetallesLibro extends JPanel {
         add(etiqueta);
     }
 
-//Singelton
+//Singelton******
     private JButton crearBoton(String texto, int x, int y, int width, int height) {
         JButton boton = new JButton(texto);
         boton.setBounds(x, y, width, height);
@@ -243,8 +230,9 @@ public class DetallesLibro extends JPanel {
     }
 
     private String getImagePathGenero(String genero) {
-        return generoImagenes.getOrDefault(genero, generoImagenes.get("Default"));
+        return GeneroImagenes.getInstance().getImagePath(genero);
     }
+
 
     private JPanel panelGenero(Libro libro) {
         JPanel generoPanel = new JPanel();
@@ -350,6 +338,5 @@ public class DetallesLibro extends JPanel {
 
         return jScrollPane;
     }
-
 
 }
