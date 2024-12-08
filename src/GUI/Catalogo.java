@@ -1,5 +1,6 @@
 package GUI;
 
+import App.VentanaPrincipal;
 import Core.Libro;
 
 import javax.swing.*;
@@ -23,12 +24,13 @@ public class Catalogo extends JPanel {
      *
      * @param ventanacontenedor La ventana principal que contiene este panel.
      */
-    Catalogo(VentanaPrincipal ventanacontenedor) {
+    public Catalogo(VentanaPrincipal ventanacontenedor) {
 
         setBackground(Color.LIGHT_GRAY);
         setLayout(new BorderLayout());
 
         JPanel panelContenido = new JPanel();
+
         panelContenido.setLayout(new GridLayout(7, 9));
 
         // Crear un JScrollPane que contenga el panelContenido
@@ -63,7 +65,7 @@ public class Catalogo extends JPanel {
         panelinfolibro.add(titulo);
 
         // Establecer el fondo del panel y su tamaño preferido
-        panelinfolibro.setBackground(Color.WHITE);
+
         panelinfolibro.setPreferredSize(new Dimension(250, 250));
 
         // Imagen del libro

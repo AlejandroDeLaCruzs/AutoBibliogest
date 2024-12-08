@@ -1,6 +1,6 @@
 package Core;
 
-import GUI.VentanaPrincipal;
+import App.VentanaPrincipal;
 
 import java.io.*;
 import java.time.LocalDate;

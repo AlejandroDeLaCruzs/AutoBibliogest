@@ -1,7 +1,6 @@
 package Core;
 
-import GUI.PanelMisReservas;
-import GUI.VentanaPrincipal;
+import App.VentanaPrincipal;
 
 import javax.swing.*;
 import java.io.BufferedReader;

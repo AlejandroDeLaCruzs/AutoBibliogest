@@ -1,4 +1,4 @@
-package GUI;
+package App;
 
 
 public class AutoBibliogestApp {

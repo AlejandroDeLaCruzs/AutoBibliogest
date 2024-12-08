@@ -1,5 +1,7 @@
 package GUI;
 
+import App.VentanaPrincipal;
+
 import javax.swing.*;
 import java.awt.*;
 

@@ -1,13 +1,12 @@
 package GUI;
 
+import App.VentanaPrincipal;
 import Core.Libro;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
 
 import static Core.Libro.buscarLibro;
 import static Core.Libro.librosRecomendados;

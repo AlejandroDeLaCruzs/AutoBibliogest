@@ -1,6 +1,7 @@
-package GUI;
+package App;
 
 import Core.Usuario;
+import GUI.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +20,7 @@ public class VentanaPrincipal extends JFrame {
         // Configuración del JFrame
         setTitle("AutoBibliogest");
         setSize(400, 400);
-
+        setLayout(new BorderLayout());
 
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -38,7 +39,6 @@ public class VentanaPrincipal extends JFrame {
         Catalogo catalogo = new Catalogo(this); //EL tercer panel
         PanelBusquedalibros busquedalibros = new PanelBusquedalibros(this);
         PantallaCarga pantallaCarga = new PantallaCarga(this);
-        //PanelMisReservas misReservas = new PanelMisReservas(this);
 
 
         // Añadir los paneles al panel contenedor con un nombre para cada uno
@@ -47,7 +47,6 @@ public class VentanaPrincipal extends JFrame {
         panelContenedor.add(catalogo, "catalogo");
         panelContenedor.add(busquedalibros, "busquedalibros");
         panelContenedor.add(pantallaCarga, "pantallacarga");
-        // panelContenedor.add(misReservas, "panelMisreservas");
 
 
         //Menu con las diferentes opciones

@@ -1,6 +1,6 @@
 package GUI;
 
-import Core.Notificaciones.CrearNotificaciones;
+import App.VentanaPrincipal;
 
 import javax.swing.*;
 

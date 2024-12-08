@@ -1,5 +1,6 @@
 package GUI;
 
+import App.VentanaPrincipal;
 import Core.Usuario;
 
 import javax.swing.*;
@@ -29,19 +30,11 @@ public class PanelInicio extends JPanel {
         this.setBackground(Color.WHITE);
         Font fuente = new Font("Arial", Font.BOLD, 12);
 
-
-        // Espacio para centrar verticalmente los elementos
+        // Espacio entre componentes
         this.add(Box.createVerticalGlue());
 
-        // Nombre de la aplicación
-        JLabel titulousuario = new JLabel("AUTOBIBLIOGEST", SwingConstants.CENTER);
-        titulousuario.setForeground(Color.orange);
-        titulousuario.setFont(new Font("Arial", Font.TYPE1_FONT, 50));
-        titulousuario.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineado al centro
-        this.add(titulousuario);
+        add(logoypanel());
 
-        // Espacio entre componentes
-        this.add(Box.createRigidArea(new Dimension(0, 20)));
 
         JLabel etiquetaUsuario = new JLabel("Dirección de e-mail");
         etiquetaUsuario.setFont(fuente);
@@ -167,6 +160,27 @@ public class PanelInicio extends JPanel {
             }
         });
 
+
+    }
+    public static JPanel logoypanel(){
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setBackground(Color.WHITE);
+        JLabel imagenLabel = new JLabel();
+        ImageIcon imagenIcon = new ImageIcon("./res/logo.png");
+        Image imagenEscalada = imagenIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+        imagenLabel.setIcon(new ImageIcon(imagenEscalada));
+        imagenLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(imagenLabel);
+
+        // Nombre de la aplicación
+        JLabel nombreapliacion = new JLabel("AUTOBIBLIOGEST", SwingConstants.CENTER);
+        nombreapliacion.setForeground(Color.orange);
+        nombreapliacion.setFont(new Font("Arial", Font.TYPE1_FONT, 50));
+        nombreapliacion.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineado al centro
+        panel.add(nombreapliacion);
+
+        return panel;
 
     }
 }

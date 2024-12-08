@@ -1,15 +1,11 @@
 package Core;
 
-import GUI.VentanaPrincipal;
-
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static Core.Libro.crearLibro;
-import static GUI.Catalogo.crearpanelinfolibro;
 
 /**
  * Esta clase contiene métodos para realizar la búsqueda de libros en un archivo de texto.

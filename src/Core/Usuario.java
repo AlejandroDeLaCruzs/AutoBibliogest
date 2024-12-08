@@ -1,6 +1,6 @@
 package Core;
 
-import GUI.VentanaPrincipal;
+import App.VentanaPrincipal;
 
 import javax.swing.*;
 import java.io.*;
@@ -14,6 +14,19 @@ public class Usuario {
     private String idUsuario;
     private String correo;
     private String contrasena;
+    private String notificacion;
+    public static final String Notificacion_Push = "Push";
+    public static final String Notificacion_Correo = "CORREO";
+
+    public String getNotificacion() {
+        return notificacion;
+    }
+
+    public void setNotificacion(String notificacion) {
+        this.notificacion = notificacion;
+    }
+
+
 
 
     /**
@@ -94,6 +107,7 @@ public class Usuario {
         this.correo = correo;
         this.contrasena = contrasena;
     }
+
 
     public Usuario() {
     }
