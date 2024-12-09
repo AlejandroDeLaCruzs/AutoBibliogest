@@ -8,7 +8,7 @@ import java.awt.*;
 import static Core.Reservas.*;
 
 public class PanelMisReservas extends JPanel {
-    private  JScrollPane scrollPane;
+    private JScrollPane scrollPane;
     private JPanel panelContenedor;
 
     public PanelMisReservas(VentanaPrincipal ventanacontenedor) {

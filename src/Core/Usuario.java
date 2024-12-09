@@ -27,8 +27,6 @@ public class Usuario {
     }
 
 
-
-
     /**
      * Obtiene el nombre del usuario.
      *

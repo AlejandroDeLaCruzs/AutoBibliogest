@@ -118,6 +118,7 @@ public class VentanaPrincipal extends JFrame {
 
     /**
      * Cambia el panel activo (visible)
+     *
      * @param nombrePanel Panel a mostrar
      */
     public void cambiarPanel(String nombrePanel) {

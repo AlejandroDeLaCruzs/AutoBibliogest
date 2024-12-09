@@ -91,8 +91,8 @@ public class PanelBusquedalibros extends JPanel {
                 ArrayList<Libro> librosencontrados = busquedalibrofichero(autor, titulo, generoSeleccionado);
                 if (librosencontrados != null) {
                     Busquedapanel panel = new Busquedapanel(librosencontrados, ventanacontendor);
-                    ventanacontendor.getPanelContenedor().add(panel, "busqueda");
-                    ventanacontendor.cambiarPanel("busqueda");
+                    ventanacontendor.mostrarPanel(panel,"busqueda" );
+
                 } else {
                     JOptionPane.showMessageDialog(null, "No se ha encontrado ningun libro");
                 }

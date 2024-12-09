@@ -6,3 +6,7 @@ a,La mujer en la ventana,2024-11-25,2024-12-09
 a,El odio que das,2024-11-25,2024-12-09
 j,La sombra del viento,2024-11-30,2024-12-14
 a,El arte de perder,2024-11-30,2024-12-14
+a,Ready Player One,2024-12-09,2024-12-23
+a,El corredor del laberinto,2024-12-09,2024-12-23
+a,Anatomía de un instante,2024-12-09,2024-12-23
+a,El teorema Katherine,2024-12-09,2024-12-23

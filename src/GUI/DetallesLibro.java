@@ -51,9 +51,7 @@ public class DetallesLibro extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontenedor, libro);
-                ventanacontenedor.getPanelContenedor().add(detallesLibroPanel, "paneldetalle");
-                ventanacontenedor.cambiarPanel("paneldetalle");
-
+                ventanacontenedor.mostrarPanel(detallesLibroPanel, "paneldetalle");
             }
         });
         return panellibrorecoemdado;
@@ -77,7 +75,6 @@ public class DetallesLibro extends JPanel {
         setLayout(null);
         setBackground(Color.white);
     }
-
 
 
     /**
@@ -201,7 +198,7 @@ public class DetallesLibro extends JPanel {
         add(etiqueta);
     }
 
-//Singelton******
+    //Singelton******
     private JButton crearBoton(String texto, int x, int y, int width, int height) {
         JButton boton = new JButton(texto);
         boton.setBounds(x, y, width, height);

@@ -13,7 +13,7 @@ import static GUI.PanelMisReservas.panellibroreservado;
  * Clase que gestiona las reservas de libros realizadas por los usuarios.
  * Proporciona métodos para mostrar las reservas de un usuario y leer la última línea del archivo de préstamos.
  */
-abstract public class Reservas  {
+abstract public class Reservas {
 
     public static void misReservas(VentanaPrincipal ventanacontenedor, JPanel panel) {
         try (BufferedReader reader = new BufferedReader(new FileReader("prestamos.txt"))) {

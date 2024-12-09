@@ -162,7 +162,8 @@ public class PanelInicio extends JPanel {
 
 
     }
-    public static JPanel logoypanel(){
+
+    public static JPanel logoypanel() {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBackground(Color.WHITE);

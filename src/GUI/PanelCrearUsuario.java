@@ -17,9 +17,9 @@ public class PanelCrearUsuario extends JPanel {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(Color.WHITE);
 
-       this.add(Box.createRigidArea(new Dimension(0, 55)));
+        this.add(Box.createRigidArea(new Dimension(0, 55)));
 
-       add(logoypanel());
+        add(logoypanel());
 
         this.add(Box.createRigidArea(new Dimension(0, 20)));
 
@@ -33,7 +33,7 @@ public class PanelCrearUsuario extends JPanel {
 
         String[] labels = {"Nombre: ", "Iduser: ", "Email: "};
         JTextField[] textFields = new JTextField[labels.length];
-         for (int i = 0; i < labels.length; i++) {
+        for (int i = 0; i < labels.length; i++) {
             JLabel label = new JLabel(labels[i]);
             label.setAlignmentX(Component.CENTER_ALIGNMENT);
             this.add(label);
@@ -67,7 +67,7 @@ public class PanelCrearUsuario extends JPanel {
 
         this.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        JPasswordField confirmarContrasenia= new JPasswordField();
+        JPasswordField confirmarContrasenia = new JPasswordField();
         confirmarContrasenia.setEchoChar('●');
         confirmarContrasenia.setMaximumSize(new Dimension(270, 30)); // Ancho máximo
         confirmarContrasenia.setBackground(Color.WHITE);
@@ -76,7 +76,6 @@ public class PanelCrearUsuario extends JPanel {
         add(confirmarContrasenia);
 
         this.add(Box.createRigidArea(new Dimension(0, 10)));
-
 
 
         //Creacion del botón crearcuenta
@@ -92,10 +91,9 @@ public class PanelCrearUsuario extends JPanel {
                 String validationMessage = validateFields(textFields, contrasenia, confirmarContrasenia);
                 if (validationMessage != null) {
                     JOptionPane.showMessageDialog(null, validationMessage);
-                }
-                else {
+                } else {
                     String nuevaContrasenia = new String(contrasenia.getPassword());
-                    Usuario crearusuaio = new Usuario(textFields[0].getText(), textFields[1].getText(), textFields[2].getText(),nuevaContrasenia);
+                    Usuario crearusuaio = new Usuario(textFields[0].getText(), textFields[1].getText(), textFields[2].getText(), nuevaContrasenia);
                     crearusuaio.aniadirUseralArchivo();
                     ventanacontenedor.cambiarPanel("panelInicio");
                 }
@@ -120,6 +118,7 @@ public class PanelCrearUsuario extends JPanel {
         return null;
 
     }
+
     // Validar que los campos de texto no estén vacíos
     private String validateTextFields(JTextField[] textFields) {
         for (JTextField textField : textFields) {
