@@ -88,7 +88,7 @@ public class PanelCrearUsuario extends JPanel {
         botonCrearCuenta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String validationMessage = validateFields(textFields, contrasenia, confirmarContrasenia);
+                String validationMessage = validarJtexfields(textFields, contrasenia, confirmarContrasenia);
                 if (validationMessage != null) {
                     JOptionPane.showMessageDialog(null, validationMessage);
                 } else {
@@ -103,7 +103,7 @@ public class PanelCrearUsuario extends JPanel {
     }
 
     // Método para validar campos de texto y contraseñas
-    private String validateFields(JTextField[] textFields, JPasswordField contrasenia, JPasswordField confirmarContrasenia) {
+    private String validarJtexfields(JTextField[] textFields, JPasswordField contrasenia, JPasswordField confirmarContrasenia) {
         // Validar si los campos de texto están vacíos
         String validationMessage = validateTextFields(textFields);
         if (validationMessage != null) {

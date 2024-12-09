@@ -109,7 +109,7 @@ public class VentanaPrincipal extends JFrame {
         });
 
     }
-
+//Cambiar nombre
     public void hacervisiblemenu() {
         setJMenuBar(barraMenu);
     }

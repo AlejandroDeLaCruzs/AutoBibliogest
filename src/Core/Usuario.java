@@ -124,7 +124,8 @@ public class Usuario {
      * @param ventanaContenedor Contenedor principal para actualizar el usuario activo.
      * @return {@code true} si las credenciales son válidas, de lo contrario {@code false}.
      */
-    public static boolean esvaldio(String email, char[] contrasenia, VentanaPrincipal ventanaContenedor) {
+    //DIVIDIR RESPONASABILIDADES!!!!!!
+    public static boolean esValido(String email, char[] contrasenia, VentanaPrincipal ventanaContenedor) {
         boolean usuariovalido = false;
         try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
             String linea;

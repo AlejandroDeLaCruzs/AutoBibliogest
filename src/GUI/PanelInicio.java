@@ -141,7 +141,7 @@ public class PanelInicio extends JPanel {
         butoninicsesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (Usuario.esvaldio(usuario.getText(), contrasenia.getPassword(), ventanacontenedor)) {
+                if (Usuario.esValido(usuario.getText(), contrasenia.getPassword(), ventanacontenedor)) {
                     ventanacontenedor.hacervisiblemenu();
                     ventanacontenedor.cambiarPanel("pantallacarga");
                     PanelMisReservas panelMisReservas = new PanelMisReservas(ventanacontenedor);

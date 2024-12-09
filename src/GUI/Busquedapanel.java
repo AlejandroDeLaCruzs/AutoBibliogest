@@ -49,6 +49,7 @@ public class Busquedapanel extends JPanel {
      * @param panelContenido    El panel donde se agregan los libros.
      * @param ventanaPrincipal  La ventana principal que contiene este panel.
      */
+    //LA VENTANA PRINCIPAL !!
     public void agregarLibrosALaVista(final ArrayList<Libro> librosencontrados, JPanel panelContenido, VentanaPrincipal ventanaPrincipal) {
         for (Libro libro : librosencontrados) {
             // Para cada libro, se crea un panel con la información y se agrega al panelContenido
