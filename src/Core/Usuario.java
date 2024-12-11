@@ -4,6 +4,8 @@ import App.VentanaPrincipal;
 
 import javax.swing.*;
 import java.io.*;
+import java.nio.file.attribute.UserPrincipal;
+import java.util.ArrayList;
 
 /**
  * Clase que representa a un usuario en el sistema.
@@ -107,12 +109,16 @@ public class Usuario {
     }
 
 
-    public Usuario() {
+    public static Usuario crearUsuario(String[] partes) {
+        return new Usuario(partes[0], partes[1], partes[2], partes[3]);
     }
 
     @Override
     public String toString() {
         return idUsuario + "," + contrasena + "," + correo + "," + nombre;
+    }
+
+    public Usuario() {
     }
 
 
@@ -125,24 +131,18 @@ public class Usuario {
      * @return {@code true} si las credenciales son válidas, de lo contrario {@code false}.
      */
     //DIVIDIR RESPONASABILIDADES!!!!!!
-    public static boolean esValido(String email, char[] contrasenia, VentanaPrincipal ventanaContenedor) {
+    public static boolean esValido(String email, char[] contrasenia, VentanaPrincipal ventanaContenedor, ArrayList<Usuario> usuarios) {
         boolean usuariovalido = false;
-        try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                String[] campos = linea.split(",");
-                if ((email.equals(campos[2]))) {
+        for(Usuario usuario : usuarios) {
+                if ((email.equals(usuario.correo))) {
                     String contraseniaIngresada = new String(contrasenia);
-                    if (contraseniaIngresada.equals(campos[1])) {
-                        Usuario usuarioactivo = new Usuario(campos[0], campos[1], campos[2], campos[3]);
+                    if (contraseniaIngresada.equals(usuario.contrasena)) {
+                        Usuario usuarioactivo = new Usuario(usuario.nombre, usuario.idUsuario, usuario.correo, usuario.contrasena);
                         ventanaContenedor.setUsuarioActivo(usuarioactivo);
                         return true;
                     }
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return false;
     }
 
@@ -150,21 +150,17 @@ public class Usuario {
     /**
      * Añade un nuevo usuario al archivo de usuarios si no existe ya.
      */
-    public void aniadirUseralArchivo() {
-        if (usuarioYaCreado(this)) {
+    public void aniadirUseralArchivo(ArrayList<Usuario> usuarios) {
+        if (usuarioYaCreado(this, usuarios)) {
             JOptionPane.showMessageDialog(null, "El correo ya está registrado.",
                     "Usuario existente", JOptionPane.WARNING_MESSAGE);
         } else {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter("usuarios.txt", true))) {
-                writer.newLine();
-                writer.write(this.toString());
-                JOptionPane.showMessageDialog(null, "Usuario creado con éxito.",
-                        "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            usuarios.add(this);
+            JOptionPane.showMessageDialog(null, "Usuario creado con éxito.",
+                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }
     }
+
 
     /**
      * Verifica si un usuario ya existe en el archivo de usuarios basado en el correo.
@@ -172,20 +168,14 @@ public class Usuario {
      * @param usuario Usuario a verificar.
      * @return {@code true} si el correo ya está registrado, de lo contrario {@code false}.
      */
-    public static boolean usuarioYaCreado(Usuario usuario) {
-        try (BufferedReader br = new BufferedReader(new FileReader("usuarios.txt"))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                String[] campos = linea.split(",");
-                if (campos.length == 4 && usuario.correo.equals(campos[2])) {
-                    return true;
-                }
+    public static boolean usuarioYaCreado(Usuario usuario, ArrayList<Usuario> usuarios) {
+        for (Usuario usuario1 : usuarios) {
+            if (usuario1.correo.equals(usuario.correo)) {
+                return true;
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return false;
     }
 
-
 }
+

@@ -1,6 +1,7 @@
 package GUI;
 
 import App.VentanaPrincipal;
+import Core.Biblioteca;
 import Core.Usuario;
 
 import javax.swing.*;
@@ -25,7 +26,7 @@ public class PanelInicio extends JPanel {
      *
      * @param ventanacontenedor referencia a la ventana principal que contiene este panel.
      */
-    public PanelInicio(VentanaPrincipal ventanacontenedor) {
+    public PanelInicio(VentanaPrincipal ventanacontenedor, Biblioteca biblioteca) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS)); // Configuramos BoxLayout en el eje Y
         this.setBackground(Color.WHITE);
         Font fuente = new Font("Arial", Font.BOLD, 12);
@@ -43,34 +44,34 @@ public class PanelInicio extends JPanel {
         this.add(etiquetaUsuario);
 
         // Field para introducir el usuario
-        JTextField usuario = new JTextField();
-        usuario.setMaximumSize(new Dimension(270, 200)); // Ancho máximo
-        usuario.setBackground(Color.WHITE);
-        usuario.setForeground(Color.BLACK);
-        usuario.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineado al centro
+        JTextField usuarioCorreo = new JTextField();
+        usuarioCorreo.setMaximumSize(new Dimension(270, 200)); // Ancho máximo
+        usuarioCorreo.setBackground(Color.WHITE);
+        usuarioCorreo.setForeground(Color.BLACK);
+        usuarioCorreo.setAlignmentX(Component.CENTER_ALIGNMENT); // Alineado al centro
 
 
         Border borderNegro = new LineBorder(Color.BLACK, 1);
-        usuario.setBorder(borderNegro);
+        usuarioCorreo.setBorder(borderNegro);
 
         // Borde iluminado (cuando se está escribiendo)
         Border borderIluminado = new LineBorder(Color.BLUE, 2);
 
         // Agregar FocusListener para cambiar el borde al ganar o perder el foco
-        usuario.addFocusListener(new FocusAdapter() {
+        usuarioCorreo.addFocusListener(new FocusAdapter() {
             @Override
             public void focusGained(FocusEvent e) {
                 // Cambiar borde a azul cuando se escribe
-                usuario.setBorder(borderIluminado);
+                usuarioCorreo.setBorder(borderIluminado);
             }
 
             @Override
             public void focusLost(FocusEvent e) {
                 // Cambiar borde a negro cuando no se está escribiendo
-                usuario.setBorder(borderNegro);
+                usuarioCorreo.setBorder(borderNegro);
             }
         });
-        this.add(usuario);
+        this.add(usuarioCorreo);
 
         // Espaciador entre componentes
         this.add(Box.createRigidArea(new Dimension(0, 30)));
@@ -141,7 +142,7 @@ public class PanelInicio extends JPanel {
         butoninicsesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (Usuario.esValido(usuario.getText(), contrasenia.getPassword(), ventanacontenedor)) {
+                if (Usuario.esValido(usuarioCorreo.getText(), contrasenia.getPassword(), ventanacontenedor, biblioteca.getUsuarios())) {
                     ventanacontenedor.hacervisiblemenu();
                     ventanacontenedor.cambiarPanel("pantallacarga");
                     PanelMisReservas panelMisReservas = new PanelMisReservas(ventanacontenedor);

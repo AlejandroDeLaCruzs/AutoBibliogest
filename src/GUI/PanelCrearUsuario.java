@@ -1,6 +1,7 @@
 package GUI;
 
 import App.VentanaPrincipal;
+import Core.Biblioteca;
 import Core.Usuario;
 
 import javax.swing.*;
@@ -12,7 +13,7 @@ import static GUI.PanelInicio.logoypanel;
 
 public class PanelCrearUsuario extends JPanel {
 
-    public PanelCrearUsuario(VentanaPrincipal ventanacontenedor) {
+    public PanelCrearUsuario(VentanaPrincipal ventanacontenedor, Biblioteca biblioteca) {
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBackground(Color.WHITE);
@@ -94,7 +95,7 @@ public class PanelCrearUsuario extends JPanel {
                 } else {
                     String nuevaContrasenia = new String(contrasenia.getPassword());
                     Usuario crearusuaio = new Usuario(textFields[0].getText(), textFields[1].getText(), textFields[2].getText(), nuevaContrasenia);
-                    crearusuaio.aniadirUseralArchivo();
+                    crearusuaio.aniadirUseralArchivo(biblioteca.getUsuarios());
                     ventanacontenedor.cambiarPanel("panelInicio");
                 }
             }

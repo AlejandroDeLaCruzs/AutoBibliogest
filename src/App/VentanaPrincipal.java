@@ -1,5 +1,6 @@
 package App;
 
+import Core.Biblioteca;
 import Core.Usuario;
 import GUI.*;
 
@@ -14,9 +15,13 @@ public class VentanaPrincipal extends JFrame {
     private CardLayout cardLayout;
     private JPanel panelContenedor;
     private JMenuBar barraMenu;
+    private Biblioteca biblioteca;
 
 
     public VentanaPrincipal() {
+        biblioteca = new Biblioteca();
+        biblioteca.iniciarBiblioteca();
+
         // Configuración del JFrame
         setTitle("AutoBibliogest");
         setSize(400, 400);
@@ -34,10 +39,10 @@ public class VentanaPrincipal extends JFrame {
 
 
         // Crear los paneles
-        PanelInicio panelInicio = new PanelInicio(this);  // El primer panel
-        PanelCrearUsuario panelCrearUsuario = new PanelCrearUsuario(this);  // El segundo panel
-        Catalogo catalogo = new Catalogo(this); //EL tercer panel
-        PanelBusquedalibros busquedalibros = new PanelBusquedalibros(this);
+        PanelInicio panelInicio = new PanelInicio(this, biblioteca);  // El primer panel
+        PanelCrearUsuario panelCrearUsuario = new PanelCrearUsuario(this,biblioteca);  // El segundo panel
+        Catalogo catalogo = new Catalogo(this, biblioteca); //EL tercer panel
+        PanelBusquedalibros busquedalibros = new PanelBusquedalibros(this, biblioteca);
         PantallaCarga pantallaCarga = new PantallaCarga(this);
 
 

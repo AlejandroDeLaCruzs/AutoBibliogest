@@ -31,6 +31,15 @@ public class Prestamos {
         this.fechafinprestamo = fechafinprestamo;
     }
 
+    public static Prestamos crearPrestamo(String[] campos) {
+        LocalDate date;
+        LocalDate mejorOpcion = null;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate fechaInicio = LocalDate.parse(campos[2], formatter);
+        LocalDate fechaDevolucion = LocalDate.parse(campos[3], formatter);
+
+        return new Prestamos (campos[0], campos[1], fechaInicio, fechaDevolucion);
+    }
     /**
      * Representa el préstamo en formato CSV.
      *

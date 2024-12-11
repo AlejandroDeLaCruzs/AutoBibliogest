@@ -28,26 +28,18 @@ public class Busquedalibros {
      * @return Una lista de libros que coinciden con los criterios de búsqueda. Si no se encuentra ningún libro, se retorna `null`.
      */
 
-    public static ArrayList<Libro> busquedalibrofichero(String autor, String titulo, String[] genero) {
+    public static ArrayList<Libro> busquedalibrofichero(String autor, String titulo, String[] genero, Biblioteca biblioteca) {
         int contador = 0; //Para ver si existe al menos una coincidencia.
         ArrayList<Libro> librosEncontrados = new ArrayList<>();
         //Abrimos el fichero donde tenemos todos los datos del los libros
-        try (BufferedReader reader = new BufferedReader(new FileReader("libros.txt"))) {
-            String linea;
+        for (int i = 0; i < biblioteca.getLibros().size(); i++) {
 
-            while ((linea = reader.readLine()) != null) {
-                String[] campos = linea.split(","); //Seperamos el contenido
-
-                Libro libro = coincideConBusqueda(campos, autor, titulo, genero);
-                if (libro != null) {
-
-                    librosEncontrados.add(libro);
-                }
+            Libro libro = coincideConBusqueda(biblioteca.getLibros().get(i), autor, titulo, genero);
+            if (libro != null) {
+                librosEncontrados.add(libro);
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
         if (librosEncontrados.isEmpty()) {
             return null;
         }
@@ -59,22 +51,22 @@ public class Busquedalibros {
      * Método auxiliar que verifica si un libro coincide con los criterios de búsqueda.
      * Si el libro cumple con los tres criterios (autor, título y género), crea un objeto `Libro`.
      *
-     * @param campos  Los campos del libro extraídos del archivo (por ejemplo: título, autor, etc.).
+     *
      * @param autor   El autor del libro a buscar.
      * @param titulo  El título del libro a buscar.
      * @param generos Un arreglo de géneros para comparar con el libro.
      * @return Un objeto `Libro` si el libro coincide con los criterios de búsqueda, `null` si no hay coincidencia.
      */
-    private static Libro coincideConBusqueda(String[] campos, String autor, String titulo, String[] generos) {
-        boolean coincideTitulo = titulo.isEmpty() || campos[1].toLowerCase().contains(titulo.toLowerCase());
-        boolean coincideAutor = autor.isEmpty() || campos[3].toLowerCase().contains(autor.toLowerCase());
-        boolean coincideGenero = generos == null || generos.length == 0 || generoCoincide(campos[5], generos);
+    private static Libro coincideConBusqueda(Libro libro, String autor, String titulo, String[] generos) {
+        boolean coincideTitulo = titulo.isEmpty() || libro.getTitulo().contains(titulo.toLowerCase());
+        boolean coincideAutor = autor.isEmpty() || libro.getAutor().toLowerCase().contains(autor.toLowerCase());
+        boolean coincideGenero = generos == null || generos.length == 0 || generoCoincide(libro.getGenero(), generos);
 
         if (coincideTitulo && coincideAutor && coincideGenero) {
             try {
-                return crearLibro(campos);
+                return libro;
             } catch (NumberFormatException e) {
-                System.out.println("Error en el formato de números para el libro: " + String.join(",", campos));
+                System.out.println("Error en el formato de números para el libro: ");
             }
         }
         return null; // No coincide con los criterios de búsqueda

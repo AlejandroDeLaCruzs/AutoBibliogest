@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static Core.Prestamos.haydisponibilidad;
 import static GUI.Catalogo.crearpanelinfolibro;
@@ -206,10 +208,10 @@ public class Libro {
      */
     @Override
     public String toString() {
-        return "Titulo: " + this.titulo +
-                ", Autor: " + this.autor +
-                ", Genero: " + this.genero +
-                ", Resumen: " + this.resumen;
+        // Concatenar los atributos de la clase separados por comas
+        return ISBN + "," + titulo + "," + resumen + "," + autor + ","
+                + aniopublicacion + "," + genero + "," + cantidadpaginas + ","
+                + cantidad + "," + rutaimagen;
     }
 
     /**
@@ -219,22 +221,12 @@ public class Libro {
      * @param panel             El panel donde se añadirán los libros.
      * @param ventanacontenedor La ventana principal que contiene el panel.
      */
-    public static void infoLibros(JPanel panel, VentanaPrincipal ventanacontenedor) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("libros.txt"))) {
-            String linea;
-            while ((linea = reader.readLine()) != null) {
-                String[] partes = linea.split(",");
-
-                if (partes.length == 9) {
-                    panel.add(crearpanelinfolibro(crearLibro(partes), ventanacontenedor));
-                }
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
+    public static void infoLibros(JPanel panel, VentanaPrincipal ventanacontenedor, Biblioteca biblioteca) {
+        for (Libro libro : biblioteca.getLibros()) {
+            panel.add(crearpanelinfolibro(libro, ventanacontenedor, biblioteca));
         }
-
     }
+
 
     /**
      * Busca un libro en el archivo, y devuelve el siguiente o anterior libro según el parámetro.
@@ -243,35 +235,28 @@ public class Libro {
      * @param buscarSiguiente Si es true, devuelve el siguiente libro, de lo contrario el anterior.
      * @return El libro siguiente o anterior, o null si no se encuentra.
      */
-    public static Libro buscarLibro(Libro libroActual, boolean buscarSiguiente) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("libros.txt"))) {
-            String linea;
-            String[] partesAnterior = null; // Guardar datos del libro previo
+    public static Libro buscarLibro(Libro libroActual, boolean buscarSiguiente, Biblioteca biblioteca) {
+        List<Libro> libros = biblioteca.getLibros();
 
-            while ((linea = reader.readLine()) != null) {
-                String[] partes = linea.split(",");
-
-                if (partes.length == 9) {
-                    // Si encontramos el libro actual
-                    if (partes[1].equals(libroActual.titulo)) {
-                        if (buscarSiguiente) {
-                            return obtenerSiguienteLibro(reader);
-                        } else {
-                            return obtenerLibroAnterior(partesAnterior);
-                        }
-
-                    }
-
-                    // Actualizar el libro previo antes de avanzar a la siguiente línea
-                    partesAnterior = partes;
+        for (int i = 0; i < biblioteca.getLibros().size(); i++) {
+                // Si encontramos el libro actual
+            if (libros.get(i).equals(libroActual)) {
+                // Verificar límites para evitar IndexOutOfBoundsException
+                if (buscarSiguiente && i < libros.size() - 1) {
+                    return libros.get(i + 1);
+                } else if (!buscarSiguiente && i > 0) {
+                    return libros.get(i - 1);
+                } else {
+                    // No hay libro siguiente o anterior según el caso
+                    return null;
                 }
             }
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
         return null;
     }
+
+
+
 
     /**
      * Crea un objeto Libro a partir de un array de partes extraído de una línea de archivo.
@@ -280,61 +265,25 @@ public class Libro {
      * @return Un objeto Libro creado con los datos proporcionados.
      */
     public static Libro crearLibro(String[] partes) {
-        int copias = Integer.parseInt(partes[7]);
-        int cantidadpaginas = Integer.parseInt(partes[6]);
-        return new Libro(partes[0], partes[1], partes[2], partes[3], partes[4], partes[5], cantidadpaginas, copias, partes[8]);
+        if (partes.length == 9) {
+            int copias = Integer.parseInt(partes[7]);
+            int cantidadpaginas = Integer.parseInt(partes[6]);
+            return new Libro(partes[0], partes[1], partes[2], partes[3], partes[4], partes[5], cantidadpaginas, copias, partes[8]);
+        }
+        return null;
     }
 
-    /**
-     * Genera recomendaciones de libros basados en el género del libro actual.
-     *
-     * @param libro             El libro actual usado para encontrar recomendaciones.
-     * @param panelrecomendados El panel donde se añadirán los libros recomendados.
-     * @param ventanacontenedor La ventana principal que contiene el panel.
-     */
-    public static void librosRecomendados(Libro libro, JPanel panelrecomendados, VentanaPrincipal ventanacontenedor) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("libros.txt"))) {
-            String linea;
-            while ((linea = reader.readLine()) != null) {
-                String[] partes = linea.split(",");
-                if (partes[5].equals(libro.genero) && !partes[1].equals(libro.titulo)) {
-                    if (haydisponibilidad(crearLibro(partes))) {
-                        panelrecomendados.add(panelLibroRecomendado(crearLibro(partes), ventanacontenedor));
-                    }
-                }
+
+    public static List<Libro> librosRecomendados(Libro libroActual, List<Libro> libros) {
+        List<Libro> librosRecomendados = new ArrayList<>();
+        for (Libro libro : libros) {
+            if (libro.getGenero().equals(libroActual.getGenero())
+                    && !libro.getTitulo().equals(libroActual.getTitulo())
+                    && haydisponibilidad(libro)) { // Asumiendo que haydisponibilidad(Libro) verifica la disponibilidad
+                librosRecomendados.add(libro);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-    }
-
-    /**
-     * Lee la siguiente línea del archivo y crea un objeto Libro a partir de esos datos.
-     *
-     * @param reader El BufferedReader que lee el archivo.
-     * @return El siguiente libro en el archivo, o null si no hay más libros.
-     * @throws IOException Si ocurre un error al leer el archivo.
-     */
-    private static Libro obtenerSiguienteLibro(BufferedReader reader) throws IOException {
-        String linea = reader.readLine();  // Leer la siguiente línea
-        if (linea != null) {
-            String[] partesSiguiente = linea.split(",");
-            return crearLibro(partesSiguiente);
-        }
-        return null;  // No hay siguiente libro
-    }
-
-    /**
-     * Devuelve un libro a partir de los datos previos almacenados en el arreglo de partes.
-     *
-     * @param partesAnterior El arreglo de cadenas que contiene los datos del libro anterior.
-     * @return El libro correspondiente a los datos almacenados en partesAnterior, o null si no hay datos.
-     */
-    private static Libro obtenerLibroAnterior(String[] partesAnterior) {
-        if (partesAnterior != null) {
-            return crearLibro(partesAnterior);
-        }
-        return null;  // No hay libro anterior
+        return librosRecomendados;
     }
 
 }

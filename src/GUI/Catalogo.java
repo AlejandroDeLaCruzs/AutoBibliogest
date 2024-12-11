@@ -1,6 +1,7 @@
 package GUI;
 
 import App.VentanaPrincipal;
+import Core.Biblioteca;
 import Core.Libro;
 
 import javax.swing.*;
@@ -24,7 +25,7 @@ public class Catalogo extends JPanel {
      *
      * @param ventanacontenedor La ventana principal que contiene este panel.
      */
-    public Catalogo(VentanaPrincipal ventanacontenedor) {
+    public Catalogo(VentanaPrincipal ventanacontenedor, Biblioteca biblioteca) {
 
         setBackground(Color.LIGHT_GRAY);
         setLayout(new BorderLayout());
@@ -38,7 +39,7 @@ public class Catalogo extends JPanel {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
         // Cargar los libros en el panel
-        infoLibros(panelContenido, ventanacontenedor);
+        infoLibros(panelContenido, ventanacontenedor, biblioteca);
 
         // Añadir el JScrollPane al panel principal
         add(scrollPane);
@@ -52,7 +53,7 @@ public class Catalogo extends JPanel {
      * @param ventanacontenedor La ventana principal que contiene este panel.
      * @return Un panel con la información del libro, incluyendo un botón para más detalles.
      */
-    public static JPanel crearpanelinfolibro(final Libro libro, VentanaPrincipal ventanacontenedor) {
+    public static JPanel crearpanelinfolibro(final Libro libro, VentanaPrincipal ventanacontenedor, Biblioteca biblioteca) {
 
         JPanel panelinfolibro = new JPanel();
 
@@ -89,7 +90,7 @@ public class Catalogo extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Crear un panel con los detalles del libro y cambiar el panel visible
-                DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontenedor, libro);
+                DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontenedor, libro, biblioteca);
                 ventanacontenedor.mostrarPanel(detallesLibroPanel, "paneldetalle");
 
             }

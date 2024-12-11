@@ -1,13 +1,14 @@
 package GUI;
 
 import App.VentanaPrincipal;
+import Core.Biblioteca;
 import Core.Libro;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.util.List;
 import static Core.Libro.buscarLibro;
 import static Core.Libro.librosRecomendados;
 import static Core.Prestamos.*;
@@ -23,14 +24,13 @@ public class DetallesLibro extends JPanel {
      * @param ventanacontendor La ventana principal de la aplicación.
      * @param libro            El libro cuyos detalles se mostrarán.
      */
-    public DetallesLibro(VentanaPrincipal ventanacontendor, Libro libro) {
+    public DetallesLibro(VentanaPrincipal ventanacontendor, Libro libro, Biblioteca biblioteca) {
         inicializarPanel();
-        agregarComponentesPrincipales(libro, ventanacontendor);
-        agregarBotonesNavegacion(ventanacontendor, libro);
-
+        agregarComponentesPrincipales(libro, ventanacontendor, biblioteca);
+        agregarBotonesNavegacion(ventanacontendor, libro, biblioteca);
     }
 
-    public static JPanel panelLibroRecomendado(Libro libro, VentanaPrincipal ventanacontenedor) {
+    public static JPanel panelLibroRecomendado(Libro libro, VentanaPrincipal ventanacontenedor, Biblioteca biblioteca) {
         JPanel panellibrorecoemdado = new JPanel();
         panellibrorecoemdado.setLayout(new BoxLayout(panellibrorecoemdado, BoxLayout.Y_AXIS));
         panellibrorecoemdado.setBackground(Color.white);
@@ -50,7 +50,7 @@ public class DetallesLibro extends JPanel {
         botonlibro.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontenedor, libro);
+                DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontenedor, libro, biblioteca);
                 ventanacontenedor.mostrarPanel(detallesLibroPanel, "paneldetalle");
             }
         });
@@ -82,7 +82,7 @@ public class DetallesLibro extends JPanel {
      *
      * @param libro El libro cuyos detalles se mostrarán.
      */
-    private void agregarComponentesPrincipales(Libro libro, VentanaPrincipal ventanacontendor) {
+    private void agregarComponentesPrincipales(Libro libro, VentanaPrincipal ventanacontendor, Biblioteca biblioteca) {
         agregarImagenLibro(libro);
 
         agregarEtiqueta(new JLabel(libro.getTitulo()), 670, 30, 1000, 40, new Font("Arial", Font.BOLD, 30));
@@ -94,7 +94,7 @@ public class DetallesLibro extends JPanel {
         add(panelAnioPublicacion(libro));
         add(panelIdioma());
         add(panelCantidadPaginas(libro));
-        add(panelLibrosreomendados(libro, ventanacontendor));
+        add(panelLibrosreomendados(libro, ventanacontendor,biblioteca));
 
         JButton botonReservar = crearBoton("Reservar", 670, 170, 270, 40);
         add(botonReservar);
@@ -121,7 +121,7 @@ public class DetallesLibro extends JPanel {
      * @param ventanacontendor La ventana principal de la aplicación.
      * @param libro            El libro actual mostrado en el panel.
      */
-    private void agregarBotonesNavegacion(VentanaPrincipal ventanacontendor, Libro libro) {
+    private void agregarBotonesNavegacion(VentanaPrincipal ventanacontendor, Libro libro, Biblioteca biblioteca) {
         JButton botonCerrar = crearBotonConImagen("./res/cruz.jpg", 1400, 10, 30, 30, "Cerrar");
         botonCerrar.addActionListener(new ActionListener() {
             /**
@@ -140,9 +140,9 @@ public class DetallesLibro extends JPanel {
         botonFlechaDerecha.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Libro siguientelibroficehro = buscarLibro(libro, true);
+                Libro siguientelibroficehro = buscarLibro(libro, true, biblioteca);
                 if (siguientelibroficehro != null) {
-                    DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontendor, siguientelibroficehro);
+                    DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontendor, siguientelibroficehro, biblioteca);
                     ventanacontendor.mostrarPanel(detallesLibroPanel, "paneldetalle");
                 }
             }
@@ -154,9 +154,9 @@ public class DetallesLibro extends JPanel {
         botonFlechaIzquierda.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Libro anteriorlibroficehro = buscarLibro(libro, false);
+                Libro anteriorlibroficehro = buscarLibro(libro, false, biblioteca);
                 if (anteriorlibroficehro != null) {
-                    DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontendor, anteriorlibroficehro);
+                    DetallesLibro detallesLibroPanel = new DetallesLibro(ventanacontendor, anteriorlibroficehro, biblioteca);
                     ventanacontendor.mostrarPanel(detallesLibroPanel, "paneldetalle");
                 }
             }
@@ -323,16 +323,38 @@ public class DetallesLibro extends JPanel {
         return panelcantidadpags;
     }
 
-    private JScrollPane panelLibrosreomendados(Libro libro, VentanaPrincipal ventanacontenedor) {
-        JPanel panellibrosrecomendados = new JPanel();
-        //panellibrosrecomendados.setBounds(100, 500, 700, 500);
-        panellibrosrecomendados.setLayout(new GridLayout(1, 0, 10, 10));
-        librosRecomendados(libro, panellibrosrecomendados, ventanacontenedor);
-        JScrollPane jScrollPane = new JScrollPane(panellibrosrecomendados);
+    private JScrollPane panelLibrosreomendados(Libro libro, VentanaPrincipal ventanacontenedor, Biblioteca biblioteca) {
+        // Crear el panel principal para los libros recomendados
+        JPanel panelLibrosRecomendados = inicializarPanelRecomendados();
+
+        // Agregar libros recomendados al panel
+        agregarLibrosRecomendadosAlPanel(libro, panelLibrosRecomendados, ventanacontenedor, biblioteca);
+
+        JScrollPane jScrollPane = new JScrollPane(panelLibrosRecomendados);
         jScrollPane.setBounds(300, 460, 1000, 250);
         jScrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         return jScrollPane;
+    }
+
+
+    // Método para inicializar el panel recomendado
+    private JPanel inicializarPanelRecomendados() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(1, 0, 10, 10)); // Configuración de diseño
+        return panel;
+    }
+
+
+    // Método para agregar libros recomendados al panel
+    private void agregarLibrosRecomendadosAlPanel(Libro libro, JPanel panelRecomendados, VentanaPrincipal ventanaContenedor, Biblioteca biblioteca) {
+        // Filtrar los libros recomendados
+        List<Libro> librosRecomendados = librosRecomendados(libro, biblioteca.getLibros());
+
+        // Crear un panel para cada libro recomendado y añadirlo al panel principal
+        for (Libro libroRecomendado : librosRecomendados) {
+            panelRecomendados.add(panelLibroRecomendado(libroRecomendado, ventanaContenedor, biblioteca));
+        }
     }
 
 }

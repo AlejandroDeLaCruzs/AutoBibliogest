@@ -1,6 +1,8 @@
 package GUI;
 
 import App.VentanaPrincipal;
+import Core.Biblioteca;
+import Core.Busquedalibros;
 import Core.Libro;
 
 import javax.swing.*;
@@ -16,7 +18,7 @@ public class PanelBusquedalibros extends JPanel {
 
     private Map<String, JRadioButton> generoBotones;
 
-    public PanelBusquedalibros(VentanaPrincipal ventanacontendor) {
+    public PanelBusquedalibros(VentanaPrincipal ventanacontendor, Biblioteca biblioteca) {
 
         JLabel tituloLabel = new JLabel("Título:");
         JTextField tituloField = new JTextField(100);
@@ -88,9 +90,9 @@ public class PanelBusquedalibros extends JPanel {
                 String titulo = tituloField.getText();
                 String autor = autorField.getText();
 
-                ArrayList<Libro> librosencontrados = busquedalibrofichero(autor, titulo, generoSeleccionado);
+                ArrayList<Libro> librosencontrados = busquedalibrofichero(autor, titulo, generoSeleccionado, biblioteca);
                 if (librosencontrados != null) {
-                    Busquedapanel panel = new Busquedapanel(librosencontrados, ventanacontendor);
+                    Busquedapanel panel = new Busquedapanel(librosencontrados, ventanacontendor, biblioteca);
                     ventanacontendor.mostrarPanel(panel,"busqueda" );
 
                 } else {

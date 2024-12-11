@@ -1,6 +1,7 @@
 package GUI;
 
 import App.VentanaPrincipal;
+import Core.Biblioteca;
 import Core.Libro;
 
 import javax.swing.*;
@@ -23,7 +24,7 @@ public class Busquedapanel extends JPanel {
      * @param librosencontrados Lista de libros encontrados que cumplen con los criterios de búsqueda.
      * @param ventanacontendor  Ventana principal que contiene este panel y proporciona contexto para las interacciones.
      */
-    public Busquedapanel(ArrayList<Libro> librosencontrados, VentanaPrincipal ventanacontendor) {
+    public Busquedapanel(ArrayList<Libro> librosencontrados, VentanaPrincipal ventanacontendor, Biblioteca biblioteca) {
 
 
         setLayout(new BorderLayout()); //Para que ocupe toda la pantalla
@@ -35,7 +36,7 @@ public class Busquedapanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane(panelContenido);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 
-        agregarLibrosALaVista(librosencontrados, panelContenido, ventanacontendor);
+        agregarLibrosALaVista(librosencontrados, panelContenido, ventanacontendor,biblioteca );
 
         // Añadir el JScrollPane al panel principal
         add(scrollPane);
@@ -50,10 +51,10 @@ public class Busquedapanel extends JPanel {
      * @param ventanaPrincipal  La ventana principal que contiene este panel.
      */
     //LA VENTANA PRINCIPAL !!
-    public void agregarLibrosALaVista(final ArrayList<Libro> librosencontrados, JPanel panelContenido, VentanaPrincipal ventanaPrincipal) {
+    public void agregarLibrosALaVista(final ArrayList<Libro> librosencontrados, JPanel panelContenido, VentanaPrincipal ventanaPrincipal, Biblioteca biblioteca) {
         for (Libro libro : librosencontrados) {
             // Para cada libro, se crea un panel con la información y se agrega al panelContenido
-            panelContenido.add(crearpanelinfolibro(libro, ventanaPrincipal));
+            panelContenido.add(crearpanelinfolibro(libro, ventanaPrincipal,biblioteca));
         }
     }
 
