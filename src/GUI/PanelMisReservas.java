@@ -1,9 +1,11 @@
 package GUI;
 
 import App.VentanaPrincipal;
+import Core.Prestamos;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 import static Core.Reservas.*;
 
@@ -11,7 +13,7 @@ public class PanelMisReservas extends JPanel {
     private JScrollPane scrollPane;
     private JPanel panelContenedor;
 
-    public PanelMisReservas(VentanaPrincipal ventanacontenedor) {
+    public PanelMisReservas(VentanaPrincipal ventanacontenedor, ArrayList<Prestamos> prestamos) {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -27,6 +29,7 @@ public class PanelMisReservas extends JPanel {
 
         add(scrollPane);  // Directamente agregar el scrollPane
         setPreferredSize(new Dimension(400, 400));
+
 
     }
 

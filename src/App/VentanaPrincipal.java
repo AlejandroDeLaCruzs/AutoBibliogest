@@ -9,15 +9,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Ventana principal de la aplicación AutoBibliogest, que gestiona la interfaz gráfica del usuario
+ * y permite la navegación entre distintos paneles (catálogo, búsqueda, reservas, etc.).
+ */
 public class VentanaPrincipal extends JFrame {
 
-    private Usuario UsuarioActivo;
+    private Usuario usuarioActivo;
     private CardLayout cardLayout;
     private JPanel panelContenedor;
     private JMenuBar barraMenu;
     private Biblioteca biblioteca;
 
-
+    /**
+     * Constructor de la clase VentanaPrincipal. Configura la interfaz gráfica, la barra de menú
+     * y los paneles de la aplicación.
+     */
     public VentanaPrincipal() {
         biblioteca = new Biblioteca();
         biblioteca.iniciarBiblioteca();
@@ -26,132 +33,88 @@ public class VentanaPrincipal extends JFrame {
         setTitle("AutoBibliogest");
         setSize(400, 400);
         setLayout(new BorderLayout());
-
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-
         // Inicializar CardLayout y panel contenedor
         cardLayout = new CardLayout();
         panelContenedor = new JPanel(cardLayout);
-        UsuarioActivo = new Usuario();
+        usuarioActivo = new Usuario();
 
+        inicializarPaneles();
+        inicializarMenu();
 
-        // Crear los paneles
-        PanelInicio panelInicio = new PanelInicio(this, biblioteca);  // El primer panel
-        PanelCrearUsuario panelCrearUsuario = new PanelCrearUsuario(this,biblioteca);  // El segundo panel
-        Catalogo catalogo = new Catalogo(this, biblioteca); //EL tercer panel
-        PanelBusquedalibros busquedalibros = new PanelBusquedalibros(this, biblioteca);
-        PantallaCarga pantallaCarga = new PantallaCarga(this);
-
-
-        // Añadir los paneles al panel contenedor con un nombre para cada uno
-        panelContenedor.add(panelInicio, "panelInicio");
-        panelContenedor.add(panelCrearUsuario, "panelCrearUsuario");
-        panelContenedor.add(catalogo, "catalogo");
-        panelContenedor.add(busquedalibros, "busquedalibros");
-        panelContenedor.add(pantallaCarga, "pantallacarga");
-
-
-        //Menu con las diferentes opciones
-        JMenuItem menuSalir = new JMenuItem("SALIR");
-        JMenuItem menuItemcatalogo = new JMenuItem("CATALOGO");
-        JMenuItem menuItembusqueda = new JMenuItem("BUSQUEDA");
-        JMenuItem menuItemmisreservas = new JMenuItem("MIS RESERVAS");
-
-        barraMenu = new JMenuBar();
-
-        //Añadimos al menu todas las diferentes items(opciones)
-        barraMenu.add(menuItemcatalogo);
-        barraMenu.add(menuItembusqueda);
-        barraMenu.add(menuItembusqueda);
-        barraMenu.add(menuItemmisreservas);
-        barraMenu.add(menuSalir);
-
-        //Añadimos el menu a la ventana
-        // setJMenuBar(barraMenu);
-
-
-        // Mostrar el primer panel al iniciar
         cardLayout.show(panelContenedor, "panelInicio");
 
-        // Añadir el panel contenedor al JFrame
         this.add(panelContenedor);
 
         // Hacer visible el JFrame
         setVisible(true);
 
-
-        menuSalir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-            }
-        });
-
-        menuItemcatalogo.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cambiarPanel("catalogo");
-            }
-        });
-
-        menuItembusqueda.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cambiarPanel("busquedalibros");
-            }
-        });
-
-
-        menuItemmisreservas.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cambiarPanel("panelMisreservas");
-
-            }
-        });
-
     }
-//Cambiar nombre
-    public void hacervisiblemenu() {
+
+    /**
+     * Hace visible la barra de menú en la ventana principal.
+     */
+    public void hacerVisibleMenu() {
         setJMenuBar(barraMenu);
     }
 
-    // Método público para cambiar de panel
-
     /**
-     * Cambia el panel activo (visible)
+     * Cambia el panel activo (visible) en el contenedor.
      *
-     * @param nombrePanel Panel a mostrar
+     * @param nombrePanel El nombre del panel a mostrar.
      */
     public void cambiarPanel(String nombrePanel) {
         cardLayout.show(panelContenedor, nombrePanel);
     }
 
+    /**
+     * Muestra un panel específico en el contenedor y cambia a él.
+     *
+     * @param panel          El panel a mostrar.
+     * @param nombreDelPanel Nombre del panel para agregarlo al contenedor.
+     */
     public void mostrarPanel(JPanel panel, String nombreDelPanel) {
         panelContenedor.add(panel, nombreDelPanel);
         cambiarPanel(nombreDelPanel);
     }
 
-    // Geter y set
+    /**
+     * Agrega un panel al contenedor sin cambiar a él.
+     *
+     * @param panel          El panel a agregar.
+     * @param nombreDelPanel Nombre del panel para agregarlo al contenedor.
+     */
+    public void agregarPanel(JPanel panel, String nombreDelPanel) {
+        panelContenedor.add(panel, nombreDelPanel);
+    }
+
+    /**
+     * Obtiene el usuario activo en la aplicación.
+     *
+     * @return El objeto Usuario que representa al usuario actualmente activo.
+     */
     public Usuario getUsuarioActivo() {
-        return UsuarioActivo;
+        return usuarioActivo;
     }
 
+    /**
+     * Establece el usuario activo en la aplicación.
+     *
+     * @param usuarioActivo El objeto Usuario que representa al usuario a establecer como activo.
+     */
     public void setUsuarioActivo(Usuario usuarioActivo) {
-        UsuarioActivo = usuarioActivo;
+        this.usuarioActivo = usuarioActivo;
     }
 
-    public JPanel getPanelContenedor() {
-        return panelContenedor;
-    }
 
-    public void setPanelContenedor(JPanel panelContenedor) {
-        this.panelContenedor = panelContenedor;
-    }
-
+    /**
+     * Obtiene el panel de "Mis Reservas" si está presente en el contenedor.
+     *
+     * @return El panel de "Mis Reservas", o null si no se encuentra.
+     */
     public PanelMisReservas getPanelMisReservas() {
         for (Component comp : panelContenedor.getComponents()) {
             if (comp instanceof PanelMisReservas) {
@@ -159,6 +122,64 @@ public class VentanaPrincipal extends JFrame {
             }
         }
         return null; // Si no encuentra el panel
+    }
+
+    /**
+     * Inicializa y agrega los paneles principales al contenedor.
+     */
+    private void inicializarPaneles() {
+        panelContenedor.add(new PanelInicio(this, biblioteca), "panelInicio");
+        panelContenedor.add(new PanelCrearUsuario(this, biblioteca), "panelCrearUsuario");
+        panelContenedor.add(new PanelCatalogoLibros(this, biblioteca), "catalogo");
+        panelContenedor.add(new PanelBusquedalibros(this, biblioteca), "busquedalibros");
+        panelContenedor.add(new PantallaCarga(this), "pantallacarga");
+    }
+
+
+    /**
+     * Configura la barra de menú y los listeners de los elementos del menú.
+     */
+    private void inicializarMenu() {
+        JMenuItem menuSalir = new JMenuItem("SALIR");
+        JMenuItem menuItemCatalogo = new JMenuItem("CATÁLOGO");
+        JMenuItem menuItemBusqueda = new JMenuItem("BÚSQUEDA");
+        JMenuItem menuItemMisReservas = new JMenuItem("MIS RESERVAS");
+
+        barraMenu = new JMenuBar();
+        barraMenu.add(menuItemCatalogo);
+        barraMenu.add(menuItemBusqueda);
+        barraMenu.add(menuItemMisReservas);
+        barraMenu.add(menuSalir);
+
+        // Action listeners para los ítems del menú
+        menuSalir.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+
+        menuItemCatalogo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cambiarPanel("catalogo");
+            }
+        });
+
+        menuItemBusqueda.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cambiarPanel("busquedalibros");
+            }
+        });
+
+        menuItemMisReservas.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cambiarPanel("panelMisReservas");
+                System.out.println("aa");
+            }
+        });
     }
 
 }

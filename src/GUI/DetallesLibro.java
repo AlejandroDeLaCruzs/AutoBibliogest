@@ -18,6 +18,7 @@ import static Core.Prestamos.*;
  * Permite mostrar información detallada del libro y realizar acciones como reservarlo.
  */
 public class DetallesLibro extends JPanel {
+
     /**
      * Constructor de la clase DetallesLibro.
      *

@@ -7,6 +7,9 @@ import java.io.*;
 import java.nio.file.attribute.UserPrincipal;
 import java.util.ArrayList;
 
+import static Core.Validación.Usuarios.ValidadorCrearUsuario.usuarioYaCreado;
+
+
 /**
  * Clase que representa a un usuario en el sistema.
  * Incluye métodos para gestionar el inicio de sesión y la creación de nuevos usuarios.
@@ -123,31 +126,6 @@ public class Usuario {
 
 
     /**
-     * Valida las credenciales de inicio de sesión.
-     *
-     * @param email             Correo electrónico ingresado por el usuario.
-     * @param contrasenia       Contraseña ingresada por el usuario.
-     * @param ventanaContenedor Contenedor principal para actualizar el usuario activo.
-     * @return {@code true} si las credenciales son válidas, de lo contrario {@code false}.
-     */
-    //DIVIDIR RESPONASABILIDADES!!!!!!
-    public static boolean esValido(String email, char[] contrasenia, VentanaPrincipal ventanaContenedor, ArrayList<Usuario> usuarios) {
-        boolean usuariovalido = false;
-        for(Usuario usuario : usuarios) {
-                if ((email.equals(usuario.correo))) {
-                    String contraseniaIngresada = new String(contrasenia);
-                    if (contraseniaIngresada.equals(usuario.contrasena)) {
-                        Usuario usuarioactivo = new Usuario(usuario.nombre, usuario.idUsuario, usuario.correo, usuario.contrasena);
-                        ventanaContenedor.setUsuarioActivo(usuarioactivo);
-                        return true;
-                    }
-                }
-            }
-        return false;
-    }
-
-
-    /**
      * Añade un nuevo usuario al archivo de usuarios si no existe ya.
      */
     public void aniadirUseralArchivo(ArrayList<Usuario> usuarios) {
@@ -160,22 +138,5 @@ public class Usuario {
                     "Éxito", JOptionPane.INFORMATION_MESSAGE);
         }
     }
-
-
-    /**
-     * Verifica si un usuario ya existe en el archivo de usuarios basado en el correo.
-     *
-     * @param usuario Usuario a verificar.
-     * @return {@code true} si el correo ya está registrado, de lo contrario {@code false}.
-     */
-    public static boolean usuarioYaCreado(Usuario usuario, ArrayList<Usuario> usuarios) {
-        for (Usuario usuario1 : usuarios) {
-            if (usuario1.correo.equals(usuario.correo)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
 }
 

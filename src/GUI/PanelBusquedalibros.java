@@ -104,7 +104,6 @@ public class PanelBusquedalibros extends JPanel {
 
     }
 
-
     public String[] generosSeleccionados() {
         ArrayList<String> seleccionados = new ArrayList<>();
         for (Map.Entry<String, JRadioButton> entry : generoBotones.entrySet()) {

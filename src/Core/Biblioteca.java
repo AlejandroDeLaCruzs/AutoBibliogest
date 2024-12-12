@@ -7,6 +7,12 @@ import java.util.ArrayList;
 
 
 public class Biblioteca {
+    private ArrayList<Usuario> usuarios;
+    private ArrayList<Libro> libros;
+    private ArrayList<Prestamos> prestamos;
+
+
+
     public ArrayList<Usuario> getUsuarios() {
         return usuarios;
     }
@@ -15,7 +21,6 @@ public class Biblioteca {
         this.usuarios = usuarios;
     }
 
-    private ArrayList<Usuario> usuarios;
 
     public ArrayList<Libro> getLibros() {
         return libros;
@@ -25,13 +30,20 @@ public class Biblioteca {
         this.libros = libros;
     }
 
-    private ArrayList<Libro> libros;
-    private ArrayList<Prestamos> prestamos;
+    public ArrayList<Prestamos> getPrestamos() {
+        return prestamos;
+    }
+
+    public void setPrestamos(ArrayList<Prestamos> prestamos) {
+        this.prestamos = prestamos;
+    }
+
     public Biblioteca() {
         this.usuarios = new ArrayList<>();
         this.libros = new ArrayList<>();
         this.prestamos = new ArrayList<>();
     }
+
 
     public void iniciarBiblioteca() {
         FicheroGenerico<Libro> ficheroLibros = new FicheroGenerico<>(Libro::crearLibro);

@@ -1,17 +1,9 @@
 package Core;
 
-import App.VentanaPrincipal;
-
-import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import static Core.Prestamos.haydisponibilidad;
-import static GUI.Catalogo.crearpanelinfolibro;
-import static GUI.DetallesLibro.panelLibroRecomendado;
 
 /**
  * Clase que representa un libro con atributos como ISBN, título, autor, etc.
@@ -214,18 +206,7 @@ public class Libro {
                 + cantidad + "," + rutaimagen;
     }
 
-    /**
-     * Lee un archivo de texto con los libros y añade un panel con los datos de cada libro
-     * al panel proporcionado.
-     *
-     * @param panel             El panel donde se añadirán los libros.
-     * @param ventanacontenedor La ventana principal que contiene el panel.
-     */
-    public static void infoLibros(JPanel panel, VentanaPrincipal ventanacontenedor, Biblioteca biblioteca) {
-        for (Libro libro : biblioteca.getLibros()) {
-            panel.add(crearpanelinfolibro(libro, ventanacontenedor, biblioteca));
-        }
-    }
+
 
 
     /**

@@ -10,3 +10,4 @@ a,Ready Player One,2024-12-09,2024-12-23
 a,El corredor del laberinto,2024-12-09,2024-12-23
 a,Anatomía de un instante,2024-12-09,2024-12-23
 a,El teorema Katherine,2024-12-09,2024-12-23
+j,El silencio de la ciudad blanca,2024-12-11,2024-12-25

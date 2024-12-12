@@ -5,6 +5,6 @@ import Core.Usuario;
 public class NotificacionPush implements Notificaciones {
     @Override
     public void notificacion(Usuario activo) {
-        System.out.println("aaaa");
+        System.out.println("notificacion push");
     }
 }

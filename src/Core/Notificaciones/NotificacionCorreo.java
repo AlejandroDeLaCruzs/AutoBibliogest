@@ -10,7 +10,7 @@ import java.io.IOException;
 public class NotificacionCorreo implements Notificaciones {
     @Override
     public void notificacion(Usuario activo) {
-        System.out.println("prueba");
+        System.out.println("prueba correo");
     }
 }
 

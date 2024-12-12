@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static GUI.Catalogo.crearpanelinfolibro;
+import static GUI.PanelCatalogoLibros.crearPanelInfoLibro;
 
 /**
  * La clase {@code Busquedapanel} genera un panel que muestra los libros que cumplen con los criterios de búsqueda.
@@ -54,7 +54,7 @@ public class Busquedapanel extends JPanel {
     public void agregarLibrosALaVista(final ArrayList<Libro> librosencontrados, JPanel panelContenido, VentanaPrincipal ventanaPrincipal, Biblioteca biblioteca) {
         for (Libro libro : librosencontrados) {
             // Para cada libro, se crea un panel con la información y se agrega al panelContenido
-            panelContenido.add(crearpanelinfolibro(libro, ventanaPrincipal,biblioteca));
+            panelContenido.add(crearPanelInfoLibro(libro, ventanaPrincipal,biblioteca));
         }
     }
 
