@@ -3,6 +3,7 @@ package GUI;
 import App.VentanaPrincipal;
 import Core.Biblioteca;
 import Core.Libro;
+import GUI.DetallesLibro.PanelDetallesLibro;
 
 import javax.swing.*;
 import java.awt.*;
@@ -96,7 +97,7 @@ public class PanelCatalogoLibros extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Crear un panel con los detalles del libro y cambiar el panel visible
-                DetallesLibro detallesLibroPanel = new DetallesLibro(ventanaContenedor, libro, biblioteca);
+                PanelDetallesLibro detallesLibroPanel = new PanelDetallesLibro(ventanaContenedor, libro, biblioteca);
                 ventanaContenedor.mostrarPanel(detallesLibroPanel, "paneldetalle");
 
             }

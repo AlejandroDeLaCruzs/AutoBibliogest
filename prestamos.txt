@@ -11,3 +11,5 @@ a,El corredor del laberinto,2024-12-09,2024-12-23
 a,Anatomía de un instante,2024-12-09,2024-12-23
 a,El teorema Katherine,2024-12-09,2024-12-23
 j,El silencio de la ciudad blanca,2024-12-11,2024-12-25
+a,La chica del tren,2024-12-12,2024-12-26
+a,Cien años de soledad,2024-12-13,2024-12-27
