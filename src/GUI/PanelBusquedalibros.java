@@ -96,7 +96,7 @@ public class PanelBusquedalibros extends JPanel {
                     ventanacontendor.mostrarPanel(panel,"busqueda" );
 
                 } else {
-                    JOptionPane.showMessageDialog(null, "No se ha encontrado ningun libro");
+                    JOptionPane.showMessageDialog(null, "No se ha encontrado ningún libro");
                 }
 
             }

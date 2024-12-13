@@ -6,12 +6,30 @@ import GUI.GeneroImagenes;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Interfaz que define la fábrica para crear subpaneles de detalles de un libro.
+ */
+@FunctionalInterface
 public interface PanelLibroDetalleFactory {
+    /**
+     * Crea un subpanel con información específica de un libro.
+     *
+     * @param libro El libro cuyos detalles se mostrarán.
+     * @return Un JPanel que contiene la información correspondiente.
+     */
+
     JPanel crearSubPanel(Libro libro);
 }
 
-// Fábrica para crear el panel de género
+/**
+ * Fábrica para crear un subpanel que muestra el género de un libro.
+ */
 class PanelGeneroFactory implements PanelLibroDetalleFactory {
+
+    /**
+     * {@inheritDoc}
+     * Este subpanel incluye el nombre y una imagen representativa del género del libro.
+     */
     @Override
     public JPanel crearSubPanel(Libro libro) {
         JPanel generoPanel = new JPanel();
@@ -41,6 +59,13 @@ class PanelGeneroFactory implements PanelLibroDetalleFactory {
 
         return generoPanel;
     }
+
+    /**
+     * Obtiene una etiqueta con la imagen correspondiente al género del libro.
+     *
+     * @param libro El libro cuyos detalles se están mostrando.
+     * @return Un JLabel que contiene la imagen escalada del género.
+     */
     private JLabel getGeneroImagen(Libro libro) {
         JLabel generoImagen = new JLabel();
         ImageIcon iconGenero = new ImageIcon(GeneroImagenes.getInstance().getImagePath(libro.getGenero()));
@@ -51,58 +76,80 @@ class PanelGeneroFactory implements PanelLibroDetalleFactory {
     }
 }
 
-// Fábrica para crear el panel de año de publicación
+/**
+ * Fábrica para crear un subpanel que muestra el año de publicación de un libro.
+ */
 class PanelAnioPublicacionFactory implements PanelLibroDetalleFactory {
+
+    /**
+     * {@inheritDoc}
+     * Este subpanel incluye una etiqueta con el año de publicación del libro.
+     */
     @Override
     public JPanel crearSubPanel(Libro libro) {
-        JPanel publicadopanel = new JPanel();
-        publicadopanel.setLayout(new BoxLayout(publicadopanel, BoxLayout.Y_AXIS));
-        publicadopanel.setBackground(Color.white);
-        publicadopanel.setBounds(610, 310, 90, 100);
+        JPanel panelPublicado = new JPanel();
+        panelPublicado.setLayout(new BoxLayout(panelPublicado, BoxLayout.Y_AXIS));
+        panelPublicado.setBackground(Color.white);
+        panelPublicado.setBounds(610, 310, 90, 100);
 
         JLabel etiquetapublicado = new JLabel("PUBLICADO");
         etiquetapublicado.setForeground(Color.LIGHT_GRAY);
         etiquetapublicado.setAlignmentX(Component.CENTER_ALIGNMENT);
-        publicadopanel.add(etiquetapublicado);
+        panelPublicado.add(etiquetapublicado);
 
-        publicadopanel.add(Box.createVerticalStrut(10));
+        panelPublicado.add(Box.createVerticalStrut(10));
 
-        JLabel aniopublicado = new JLabel((libro.getAniopublicacion()));
-        aniopublicado.setFont(new Font("Arial", Font.BOLD, 20));
-        aniopublicado.setAlignmentX(Component.CENTER_ALIGNMENT);
-        publicadopanel.add(aniopublicado);
+        JLabel anioPublicado = new JLabel((libro.getAniopublicacion()));
+        anioPublicado.setFont(new Font("Arial", Font.BOLD, 20));
+        anioPublicado.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panelPublicado.add(anioPublicado);
 
-        return publicadopanel;
+        return panelPublicado;
     }
 }
 
-// Fábrica para crear el panel de idioma
+/**
+ * Fábrica para crear un subpanel que muestra el idioma del libro.
+ */
 class PanelIdiomaFactory implements PanelLibroDetalleFactory {
+
+    /**
+     * {@inheritDoc}
+     * Este subpanel incluye una etiqueta con el idioma principal del libro.
+     */
     @Override
     public JPanel crearSubPanel(Libro libro) {
-        JPanel paneldioma = new JPanel();
-        paneldioma.setLayout(new BoxLayout(paneldioma, BoxLayout.Y_AXIS));
-        paneldioma.setBackground(Color.white);
-        paneldioma.setBounds(740, 310, 130, 100);
+        JPanel panelIdioma = new JPanel();
+        panelIdioma.setLayout(new BoxLayout(panelIdioma, BoxLayout.Y_AXIS));
+        panelIdioma.setBackground(Color.white);
+        panelIdioma.setBounds(740, 310, 130, 100);
 
         JLabel etiquetaidioma = new JLabel("IDIOMA");
         etiquetaidioma.setForeground(Color.LIGHT_GRAY);
         etiquetaidioma.setAlignmentX(Component.CENTER_ALIGNMENT);
-        paneldioma.add(etiquetaidioma);
+        panelIdioma.add(etiquetaidioma);
 
-        paneldioma.add(Box.createVerticalStrut(10));
+        panelIdioma.add(Box.createVerticalStrut(10));
 
-        JLabel idiomaabreviatura = new JLabel("Castellano");
-        idiomaabreviatura.setFont(new Font("Arial", Font.BOLD, 20));
-        idiomaabreviatura.setAlignmentX(Component.CENTER_ALIGNMENT);
-        paneldioma.add(idiomaabreviatura);
+        JLabel idioma = new JLabel("Castellano");
+        idioma.setFont(new Font("Arial", Font.BOLD, 20));
+        idioma.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panelIdioma.add(idioma);
 
 
-        return paneldioma;
+        return panelIdioma;
     }
 }
 
+/**
+ * Fábrica para crear un subpanel que muestra la cantidad de páginas de un libro.
+ */
 class PanelCantidadPaginasFactory implements PanelLibroDetalleFactory {
+
+    /**
+     * {@inheritDoc}
+     * Este subpanel incluye una etiqueta con la cantidad de páginas y una descripción.
+     */
     @Override
     public JPanel crearSubPanel(Libro libro) {
         JPanel panelCantidadPags = new JPanel();

@@ -52,8 +52,19 @@ public class Biblioteca {
         FicheroGenerico<Usuario> ficheroUsuario = new FicheroGenerico<>(Usuario::crearUsuario);
         ficheroUsuario.cargarFichero("usuarios.txt", usuarios);
 
-        FicheroGenerico<Prestamos> ficheroPrestamos = new FicheroGenerico<>(Prestamos::crearPrestamo);
+        FicheroGenerico<Prestamos> ficheroPrestamos = new FicheroGenerico<>(Prestamos::crearPrestamoFichero);
         ficheroPrestamos.cargarFichero("prestamos.txt", prestamos);
+    }
+
+    public void cerrarBiblioteca() {
+        FicheroGenerico<Libro> ficheroLibros = new FicheroGenerico<>(null);
+        ficheroLibros.escribirFichero("libros.txt", libros);
+
+        FicheroGenerico<Usuario> ficheroUsuario = new FicheroGenerico<>(null);
+        ficheroUsuario.escribirFichero("usuarios.txt", usuarios);
+
+        FicheroGenerico<Prestamos> ficheroPrestamos = new FicheroGenerico<>(null);
+        ficheroPrestamos.escribirFichero("prestamos.txt", prestamos);
     }
 
 }

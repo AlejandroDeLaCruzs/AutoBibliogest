@@ -13,6 +13,8 @@ import java.util.List;
 import static Core.Libro.buscarLibro;
 import static Core.Libro.librosRecomendados;
 import static Core.Prestamos.*;
+import static Core.Validación.Prestamos.ValidadorPrestamos.haydisponibilidad;
+import static Core.Validación.Prestamos.ValidadorPrestamos.reservado;
 
 /**
  * Clase que representa el panel de detalles de un libro en una aplicación de biblioteca.
@@ -59,12 +61,12 @@ public class PanelDetallesLibro extends JPanel {
         botonReservar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!haydisponibilidad(libro)) {
-                    JOptionPane.showMessageDialog(null, "No hay libros disponibles para reservar." + proximadisponibilidad(libro));
-                } else if (reservado(libro, ventanaContenedor.getUsuarioActivo())) {
+                if (!haydisponibilidad(libro, biblioteca.getPrestamos())) {
+                    JOptionPane.showMessageDialog(null, "No hay libros disponibles para reservar." + proximaDisponibilidad(libro, biblioteca.getPrestamos()));
+                } else if (reservado(libro, ventanaContenedor.getUsuarioActivo(), biblioteca.getPrestamos())) {
                     JOptionPane.showMessageDialog(null, "Ya tienes este libro reservado.");
                 } else {
-                    PanelConfirmreserva panelConfirmreserva = new PanelConfirmreserva(libro, ventanaContenedor);
+                    PanelConfirmarReserva panelConfirmreserva = new PanelConfirmarReserva(libro, ventanaContenedor, biblioteca);
                     ventanaContenedor.mostrarPanel(panelConfirmreserva, "panelConfirmreserva");
                 }
             }
@@ -265,7 +267,7 @@ public class PanelDetallesLibro extends JPanel {
     // Método para agregar libros recomendados al panel
     private void agregarLibrosRecomendadosAlPanel(Libro libro, JPanel panelRecomendados, VentanaPrincipal ventanaContenedor, Biblioteca biblioteca) {
         // Filtrar los libros recomendados
-        List<Libro> librosRecomendados = librosRecomendados(libro, biblioteca.getLibros());
+        List<Libro> librosRecomendados = librosRecomendados(libro, biblioteca);
 
         // Crear un panel para cada libro recomendado y añadirlo al panel principal
         for (Libro libroRecomendado : librosRecomendados) {

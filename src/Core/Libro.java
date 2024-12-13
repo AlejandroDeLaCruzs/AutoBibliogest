@@ -3,7 +3,7 @@ package Core;
 import java.util.ArrayList;
 import java.util.List;
 
-import static Core.Prestamos.haydisponibilidad;
+import static Core.Validación.Prestamos.ValidadorPrestamos.haydisponibilidad;
 
 /**
  * Clase que representa un libro con atributos como ISBN, título, autor, etc.
@@ -255,12 +255,12 @@ public class Libro {
     }
 
 
-    public static List<Libro> librosRecomendados(Libro libroActual, List<Libro> libros) {
+    public static List<Libro> librosRecomendados(Libro libroActual, Biblioteca biblioteca) {
         List<Libro> librosRecomendados = new ArrayList<>();
-        for (Libro libro : libros) {
+        for (Libro libro : biblioteca.getLibros()) {
             if (libro.getGenero().equals(libroActual.getGenero())
                     && !libro.getTitulo().equals(libroActual.getTitulo())
-                    && haydisponibilidad(libro)) { // Asumiendo que haydisponibilidad(Libro) verifica la disponibilidad
+                    && haydisponibilidad(libro, biblioteca.getPrestamos() )) { // Asumiendo que haydisponibilidad(Libro) verifica la disponibilidad
                 librosRecomendados.add(libro);
             }
         }

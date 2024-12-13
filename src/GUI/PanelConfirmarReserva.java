@@ -1,6 +1,7 @@
 package GUI;
 
 import App.VentanaPrincipal;
+import Core.Biblioteca;
 import Core.Libro;
 
 import javax.swing.*;
@@ -13,8 +14,8 @@ import java.time.LocalDate;
 import static Core.Prestamos.reservarlibro;
 
 
-public class PanelConfirmreserva extends JPanel {
-    public PanelConfirmreserva(Libro libro, VentanaPrincipal ventanacontenador) {
+public class PanelConfirmarReserva extends JPanel {
+    public PanelConfirmarReserva(Libro libro, VentanaPrincipal ventanacontenador, Biblioteca biblioteca) {
 
         setLayout(null);
 
@@ -62,7 +63,7 @@ public class PanelConfirmreserva extends JPanel {
         butonconfirmreserva.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                reservarlibro(libro, ventanacontenador);
+                reservarlibro(libro, ventanacontenador.getUsuarioActivo(), biblioteca );
                 JOptionPane.showMessageDialog(null, "Libro reservado con exito");
                 ventanacontenador.getPanelMisReservas().agregarReserva(ventanacontenador);
                 ventanacontenador.cambiarPanel("catalogo");

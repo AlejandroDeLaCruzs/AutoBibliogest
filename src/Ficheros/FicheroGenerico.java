@@ -29,7 +29,7 @@ public class FicheroGenerico<T> {
 
 
     public void escribirFichero(String nombreArchivo, ArrayList<T> objetos) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo))) {
             for (T objeto : objetos) {
                 writer.write(objeto.toString());
                 writer.newLine(); // Agrega una nueva línea después de cada objeto

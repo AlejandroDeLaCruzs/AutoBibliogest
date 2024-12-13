@@ -155,6 +155,7 @@ public class VentanaPrincipal extends JFrame {
         menuSalir.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                biblioteca.cerrarBiblioteca();
                 dispose();
             }
         });
@@ -177,7 +178,6 @@ public class VentanaPrincipal extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cambiarPanel("panelMisReservas");
-                System.out.println("aa");
             }
         });
     }
