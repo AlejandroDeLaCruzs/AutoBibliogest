@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static GUI.PanelMisReservas.panellibroreservado;
 
@@ -15,21 +16,14 @@ import static GUI.PanelMisReservas.panellibroreservado;
  */
 abstract public class Reservas {
 
-    public static void misReservas(VentanaPrincipal ventanacontenedor, JPanel panel) {
-        try (BufferedReader reader = new BufferedReader(new FileReader("prestamos.txt"))) {
-            String linea;
-            while ((linea = reader.readLine()) != null) {
-                String[] campos = linea.split(",");
-                if (campos.length == 4) {
-                    if (campos[0].equals(ventanacontenedor.getUsuarioActivo().getCorreo())) {
-                        panel.add(panellibroreservado(campos));
-                    }
-                }
-
+    public static ArrayList<Prestamos> misPrestamos(ArrayList<Prestamos> prestamos, Usuario usuarioActivo) {
+        ArrayList<Prestamos> misPrestamos = new ArrayList<>();
+        for (Prestamos prestamo : prestamos) {
+            if (prestamo.getCorreo().equals(usuarioActivo.getCorreo())) {
+                misPrestamos.add(prestamo);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+        return misPrestamos;
     }
 
     /**
@@ -37,25 +31,7 @@ abstract public class Reservas {
      *
      * @return Un arreglo de cadenas con los campos de la última línea, o {@code null} si no hay líneas.
      */
-    public static String[] leerUltimaLinea() {
-        String[] camposultimalinea = null;
-
-        try (BufferedReader br = new BufferedReader(new FileReader("prestamos.txt"))) {
-            String linea;
-            String ultimaLinea = null;
-            while ((linea = br.readLine()) != null) {
-                ultimaLinea = linea;
-            }
-
-            // Divide la última línea en campos si existe
-            if (ultimaLinea != null) {
-                camposultimalinea = ultimaLinea.split(",");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return camposultimalinea;
+    public static Prestamos ultimoPrestamo(ArrayList<Prestamos> prestamos) {
+        return prestamos.getLast();
     }
-
 }

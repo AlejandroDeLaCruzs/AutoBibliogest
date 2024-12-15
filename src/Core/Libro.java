@@ -7,8 +7,6 @@ import static Core.Validación.Prestamos.ValidadorPrestamos.haydisponibilidad;
 
 /**
  * Clase que representa un libro con atributos como ISBN, título, autor, etc.
- * Proporciona métodos para gestionar la información de los libros, como buscar y crear libros,
- * así como generar recomendaciones basadas en el género.
  */
 public class Libro {
     private String ISBN;

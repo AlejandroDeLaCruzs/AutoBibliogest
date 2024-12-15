@@ -65,7 +65,7 @@ public class PanelConfirmarReserva extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 reservarlibro(libro, ventanacontenador.getUsuarioActivo(), biblioteca );
                 JOptionPane.showMessageDialog(null, "Libro reservado con exito");
-                ventanacontenador.getPanelMisReservas().agregarReserva(ventanacontenador);
+                ventanacontenador.getPanelMisReservas().agregarReserva(biblioteca.getPrestamos());
                 ventanacontenador.cambiarPanel("catalogo");
             }
         });

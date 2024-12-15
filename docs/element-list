@@ -1,4 +1,8 @@
 App
 Core
 Core.Notificaciones
+Core.Validación.Prestamos
+Core.Validación.Usuarios
+Ficheros
 GUI
+GUI.DetallesLibro

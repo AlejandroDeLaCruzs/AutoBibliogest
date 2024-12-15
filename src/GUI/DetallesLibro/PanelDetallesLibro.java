@@ -61,11 +61,13 @@ public class PanelDetallesLibro extends JPanel {
         botonReservar.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!haydisponibilidad(libro, biblioteca.getPrestamos())) {
-                    JOptionPane.showMessageDialog(null, "No hay libros disponibles para reservar." + proximaDisponibilidad(libro, biblioteca.getPrestamos()));
-                } else if (reservado(libro, ventanaContenedor.getUsuarioActivo(), biblioteca.getPrestamos())) {
+                 if (reservado(libro, ventanaContenedor.getUsuarioActivo(), biblioteca.getPrestamos())) {
                     JOptionPane.showMessageDialog(null, "Ya tienes este libro reservado.");
-                } else {
+                }
+                else if (!haydisponibilidad(libro, biblioteca.getPrestamos())) {
+                    JOptionPane.showMessageDialog(null, "No hay libros disponibles para reservar." + proximaDisponibilidad(libro, biblioteca.getPrestamos()));
+                }
+                 else {
                     PanelConfirmarReserva panelConfirmreserva = new PanelConfirmarReserva(libro, ventanaContenedor, biblioteca);
                     ventanaContenedor.mostrarPanel(panelConfirmreserva, "panelConfirmreserva");
                 }

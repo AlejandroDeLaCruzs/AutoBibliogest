@@ -2,7 +2,6 @@ package Ficheros;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.function.Function;
 
 public class FicheroGenerico<T> {

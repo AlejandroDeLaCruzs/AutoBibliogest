@@ -20,8 +20,11 @@ public class PanelMisReservas extends JPanel {
         panelContenedor = new JPanel();
         panelContenedor.setLayout(new BoxLayout(panelContenedor, BoxLayout.Y_AXIS));
 
-        misReservas(ventanacontenedor, panelContenedor);
 
+        ArrayList<Prestamos> misPrestamosHistorico;
+        misPrestamosHistorico = misPrestamos(prestamos, ventanacontenedor.getUsuarioActivo());
+
+        anaidirPrestamosAlPanel(misPrestamosHistorico, panelContenedor);
         scrollPane = new JScrollPane(panelContenedor);
 
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -33,7 +36,13 @@ public class PanelMisReservas extends JPanel {
 
     }
 
-    public static JPanel panellibroreservado(String[] datosreserva) {
+    public void anaidirPrestamosAlPanel(ArrayList<Prestamos> misPrestamos, JPanel panelContenedor) {
+        for(Prestamos prestamo: misPrestamos) {
+            panelContenedor.add(panellibroreservado(prestamo));
+        }
+    }
+
+    public static JPanel panellibroreservado(Prestamos prestamo) {
 
         JPanel panelReserva = new JPanel();
         panelReserva.setLayout(new BoxLayout(panelReserva, BoxLayout.X_AXIS));
@@ -46,7 +55,7 @@ public class PanelMisReservas extends JPanel {
         panelIzquierdo.setLayout(new BoxLayout(panelIzquierdo, BoxLayout.Y_AXIS));
 
         // Etiqueta de título del libro
-        JLabel titulo = new JLabel(datosreserva[1]);
+        JLabel titulo = new JLabel(prestamo.getTitulo());
         titulo.setAlignmentX(Component.CENTER_ALIGNMENT);
         titulo.setFont(new Font("Arial", Font.BOLD, 16));
         panelIzquierdo.add(titulo);
@@ -56,7 +65,7 @@ public class PanelMisReservas extends JPanel {
 
         // Imagen del libro
         JLabel imagenLabel = new JLabel();
-        ImageIcon imagenIcon = new ImageIcon(rutaImagen(datosreserva[1]));
+        ImageIcon imagenIcon = new ImageIcon(rutaImagen(prestamo.getTitulo()));
         Image imagen = imagenIcon.getImage();
         Image imagenEscalada = imagen.getScaledInstance(200, 200, Image.SCALE_SMOOTH);  // Tamaño ajustado de imagen
         imagenLabel.setIcon(new ImageIcon(imagenEscalada));
@@ -72,8 +81,8 @@ public class PanelMisReservas extends JPanel {
         // Crear el Box para las fechas en el lado derecho
         Box boxFechas = Box.createVerticalBox();
 
-        JLabel fechaInicioLabel = new JLabel("Inicio: " + datosreserva[2]);
-        JLabel fechaVencimientoLabel = new JLabel("Vencimiento: " + datosreserva[3]);
+        JLabel fechaInicioLabel = new JLabel("Inicio: " + prestamo.getFechaInicioPrestamo());
+        JLabel fechaVencimientoLabel = new JLabel("Vencimiento: " + prestamo.getFechaFinPrestamo());
 
         fechaInicioLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         fechaVencimientoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -89,14 +98,9 @@ public class PanelMisReservas extends JPanel {
         return panelReserva;
     }
 
-    public void agregarReserva(VentanaPrincipal ventanaPrincipal) {
-        String[] datosreserva = leerUltimaLinea();
-        if (datosreserva == null || datosreserva.length < 4) {
-            System.err.println("No se pudo leer datos válidos de la última reserva.");
-            return; // No continuar si los datos no son válidos
-        }
+    public void agregarReserva(ArrayList<Prestamos> prestamos) {
 
-        JPanel panelReserva = panellibroreservado(datosreserva);
+        JPanel panelReserva = panellibroreservado(ultimoPrestamo(prestamos));
         panelContenedor.add(panelReserva);
 
         // Refrescar el contenedor y desplazar el JScrollPane al final
