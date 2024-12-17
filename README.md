@@ -47,7 +47,7 @@ AUTOBIBLIOGEST es una aplicación diseñada para la autogestión de préstamos e
 
 1. Clona el repositorio:
    ```bash
-   git clone https://github.com/AlejandroDeLaCruzs/AutoBibliogest.git
+   https://github.com/AlejandroDeLaCruzs/AutoBibliogest.git
 2. Configura el entorno de ejecución para Java.
 3. Ejecuta el archivo principal de la aplicación.
 
