@@ -19,8 +19,6 @@ public class Usuario {
     private String correo;
     private String contrasena;
     private String notificacion;
-    public static final String Notificacion_Push = "Push";
-    public static final String Notificacion_Correo = "CORREO";
 
     public String getNotificacion() {
         return notificacion;

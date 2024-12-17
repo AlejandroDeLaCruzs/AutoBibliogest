@@ -5,7 +5,14 @@ import Core.Usuario;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-@FunctionalInterface
-public interface Notificaciones {
-    void notificacion(Usuario usuario);
+
+abstract public class Notificaciones {
+    abstract void notificacion(Usuario usuario);
+
+}
+
+class NotificacionPush extends Notificaciones {
+    void notificacion(Usuario usuario) {
+
+    }
 }
