@@ -58,6 +58,9 @@ AUTOBIBLIOGEST es una aplicación diseñada para la autogestión de préstamos e
 3. Reserva ejemplares y verifica tus reservas actuales.
 4. Recibe notificaciones automáticas sobre tus reservas y vencimientos.
 
+## Esquema UML
+
+
 ## Autores
 
 Alejandro De La Cruz

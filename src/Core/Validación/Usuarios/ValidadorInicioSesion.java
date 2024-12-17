@@ -5,6 +5,9 @@ import Core.Usuario;
 
 import java.util.ArrayList;
 
+/**
+ * Clase encargada de validar las credenciales de inicio de sesión de un usuario.
+ */
 public class ValidadorInicioSesion {
     /**
      * Valida las credenciales de inicio de sesión.

@@ -13,13 +13,24 @@ import java.time.LocalDate;
 
 import static Core.Prestamos.reservarlibro;
 
-
+/**
+ * Panel que permite al usuario confirmar la reserva de un libro.
+ * Muestra la información relevante del libro, del usuario, y las fechas de inicio y fin de la reserva.
+ */
 public class PanelConfirmarReserva extends JPanel {
-    public PanelConfirmarReserva(Libro libro, VentanaPrincipal ventanacontenador, Biblioteca biblioteca) {
+    /**
+     * Constructor de la clase PanelConfirmarReserva.
+     * Configura los componentes gráficos necesarios para confirmar la reserva de un libro.
+     *
+     * @param libro             El libro que se desea reservar.
+     * @param ventanaContenedor La ventana principal que contiene este panel.
+     * @param biblioteca        La instancia de la biblioteca que gestiona los préstamos.
+     */
+    public PanelConfirmarReserva(Libro libro, VentanaPrincipal ventanaContenedor, Biblioteca biblioteca) {
 
         setLayout(null);
 
-        //Creacion de la imagen de la portada del libro------------
+        //Creación de la imagen de la portada del libro
         JLabel imagenLabel = new JLabel();
         ImageIcon imagenIcon = new ImageIcon(libro.getRutaimagen());
         Image imagen = imagenIcon.getImage();  // Obtener la imagen
@@ -29,44 +40,44 @@ public class PanelConfirmarReserva extends JPanel {
         imagenLabel.setIcon(new ImageIcon(imagenEscalada));
         add(imagenLabel);
 
-        //Creacion del título del libro
+        // Título del libro
         JLabel titulo = new JLabel(libro.getTitulo());
         titulo.setFont(new Font("Arial", Font.BOLD, 30));
         titulo.setBounds(500, 110, 500, 40);
         add(titulo);
 
-        //Creacion etiqeta usuario
-        JLabel usuario = new JLabel("Correo:" + ventanacontenador.getUsuarioActivo().getCorreo());
+        // Información del usuario activo
+        JLabel usuario = new JLabel("Correo:" + ventanaContenedor.getUsuarioActivo().getCorreo());
         usuario.setBounds(500, 150, 500, 30);
         add(usuario);
 
-        //Inicializacion fecha
-        LocalDate fechaincioprestamo = LocalDate.now();
-        LocalDate fechafinprestamo = fechaincioprestamo.plusWeeks(2);
+        // Inicialización de las fechas de préstamo
+        LocalDate fechaInicioPrestamo = LocalDate.now();
+        LocalDate fechaFinPrestamo = fechaInicioPrestamo.plusWeeks(2);
 
-        //Creacion de fecha incio reserva
-        JLabel fechainicoreserva = new JLabel("Fecha incio prestamo:" + fechaincioprestamo);
-        fechainicoreserva.setBounds(500, 200, 500, 20);
-        add(fechainicoreserva);
+        // Fecha de inicio de la reserva
+        JLabel fechaInicioReserva = new JLabel("Fecha inicio préstamo: " + fechaInicioPrestamo);
+        fechaInicioReserva.setBounds(500, 200, 500, 20);
+        add(fechaInicioReserva);
 
-        //Fecha fin de reserva
-        JLabel fechafinreserva = new JLabel("Fecha fin de prestamo:" + fechafinprestamo);
-        fechafinreserva.setBounds(500, 240, 500, 20);
-        add(fechafinreserva);
+        // Fecha de fin de la reserva
+        JLabel fechaFinReserva = new JLabel("Fecha fin préstamo: " + fechaFinPrestamo);
+        fechaFinReserva.setBounds(500, 240, 500, 20);
+        add(fechaFinReserva);
 
-        //Creacion buton confirmar reserva
-        JButton butonconfirmreserva = new JButton("Confirmar reserva");
-        butonconfirmreserva.setEnabled(true);
-        butonconfirmreserva.setBounds(700, 320, 270, 50);
-        add(butonconfirmreserva);
+        // Botón para confirmar la reserva
+        JButton botonConfirmarReserva = new JButton("Confirmar reserva");
+        botonConfirmarReserva.setEnabled(true);
+        botonConfirmarReserva.setBounds(700, 320, 270, 50);
+        add(botonConfirmarReserva);
 
-        butonconfirmreserva.addActionListener(new ActionListener() {
+        botonConfirmarReserva.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                reservarlibro(libro, ventanacontenador.getUsuarioActivo(), biblioteca );
-                JOptionPane.showMessageDialog(null, "Libro reservado con exito");
-                ventanacontenador.getPanelMisReservas().agregarReserva(biblioteca.getPrestamos());
-                ventanacontenador.cambiarPanel("catalogo");
+                reservarlibro(libro, ventanaContenedor.getUsuarioActivo(), biblioteca );
+                JOptionPane.showMessageDialog(null, "Libro reservado con éxito");
+                ventanaContenedor.getPanelMisReservas().agregarReserva(biblioteca.getPrestamos());
+                ventanaContenedor.cambiarPanel("catalogo");
             }
         });
     }

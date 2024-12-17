@@ -2,7 +2,6 @@ package GUI;
 
 import App.VentanaPrincipal;
 import Core.Biblioteca;
-import Core.Busquedalibros;
 import Core.Libro;
 
 import javax.swing.*;
@@ -12,13 +11,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static Core.Busquedalibros.busquedalibrofichero;
+import static Core.BusquedaLibros.busquedaLibro;
 
+/**
+ * Panel de búsqueda de libros en la biblioteca.
+ * Permite buscar libros por título, autor y género literario utilizando componentes gráficos.
+ */
 public class PanelBusquedalibros extends JPanel {
 
+    /**
+     * Mapa que asocia los géneros literarios con sus botones de selección.
+     */
     private Map<String, JRadioButton> generoBotones;
 
-    public PanelBusquedalibros(VentanaPrincipal ventanacontendor, Biblioteca biblioteca) {
+    /**
+     * Constructor del panel de búsqueda de libros.
+     * Configura los componentes gráficos necesarios para buscar libros en la biblioteca.
+     *
+     * @param ventanaContenedor La ventana principal que contiene este panel.
+     * @param biblioteca        La instancia de la biblioteca que contiene la información de los libros.
+     */
+    public PanelBusquedalibros(VentanaPrincipal ventanaContenedor, Biblioteca biblioteca) {
 
         JLabel tituloLabel = new JLabel("Título:");
         JTextField tituloField = new JTextField(100);
@@ -90,10 +103,10 @@ public class PanelBusquedalibros extends JPanel {
                 String titulo = tituloField.getText();
                 String autor = autorField.getText();
 
-                ArrayList<Libro> librosencontrados = busquedalibrofichero(autor, titulo, generoSeleccionado, biblioteca);
-                if (librosencontrados != null) {
-                    Busquedapanel panel = new Busquedapanel(librosencontrados, ventanacontendor, biblioteca);
-                    ventanacontendor.mostrarPanel(panel,"busqueda" );
+                ArrayList<Libro> librosEncontrados = busquedaLibro(autor, titulo, generoSeleccionado, biblioteca);
+                if (librosEncontrados != null) {
+                    Busquedapanel panel = new Busquedapanel(librosEncontrados, ventanaContenedor, biblioteca);
+                    ventanaContenedor.mostrarPanel(panel,"busqueda" );
 
                 } else {
                     JOptionPane.showMessageDialog(null, "No se ha encontrado ningún libro");
@@ -104,7 +117,12 @@ public class PanelBusquedalibros extends JPanel {
 
     }
 
-    public String[] generosSeleccionados() {
+    /**
+     * Obtiene los géneros literarios seleccionados por el usuario.
+     *
+     * @return Un arreglo de cadenas con los géneros seleccionados.
+     */
+    private String[] generosSeleccionados() {
         ArrayList<String> seleccionados = new ArrayList<>();
         for (Map.Entry<String, JRadioButton> entry : generoBotones.entrySet()) {
             if (entry.getValue().isSelected()) {

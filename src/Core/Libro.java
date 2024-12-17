@@ -253,6 +253,15 @@ public class Libro {
     }
 
 
+    /**
+     * Obtiene una lista de libros recomendados basados en el género del libro actual
+     * y su disponibilidad en la biblioteca.
+     *
+     * @param libroActual El libro que se está considerando para obtener recomendaciones.
+     * @param biblioteca La biblioteca que contiene los libros disponibles y los préstamos actuales.
+     * @return Una lista de libros recomendados que comparten el mismo género que el libro actual
+     *         y están disponibles para ser prestados.
+     */
     public static List<Libro> librosRecomendados(Libro libroActual, Biblioteca biblioteca) {
         List<Libro> librosRecomendados = new ArrayList<>();
         for (Libro libro : biblioteca.getLibros()) {

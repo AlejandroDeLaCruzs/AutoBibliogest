@@ -12,7 +12,6 @@ import static Core.Validación.Usuarios.ValidadorCrearUsuario.usuarioYaCreado;
 
 /**
  * Clase que representa a un usuario en el sistema.
- * Incluye métodos para gestionar el inicio de sesión y la creación de nuevos usuarios.
  */
 public class Usuario {
     private String nombre;
@@ -126,7 +125,11 @@ public class Usuario {
 
 
     /**
-     * Añade un nuevo usuario al archivo de usuarios si no existe ya.
+     * Añade un nuevo usuario a la lista de usuarios si no existe un usuario con el mismo correo.
+     * Si el correo ya está registrado, muestra un mensaje de advertencia.
+     * Si el usuario se crea correctamente, muestra un mensaje de éxito.
+     *
+     * @param usuarios Lista de usuarios donde se añadirá el nuevo usuario.
      */
     public void aniadirUseralArchivo(ArrayList<Usuario> usuarios) {
         if (usuarioYaCreado(this, usuarios)) {

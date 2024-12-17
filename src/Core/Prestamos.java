@@ -65,6 +65,12 @@ public class Prestamos {
         this.fechaFinPrestamo = fechafinprestamo;
     }
 
+    /**
+     * Método estático para crear un préstamo a partir de los campos leídos de un archivo.
+     *
+     * @param campos Arreglo de cadenas con los datos del préstamo.
+     * @return Un objeto Prestamos con la información de los campos.
+     */
     public static Prestamos crearPrestamoFichero(String[] campos) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate fechaInicio = LocalDate.parse(campos[2], formatter);
@@ -84,10 +90,11 @@ public class Prestamos {
 
 
     /**
-     * En este metedo escribimos los datos de la reserva en el fichero: prestamos.txt
+     * Reserva un libro para un usuario activo.
      *
-     * @param libro             del cual se quiere realizar la reserva
-     * @param
+     * @param libro             El libro que se quiere reservar.
+     * @param usuarioActivo     El usuario que realiza la reserva.
+     * @param biblioteca        La biblioteca en la que se realiza la reserva.
      */
     public static void reservarlibro(Libro libro, Usuario usuarioActivo, Biblioteca biblioteca) {
 
@@ -101,12 +108,12 @@ public class Prestamos {
 
     }
 
-
     /**
-     * Obtiene un mensaje que indica cuándo estará disponible un libro.
+     * Obtiene el mensaje que indica la próxima fecha de disponibilidad de un libro.
      *
-     * @param libro Libro del cual se desea conocer la próxima disponibilidad.
-     * @return Un mensaje con la fecha de disponibilidad del libro.
+     * @param libro    El libro cuya disponibilidad se desea conocer.
+     * @param prestamos Lista de los préstamos existentes de libros.
+     * @return Un mensaje que indica la fecha de disponibilidad del libro.
      */
     public static String proximaDisponibilidad(Libro libro, ArrayList<Prestamos> prestamos) {
         LocalDate fechaDisponibilidad = calcularProximaDisponibilidad(libro, prestamos);

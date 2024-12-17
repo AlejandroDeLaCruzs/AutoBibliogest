@@ -5,6 +5,9 @@ import Core.Usuario;
 import javax.swing.*;
 import java.util.ArrayList;
 
+/**
+ * Clase encargada de validar los datos de creación de un usuario.
+ */
 public class ValidadorCrearUsuario {
     /**
      * Valida que los campos de texto no estén vacíos.

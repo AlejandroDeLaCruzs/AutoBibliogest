@@ -9,20 +9,29 @@ import java.util.ArrayList;
 
 import static Core.Reservas.*;
 
+/**
+ * Clase que representa el panel de visualización de las reservas activas de un usuario.
+ * Permite listar y añadir reservas, así como mostrar información relevante como títulos, fechas e imágenes de libros reservados.
+ */
 public class PanelMisReservas extends JPanel {
     private JScrollPane scrollPane;
     private JPanel panelContenedor;
 
-    public PanelMisReservas(VentanaPrincipal ventanacontenedor, ArrayList<Prestamos> prestamos) {
-
+    /**
+     * Constructor de la clase PanelMisReservas.
+     * Inicializa el panel con las reservas activas del usuario en sesión.
+     *
+     * @param ventanaContenedor La ventana principal que contiene este panel.
+     * @param prestamos         Lista de préstamos disponibles.
+     */
+    public PanelMisReservas(VentanaPrincipal ventanaContenedor, ArrayList<Prestamos> prestamos) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         panelContenedor = new JPanel();
         panelContenedor.setLayout(new BoxLayout(panelContenedor, BoxLayout.Y_AXIS));
 
-
         ArrayList<Prestamos> misPrestamosHistorico;
-        misPrestamosHistorico = misPrestamos(prestamos, ventanacontenedor.getUsuarioActivo());
+        misPrestamosHistorico = misPrestamos(prestamos, ventanaContenedor.getUsuarioActivo());
 
         anaidirPrestamosAlPanel(misPrestamosHistorico, panelContenedor);
         scrollPane = new JScrollPane(panelContenedor);
@@ -36,18 +45,27 @@ public class PanelMisReservas extends JPanel {
 
     }
 
+    /**
+     * Añade una lista de préstamos al panel de contenido.
+     *
+     * @param misPrestamos   Lista de préstamos a mostrar.
+     * @param panelContenedor Panel en el que se agregan los préstamos.
+     */
     public void anaidirPrestamosAlPanel(ArrayList<Prestamos> misPrestamos, JPanel panelContenedor) {
         for(Prestamos prestamo: misPrestamos) {
-            panelContenedor.add(panellibroreservado(prestamo));
+            panelContenedor.add(panelLibroReservado(prestamo));
         }
     }
 
-    public static JPanel panellibroreservado(Prestamos prestamo) {
-
+    /**
+     * Crea un panel para mostrar la información de un libro reservado.
+     *
+     * @param prestamo Información del préstamo asociado al libro.
+     * @return Un panel que contiene los datos del libro y las fechas de préstamo.
+     */
+    public static JPanel panelLibroReservado(Prestamos prestamo) {
         JPanel panelReserva = new JPanel();
         panelReserva.setLayout(new BoxLayout(panelReserva, BoxLayout.X_AXIS));
-
-
         panelReserva.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // Panel para la imagen del libro y el título
@@ -72,35 +90,34 @@ public class PanelMisReservas extends JPanel {
         imagenLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panelIzquierdo.add(imagenLabel);
 
-        // Añadir panel izquierdo al panel principal
         panelReserva.add(panelIzquierdo);
-
-        // Espacio entre la imagen y el panel de fechas
         panelReserva.add(Box.createRigidArea(new Dimension(20, 0)));
 
-        // Crear el Box para las fechas en el lado derecho
+        // Panel de fechas
         Box boxFechas = Box.createVerticalBox();
-
         JLabel fechaInicioLabel = new JLabel("Inicio: " + prestamo.getFechaInicioPrestamo());
         JLabel fechaVencimientoLabel = new JLabel("Vencimiento: " + prestamo.getFechaFinPrestamo());
 
         fechaInicioLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         fechaVencimientoLabel.setFont(new Font("Arial", Font.PLAIN, 12));
 
-        // Agregar etiquetas de fechas al Box
         boxFechas.add(fechaInicioLabel);
         boxFechas.add(Box.createRigidArea(new Dimension(0, 5))); // Espacio entre las fechas
         boxFechas.add(fechaVencimientoLabel);
 
-        // Añadir boxFechas al lado derecho del panelReserva
         panelReserva.add(boxFechas);
 
         return panelReserva;
     }
 
+    /**
+     * Añade una nueva reserva al panel y actualiza la interfaz.
+     *
+     * @param prestamos Lista de préstamos de los que se toma la última reserva.
+     */
     public void agregarReserva(ArrayList<Prestamos> prestamos) {
 
-        JPanel panelReserva = panellibroreservado(ultimoPrestamo(prestamos));
+        JPanel panelReserva = panelLibroReservado(ultimoPrestamo(prestamos));
         panelContenedor.add(panelReserva);
 
         // Refrescar el contenedor y desplazar el JScrollPane al final
@@ -113,6 +130,12 @@ public class PanelMisReservas extends JPanel {
 
     }
 
+    /**
+     * Genera la ruta de la imagen asociada al libro.
+     *
+     * @param tituloLibro Título del libro para construir la ruta de su imagen.
+     * @return Ruta de la imagen correspondiente al título del libro.
+     */
     private static String rutaImagen(String tituloLibro) {
         return "./res/" + tituloLibro + ".jpg";
     }

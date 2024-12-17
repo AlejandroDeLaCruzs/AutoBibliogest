@@ -1,18 +1,13 @@
 package Core;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import static Core.Libro.crearLibro;
 
 /**
  * Esta clase contiene métodos para realizar la búsqueda de libros en un archivo de texto.
  * Los libros se filtran según las características proporcionadas por el usuario (autor, título y género).
  * Si se encuentra al menos un libro que cumpla con los criterios de búsqueda, se devuelve una lista de libros encontrados.
  */
-public class Busquedalibros {
+public class BusquedaLibros {
 
     /**
      * Este método busca en el fichero 'libros.txt' los libros que tienen
@@ -28,7 +23,7 @@ public class Busquedalibros {
      * @return Una lista de libros que coinciden con los criterios de búsqueda. Si no se encuentra ningún libro, se retorna `null`.
      */
 
-    public static ArrayList<Libro> busquedalibrofichero(String autor, String titulo, String[] genero, Biblioteca biblioteca) {
+    public static ArrayList<Libro> busquedaLibro(String autor, String titulo, String[] genero, Biblioteca biblioteca) {
         int contador = 0; //Para ver si existe al menos una coincidencia.
         ArrayList<Libro> librosEncontrados = new ArrayList<>();
         //Abrimos el fichero donde tenemos todos los datos del los libros

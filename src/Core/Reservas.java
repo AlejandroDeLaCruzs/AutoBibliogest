@@ -1,14 +1,6 @@
 package Core;
 
-import App.VentanaPrincipal;
-
-import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import static GUI.PanelMisReservas.panellibroreservado;
 
 /**
  * Clase que gestiona las reservas de libros realizadas por los usuarios.
@@ -16,6 +8,13 @@ import static GUI.PanelMisReservas.panellibroreservado;
  */
 abstract public class Reservas {
 
+    /**
+     * Obtiene las reservas realizadas por un usuario específico.
+     *
+     * @param prestamos Lista de todos los préstamos.
+     * @param usuarioActivo El usuario cuya información de reservas se desea obtener.
+     * @return Lista de préstamos realizados por el usuario.
+     */
     public static ArrayList<Prestamos> misPrestamos(ArrayList<Prestamos> prestamos, Usuario usuarioActivo) {
         ArrayList<Prestamos> misPrestamos = new ArrayList<>();
         for (Prestamos prestamo : prestamos) {

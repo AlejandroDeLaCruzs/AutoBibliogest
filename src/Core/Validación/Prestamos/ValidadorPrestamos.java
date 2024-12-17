@@ -7,6 +7,12 @@ import Core.Usuario;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * La clase {@code ValidadorPrestamos} proporciona métodos para validar las condiciones de préstamo de libros.
+ * Incluye validaciones como comprobar si un libro ya ha sido reservado por un usuario,
+ * contar cuántas copias de un libro están prestadas y calcular la próxima fecha en la que un libro estará disponible.
+ * Además, verifica la disponibilidad de copias de un libro para su préstamo.
+ */
 public class ValidadorPrestamos {
     /**
      * Comprueba si un usuario tiene reservado un libro específico.
