@@ -3,3 +3,4 @@ a,La mujer en la ventana,2024-12-15,2024-12-19
 a,Los testamentos,2024-12-15,2024-12-19
 a,El jardín de la señora Murakami,2024-12-15,2024-12-19
 a,El silencio de la ciudad blanca,2024-12-15,2024-12-19
+a,Fangirl,2024-12-19,2025-01-02

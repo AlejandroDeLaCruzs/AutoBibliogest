@@ -1,4 +1,4 @@
-978-0-06-267111-5,La mujer en la ventana,Un thriller psicológico sobre una mujer agorafóbica.,A.J. Finn,2018,Thriller,320,1,./res/La mujer en la ventana.jpg
+978-0-06-267111-5,La mujer en la ventana,Un thriller psicológico sobre una mujer agorafóbica.,A.J. Finn,2018,Thriller,320,1, ./res/La mujer en la ventana.jpg
 978-0-385-54328-5,Los testamentos,Una secuela de El cuento de la criada que explora nuevos personajes.,Margaret Atwood,2019,Literatura contemporánea,432,6,./res/Los testamentos.jpg
 978-84-261-4463-8,El jardín de la señora Murakami,Una historia sobre la amistad y la memoria en un jardín japonés.,Yoko Ogawa,2015,Literatura contemporánea,256,6,./res/El jardín de la señora Murakami.jpg
 978-84-16040-62-0,El silencio de la ciudad blanca,Un thriller policial ambientado en Vitoria.,Eva García Sáenz de Urturi,2016,Thriller,384,6,./res/El silencio de la ciudad blanca.jpg

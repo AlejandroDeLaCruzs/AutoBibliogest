@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AutoBibliogest:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/AutoBibliogest_jar</output-path>
+    <root id="archive" name="AutoBibliogest.jar">
+      <element id="module-output" name="AutoBibliogest" />
+    </root>
+  </artifact>
+</component>
