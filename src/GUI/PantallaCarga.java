@@ -1,8 +1,11 @@
 package GUI;
 
 import App.VentanaPrincipal;
+import Core.Biblioteca;
+
 
 import javax.swing.*;
+
 
 /**
  * Clase que representa una pantalla de carga inicial que se muestra al arrancar la aplicación.
@@ -17,7 +20,7 @@ public class PantallaCarga extends JPanel {
      *
      * @param ventanaContenedor La ventana principal que contiene esta pantalla de carga.
      */
-    public PantallaCarga(VentanaPrincipal ventanaContenedor) {
+    public PantallaCarga(VentanaPrincipal ventanaContenedor, Biblioteca biblioteca) {
         ImageIcon imagpantallacarga = new ImageIcon("./res/biblioteca.jpg");
         JLabel imagencarga = new JLabel(imagpantallacarga);
         add(imagencarga);

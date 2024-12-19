@@ -132,7 +132,7 @@ public class VentanaPrincipal extends JFrame {
         panelContenedor.add(new PanelCrearUsuario(this, biblioteca), "panelCrearUsuario");
         panelContenedor.add(new PanelCatalogoLibros(this, biblioteca), "catalogo");
         panelContenedor.add(new PanelBusquedalibros(this, biblioteca), "busquedalibros");
-        panelContenedor.add(new PantallaCarga(this), "pantallacarga");
+        panelContenedor.add(new PantallaCarga(this, biblioteca), "pantallacarga");
     }
 
 

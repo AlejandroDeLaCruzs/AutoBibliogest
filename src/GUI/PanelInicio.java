@@ -2,7 +2,7 @@ package GUI;
 
 import App.VentanaPrincipal;
 import Core.Biblioteca;
-import Core.Usuario;
+import Core.Notificaciones.NotificadorDePrestamos;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -137,6 +137,7 @@ public class PanelInicio extends JPanel {
                 if (esValido(emailField.getText(), passwordField.getPassword(), ventanaContenedora, biblioteca.getUsuarios())) {
                     ventanaContenedora.hacerVisibleMenu();
                     ventanaContenedora.cambiarPanel("pantallacarga");
+                    new NotificadorDePrestamos(ventanaContenedora.getUsuarioActivo(), biblioteca.getPrestamos());
                     PanelMisReservas panelMisReservas = new PanelMisReservas(ventanaContenedora, biblioteca.getPrestamos());
                     ventanaContenedora.agregarPanel(panelMisReservas, "panelMisReservas");
                 } else {

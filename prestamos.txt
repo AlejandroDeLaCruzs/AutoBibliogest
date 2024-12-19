@@ -1,5 +1,5 @@
-g,El teorema Katherine,2024-12-14,2024-12-28
-a,La mujer en la ventana,2024-12-15,2024-12-29
-a,Los testamentos,2024-12-15,2024-12-29
-a,El jardín de la señora Murakami,2024-12-15,2024-12-29
-a,El silencio de la ciudad blanca,2024-12-15,2024-12-29
+g,El teorema Katherine,2024-12-14,2024-12-19
+a,La mujer en la ventana,2024-12-15,2024-12-19
+a,Los testamentos,2024-12-15,2024-12-19
+a,El jardín de la señora Murakami,2024-12-15,2024-12-19
+a,El silencio de la ciudad blanca,2024-12-15,2024-12-19
